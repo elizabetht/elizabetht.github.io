@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-20T13:12:40-06:00</updated>
+  <updated>2013-11-20T13:29:09-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Elizabeth Thomas]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
