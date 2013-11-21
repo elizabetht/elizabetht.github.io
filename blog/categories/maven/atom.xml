@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
+  <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
+  <link href="http://elizabetht.github.io/"/>
+  <updated>2013-11-21T16:45:39-06:00</updated>
+  <id>http://elizabetht.github.io/</id>
+  <author>
+    <name><![CDATA[Elizabeth Thomas]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Student Enrollment Using MyBatis With Spring]]></title>
+    <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/"/>
+    <updated>2013-11-21T09:41:09-06:00</updated>
+    <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring</id>
+    <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with MyBatis framework in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<h2>1. Create Java Web Application Project using Maven Template</h2>
+
+<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml
+<img src="/images/mybatislayout.png" title="MyBatis Project Layout" alt="MyBatis Maven Project Layout" /></p>
+
+<h2>2. Update pom.xml</h2>
+
+<p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
+&ndash; mybatis (for MyBatis support)
+&ndash; mybatis-spring (for MyBatis-Spring integration support)
+&ndash; jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
+&ndash; spring-test (may be optional, needed if Spring-test support is needed)
+&ndash; mysql-connector-java (for MYSQL support)</p>
+
+<p>```
+<dependency></p>
+
+<pre><code>    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+    &lt;version&gt;3.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+    &lt;version&gt;3.1.1.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+    &lt;version&gt;3.1.1.RELEASE&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+    &lt;version&gt;5.1.21&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+    &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+    &lt;version&gt;3.2.4.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;2.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>```</p>
+
+<h2>3. Modify web.xml</h2>
+
+<p>Modify the contents of the web.xml to include the following:
+&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
+&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;web-app version=&ldquo;2.5&rdquo;
+xmlns=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a>&rdquo;
+xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;
+xsi:schemaLocation=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a> <a href="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd</a>&rdquo;></p>
+
+<p><servlet></p>
+
+<pre><code>&lt;servlet-name&gt;myBatisServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/config/springConfig.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+</code></pre>
+
+<p></servlet></p>
+
+<p>&lt;servlet-mapping></p>
+
+<pre><code>&lt;servlet-name&gt;myBatisServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;*.html&lt;/url-pattern&gt;
+</code></pre>
+
+<p>&lt;/servlet-mapping></p>
+
+<p>  &lt;display-name>Archetype Created Web Application&lt;/display-name>
+&lt;/web-app>
+```</p>
+
+<h2>4. Create the Spring Configuration File</h2>
+
+<p>Create a Spring Bean Configuration file under the folder WEB-INF/config. If a STS(Spring Tool Suite) is the IDE, go ahead and enable the context, mvc and tx namespaces. The springConfig.xml will be as shown below</p>
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
+
+<pre><code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"&gt;
+</code></pre>
+
+<p></beans>
+```</p>
+
+<p>After enabling the required namespaces, include the following (in between the <beans> and </beans> tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
+
+<p>```
+&lt;mvc:annotation-driven /></p>
+
+<p>&lt;context:component-scan base-package=&ldquo;com.meygam&rdquo; />
+```</p>
+
+<p>Include the bean InternalResourceViewResolver of Spring to locate the jsp files</p>
+
+<p>```
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"></p>
+
+<pre><code>&lt;property name="prefix" value="/WEB-INF/jsp/" /&gt;
+&lt;property name="suffix" value=".jsp" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <include connection url> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <include username> and <include password> with the actual username and password values.</p>
+
+<p>```
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
+
+<pre><code>&lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
+&lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
+&lt;property name="username" value="&lt;include username&gt;" /&gt;
+&lt;property name="password" value="&lt;include password&gt;" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Include the bean for transaction manager for scoping/controlling the transactions, that takes the data source defined above as reference (dependent)</p>
+
+<p>```
+&lt;tx:annotation-driven transaction-manager=&ldquo;transactionManager&rdquo; />
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"></p>
+
+<pre><code>&lt;property name="dataSource" ref="dataSource" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Coming to the MyBatis specific configurations, include the bean for sqlSessionFactory which is the central configuration in a MyBatis application. This bean takes in three properties
+&ndash; dataSource (already configured above)
+&ndash; typeAliasesPackage (location where the model classes of this application resides)
+&ndash; mapperLocations (location where the mapper xml files for the model resides)</p>
+
+<p>More details of this can be read at <a href="http://mybatis.github.io/mybatis-3/">http://mybatis.github.io/mybatis-3/</a></p>
+
+<p>```
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"></p>
+
+<pre><code>&lt;property name="dataSource" ref="dataSource" /&gt;
+&lt;property name="typeAliasesPackage" value="com.meygam.model"/&gt;
+&lt;property name="mapperLocations" value="classpath*:com/meygam/mappers/*.xml" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Include the bean for sqlSession</p>
+
+<p>```
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"></p>
+
+<pre><code>&lt;constructor-arg index="0" ref="sqlSessionFactory" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Next and finally, include the bean for MapperScannerConfigurer</p>
+
+<p>```
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"></p>
+
+<pre><code>&lt;property name="basePackage" value="com.meygam.mappers" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
+
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0</a></p>
+]]></content>
+  </entry>
+  
+</feed>
