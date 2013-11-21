@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T16:47:19-06:00</updated>
+  <updated>2013-11-21T16:48:38-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -186,9 +186,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 ```</p>
 
 <p>Coming to the MyBatis specific configurations, include the bean for sqlSessionFactory which is the central configuration in a MyBatis application. This bean takes in three properties
-1. dataSource (already configured above)
-2. typeAliasesPackage (location where the model classes of this application resides)
-3. mapperLocations (location where the mapper xml files for the model resides)</p>
+&ndash; dataSource (already configured above)</p>
+
+<ul>
+<li><p>typeAliasesPackage (location where the model classes of this application resides)</p></li>
+<li><p>mapperLocations (location where the mapper xml files for the model resides)</p></li>
+</ul>
+
 
 <p>More details of this can be read at <a href="http://mybatis.github.io/mybatis-3/">http://mybatis.github.io/mybatis-3/</a></p>
 
