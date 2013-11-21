@@ -115,11 +115,11 @@
 <h2>2. Update pom.xml</h2>
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
-&ndash; mybatis (for MyBatis support)
-&ndash; mybatis-spring (for MyBatis-Spring integration support)
-&ndash; jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
-&ndash; spring-test (may be optional, needed if Spring-test support is needed)
-&ndash; mysql-connector-java (for MYSQL support)</p>
+&ndash;   mybatis (for MyBatis support)
+&ndash;   mybatis-spring (for MyBatis-Spring integration support)
+&ndash;   jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
+&ndash;   spring-test (may be optional, needed if Spring-test support is needed)
+&ndash;   mysql-connector-java (for MYSQL support)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -208,8 +208,8 @@
 <h2>3. Modify web.xml</h2>
 
 <p>Modify the contents of the web.xml to include the following:
-&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
-&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
+&ndash;   A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
+&ndash;   A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
