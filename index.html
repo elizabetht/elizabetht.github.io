@@ -228,16 +228,21 @@
   </header>
 
 
-  <div class="entry-content"><p>This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment.</p>
+  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with MyBatis framework in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
 
-<h2>1. Java Web Application Project using Maven Template</h2>
+<h2>1. Create Java Web Application Project using Maven Template</h2>
 
 <p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml
 <img src="/images/mybatislayout.png" title="MyBatis Project Layout" alt="MyBatis Maven Project Layout" /></p>
 
 <h2>2. Update pom.xml</h2>
 
-<p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
+<p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
+* mybatis (for MyBatis support)
+* mybatis-spring (for MyBatis-Spring integration support)
+* jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
+* spring-test (may be optional, needed if Spring-test support is needed)
+* mysql-connector-java (for MYSQL support)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -373,6 +378,60 @@
 </span><span class='line'>
 </span><span class='line'>  &lt;display-name&gt;Archetype Created Web Application&lt;/display-name&gt;
 </span><span class='line'>&lt;/web-app&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>4. Create the Spring Configuration File</h2>
+
+<p>Create a Spring Bean Configuration file under the folder WEB-INF/config. If a STS(Spring Tool Suite) is the IDE, go ahead and enable the context, mvc and tx namespaces. The springConfig.xml will be as shown below</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+</span><span class='line'>&lt;beans xmlns="http://www.springframework.org/schema/beans"
+</span><span class='line'>  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+</span><span class='line'>  xmlns:context="http://www.springframework.org/schema/context"
+</span><span class='line'>  xmlns:mvc="http://www.springframework.org/schema/mvc"
+</span><span class='line'>  xmlns:tx="http://www.springframework.org/schema/tx"
+</span><span class='line'>  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+</span><span class='line'>      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+</span><span class='line'>      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+</span><span class='line'>      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;/beans&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After enabling the required namespaces, include the following to indicate that the application is annotation driven and base package for the context component scan.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;mvc:annotation-driven /&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;context:component-scan base-package="com.meygam" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Include the bean InternalResourceViewResolver of Spring to locate the jsp files</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+</span><span class='line'>  &lt;property name="prefix" value="/WEB-INF/jsp/" /&gt;
+</span><span class='line'>  &lt;property name="suffix" value=".jsp" /&gt;
+</span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
 
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
