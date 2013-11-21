@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T09:42:30-06:00</updated>
+  <updated>2013-11-21T09:48:33-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -18,7 +18,11 @@
     <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-jdbc/"/>
     <updated>2013-11-21T09:41:55-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-jdbc</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This post will show how to create a student enrollment application using MYSQL DB with JDBC.</p>
+
+<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithJDBC.git">https://github.com/elizabetht/StudentEnrollmentWithJDBC.git</a></p>
+
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.0</a></p>
 ]]></content>
   </entry>
   
@@ -27,7 +31,11 @@
     <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-struts-2/"/>
     <updated>2013-11-21T09:41:45-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-struts-2</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This post will show how to create a student enrollment application using MYSQL DB with Struts 2 framework.</p>
+
+<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts.git">https://github.com/elizabetht/StudentEnrollmentWithStruts.git</a></p>
+
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.0</a></p>
 ]]></content>
   </entry>
   
@@ -36,7 +44,11 @@
     <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/"/>
     <updated>2013-11-21T09:41:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This post will show how to create a student enrollment application using MYSQL DB with Hibernate framework in a Spring environment.</p>
+
+<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
+
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0</a></p>
 ]]></content>
   </entry>
   
@@ -45,7 +57,11 @@
     <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/"/>
     <updated>2013-11-21T09:41:09-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment.</p>
+
+<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
+
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0</a></p>
 ]]></content>
   </entry>
   
