@@ -9,7 +9,7 @@
   <meta name="author" content="Elizabeth Thomas">
 
   
-  <meta name="description" content="This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment. If you are using &hellip;">
+  <meta name="description" content="This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment. Java Web &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +106,98 @@
 
 
 <div class="entry-content"><p>This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment.</p>
+
+<ol>
+<li><p>Java Web Application Project using Maven Template
+To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p></li>
+<li><p>Update pom.xml
+To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;3.1.1&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;1.1.1&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;3.1.1.RELEASE&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;3.1.1.RELEASE&lt;/version&gt;
+</span><span class='line'>      &lt;scope&gt;test&lt;/scope&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;mysql&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;5.1.21&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;1.2&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;3.2.4.RELEASE&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;2.5&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
 
