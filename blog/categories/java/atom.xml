@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T17:20:01-06:00</updated>
+  <updated>2013-11-21T17:52:51-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -229,17 +229,119 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 <p>Create a folder named &ldquo;jsp&rdquo; under WEB-INF (This is where the jsp files will be created as indicated in the springConfig.xml for the InternalResourceViewResolver bean).</p>
 
-<p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. A snapshot of the signup page is as follows:
-<img src="/images/mybatis-signup.png" title="MyBatis Signup Layout" alt="MyBatis Signup Layout" /></p>
+<p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. A snapshot of the signup page is as follows:</p>
 
-<p>Next, create a file login.jsp to include a form with UserName and Password. A snapshot of the login page is as follows:
-<img src="/images/mybatis-login.png" title="MyBatis Login Layout" alt="MyBatis Login Layout" /></p>
+<p><img src="/images/mybatis-signup.png" title="MyBatis Signup Layout" alt="MyBatis Signup Layout" /></p>
+
+<p>Next, create a file login.jsp to include a form with UserName and Password. A snapshot of the login page is as follows:</p>
+
+<p><img src="/images/mybatis-login.png" title="MyBatis Login Layout" alt="MyBatis Login Layout" /></p>
 
 <p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved).</p>
 
 <p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page.</p>
 
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp</a></p>
+
+<h2>6. Create packages for Controller, Model, Service and Mappers</h2>
+
+<p>Create packages each for the Spring Controller, Model and Service classes under the src/main/java folder. Also create a package for the MyBatis Mapper class under the same src/main/java folder.</p>
+
+<p>A sample snapshot of the project after the package creation is as shown below:
+<img src="/images/mybatis-package.png" title="MyBatis Package Layout" alt="MyBatis Package Layout" /></p>
+
+<h2>7. Create classes for Model Tier</h2>
+
+<p>Create a POJO class named Student.java inside the package com.meygam.model to include the details of the Student model entity during signup. Create another POJO class named StudentLogin.java inside the same package com.meygam.model to include the Student Login details.</p>
+
+<p>A reference link to the files for the Model classes can be found at [<a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model</a>] (<a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model</a>)</p>
+
+<h2>8. Create classes for MyBatis Mapper</h2>
+
+<p>A Mapper in MyBatis framework is similar to the Repository tier in a Spring environment. Crude SQL queries takes its place here.
+Create an interface class named StudentMapper.java inside the package com.meygam.mapper to support the database operations.</p>
+
+<p>There are two interface methods needed for the application&rsquo;s purpose.
+&ndash; To Insert the Student Signup details into the Database
+&ndash; To Verify the Student Login details from the Database</p>
+
+<p>```
+public interface StudentMapper {</p>
+
+<pre><code>@Insert("INSERT INTO student(userName, password, firstName,"
+        + "lastName, dateOfBirth, emailAddress) VALUES"
+        + "(#{userName},#{password}, #{firstName}, #{lastName},"
+        + "#{dateOfBirth}, #{emailAddress})")
+@Options(useGeneratedKeys=true, keyProperty="id", flushCache=true, keyColumn="id")
+public void insertStudent(Student student);
+
+@Select("SELECT USERNAME as userName, PASSWORD as password, "
+        + "FIRSTNAME as firstName, LASTNAME as lastName, "
+        + "DATEOFBIRTH as dateOfBirth, EMAILADDRESS as emailAddress "
+        + "FROM student WHERE userName = #{userName}")
+public Student getStudentByUserName(String userName);
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>9. Create classes for Service Tier</h2>
+
+<p>Create an interface class named StudentService.java inside the package com.meygam.service to support the service tier operations.
+This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.
+```
+public interface StudentService {</p>
+
+<pre><code>void insertStudent(Student student);
+boolean getStudentByLogin(String userName, String password);
+boolean getStudentByUserName(String userName);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Create an service tier implementation class named StudentServiceImpl.java inside the package com.meygam.service.</p>
+
+<p>```
+@Service(&ldquo;studentService&rdquo;)
+public class StudentServiceImpl implements StudentService {</p>
+
+<pre><code>@Autowired
+private SqlSession sqlSession;
+
+@Transactional
+public void insertStudent(Student student) {
+    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+    studentMapper.insertStudent(student);
+}
+
+public boolean getStudentByLogin(String userName, String password) {
+    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+    Student student = studentMapper.getStudentByUserName(userName);
+
+    if(student != null &amp;&amp; student.getPassword().equals(password)) {
+        return true;
+    }
+
+    return false;
+}
+
+public boolean getStudentByUserName(String userName) {
+    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+    Student student = studentMapper.getStudentByUserName(userName);
+
+    if(student != null) {
+        return true;
+    }
+
+    return false;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>10. Create class for Controller Tier</h2>
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
 
