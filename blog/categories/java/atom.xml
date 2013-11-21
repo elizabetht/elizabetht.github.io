@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T17:52:51-06:00</updated>
+  <updated>2013-11-21T17:54:36-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -254,7 +254,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 <p>Create a POJO class named Student.java inside the package com.meygam.model to include the details of the Student model entity during signup. Create another POJO class named StudentLogin.java inside the same package com.meygam.model to include the Student Login details.</p>
 
-<p>A reference link to the files for the Model classes can be found at [<a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model</a>] (<a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model</a>)</p>
+<p>A reference link to the files for the Model classes can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/java/com/meygam/model</a></p>
 
 <h2>8. Create classes for MyBatis Mapper</h2>
 
