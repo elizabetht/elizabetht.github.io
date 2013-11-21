@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T14:41:30-06:00</updated>
+  <updated>2013-11-21T14:45:38-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -59,11 +59,11 @@
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring</id>
     <content type="html"><![CDATA[<p>This post will show how to create a student enrollment application using MYSQL DB with MyBatis framework in a Spring environment.</p>
 
-<h1>1. Java Web Application Project using Maven Template</h1>
+<h2>1. Java Web Application Project using Maven Template</h2>
 
 <p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
 
-<h1>2. Update pom.xml</h1>
+<h2>2. Update pom.xml</h2>
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
 
