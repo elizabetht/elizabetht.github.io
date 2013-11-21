@@ -238,11 +238,11 @@
 <h2>2. Update pom.xml</h2>
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
-1. mybatis (for MyBatis support)
-2. mybatis-spring (for MyBatis-Spring integration support)
-3. jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
-4. spring-test (may be optional, needed if Spring-test support is needed)
-5. mysql-connector-java (for MYSQL support)</p>
+&ndash; mybatis (for MyBatis support)
+&ndash; mybatis-spring (for MyBatis-Spring integration support)
+&ndash; jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
+&ndash; spring-test (may be optional, needed if Spring-test support is needed)
+&ndash; mysql-connector-java (for MYSQL support)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -331,8 +331,8 @@
 <h2>3. Modify web.xml</h2>
 
 <p>Modify the contents of the web.xml to include the following:
-1. A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
-2. A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
+&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
+&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -463,13 +463,9 @@
 
 
 <p>Coming to the MyBatis specific configurations, include the bean for sqlSessionFactory which is the central configuration in a MyBatis application. This bean takes in three properties
-&ndash; dataSource (already configured above)</p>
-
-<ul>
-<li><p>typeAliasesPackage (location where the model classes of this application resides)</p></li>
-<li><p>mapperLocations (location where the mapper xml files for the model resides)</p></li>
-</ul>
-
+&ndash; dataSource (already configured above)
+&ndash; typeAliasesPackage (location where the model classes of this application resides)
+&ndash; mapperLocations (location where the mapper xml files for the model resides)</p>
 
 <p>More details of this can be read at <a href="http://mybatis.github.io/mybatis-3/">http://mybatis.github.io/mybatis-3/</a></p>
 
@@ -504,6 +500,18 @@
 </span><span class='line'>  &lt;property name="basePackage" value="com.meygam.mappers" /&gt;
 </span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
 
+
+<h2>5. Create JSP Files for Student Signup/Login</h2>
+
+<p>Create a folder named &ldquo;jsp&rdquo; under WEB-INF (This is where the jsp files will be created as indicated in the springConfig.xml for the InternalResourceViewResolver bean).</p>
+
+<p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. Next, create a file to include a form with UserName and Password.</p>
+
+<p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved)</p>
+
+<p>A reference link to the jsp files of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp/WEB-INF/jsp">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp/WEB-INF/jsp</a></p>
+
+<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets.</p>
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
 
