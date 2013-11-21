@@ -115,11 +115,11 @@
 <h2>2. Update pom.xml</h2>
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
-* mybatis (for MyBatis support)
-* mybatis-spring (for MyBatis-Spring integration support)
-* jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
-* spring-test (may be optional, needed if Spring-test support is needed)
-* mysql-connector-java (for MYSQL support)</p>
+&ndash; mybatis (for MyBatis support)
+&ndash; mybatis-spring (for MyBatis-Spring integration support)
+&ndash; jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)
+&ndash; spring-test (may be optional, needed if Spring-test support is needed)
+&ndash; mysql-connector-java (for MYSQL support)</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -208,8 +208,8 @@
 <h2>3. Modify web.xml</h2>
 
 <p>Modify the contents of the web.xml to include the following:
-* A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
-* A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
+&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
+&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -311,7 +311,7 @@
 </span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified</p>
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <include connection url> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <include username> and <include password> with the actual username and password values.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -322,8 +322,57 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
 </span><span class='line'>  &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
 </span><span class='line'>  &lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" /&gt;
-</span><span class='line'>  &lt;property name="username" value="&lt;username&gt;" /&gt;
-</span><span class='line'>  &lt;property name="password" value="&lt;password&gt;" /&gt;
+</span><span class='line'>  &lt;property name="username" value="&lt;include username&gt;" /&gt;
+</span><span class='line'>  &lt;property name="password" value="&lt;include password&gt;" /&gt;
+</span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Include the bean for transaction manager for scoping/controlling the transactions, that takes the data source defined above as reference (dependent)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;tx:annotation-driven transaction-manager="transactionManager" /&gt;
+</span><span class='line'>&lt;bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"&gt;
+</span><span class='line'>  &lt;property name="dataSource" ref="dataSource" /&gt;
+</span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Coming to the MyBatis specific configurations, include the bean for sqlSessionFactory which is the central configuration in a MyBatis application. This bean takes in three properties
+&ndash; dataSource (already configured above)
+&ndash; typeAliasesPackage (location where the model classes of this application resides)
+&ndash; mapperLocations (location where the mapper xml files for the model resides)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"&gt;
+</span><span class='line'>  &lt;property name="dataSource" ref="dataSource" /&gt;
+</span><span class='line'>  &lt;property name="typeAliasesPackage" value="com.meygam.model"/&gt;
+</span><span class='line'>  &lt;property name="mapperLocations" value="classpath*:com/meygam/mappers/*.xml" /&gt;
+</span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Include the bean for sqlSession</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"&gt;
+</span><span class='line'>  &lt;constructor-arg index="0" ref="sqlSessionFactory" /&gt;
+</span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next and finally, include the bean for MapperScannerConfigurer</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"&gt;
+</span><span class='line'>  &lt;property name="basePackage" value="com.meygam.mappers" /&gt;
 </span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
 
 
