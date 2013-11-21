@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T16:19:22-06:00</updated>
+  <updated>2013-11-21T16:23:48-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -295,6 +295,8 @@
 + dataSource (already configured above)
 + typeAliasesPackage (location where the model classes of this application resides)
 + mapperLocations (location where the mapper xml files for the model resides)</p>
+
+<p>More details of this can be read at <a href="http://mybatis.github.io/mybatis-3/">http://mybatis.github.io/mybatis-3/</a></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
