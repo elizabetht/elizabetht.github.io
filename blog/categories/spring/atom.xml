@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T18:20:20-06:00</updated>
+  <updated>2013-11-21T21:51:55-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Student Enrollment Using Hibernate With Spring]]></title>
+    <link href="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/"/>
+    <updated>2013-11-21T09:41:30-06:00</updated>
+    <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring</id>
+    <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<h2>1. Create Java Web Application Project using Maven Template</h2>
+
+<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml
+<img src="/images/springlayout.png" title="Spring Hibernate Project Layout" alt="Hibernate Spring Maven Project Layout" /></p>
+
+<p>If you using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
+
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Student Enrollment Using MyBatis With Spring]]></title>
