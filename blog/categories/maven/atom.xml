@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T22:24:40-06:00</updated>
+  <updated>2013-11-21T22:32:38-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -96,6 +96,60 @@
     &lt;/exclusions&gt;
 &lt;/dependency&gt;
 </code></pre>
+
+<p>```</p>
+
+<h2>3. Modify web.xml</h2>
+
+<p>Modify the contents of the web.xml to include the following:
+&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.
+&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.
+&ndash; A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA</p>
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;web-app version=&ldquo;2.5&rdquo;
+xmlns=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a>&rdquo;
+xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo;
+xsi:schemaLocation=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a> <a href="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd</a>&rdquo;></p>
+
+<p><servlet></p>
+
+<pre><code>&lt;servlet-name&gt;studentHibernateServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/config/servletConfig.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+</code></pre>
+
+<p></servlet></p>
+
+<p>&lt;servlet-mapping></p>
+
+<pre><code>&lt;servlet-name&gt;studentHibernateServlet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;*.html&lt;/url-pattern&gt;
+</code></pre>
+
+<p>&lt;/servlet-mapping></p>
+
+<p>&lt;context-param></p>
+
+<pre><code>&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+&lt;param-value&gt;classpath:/jpaContext.xml&lt;/param-value&gt;
+</code></pre>
+
+<p>&lt;/context-param></p>
+
+<p><listener></p>
+
+<pre><code>&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+</code></pre>
+
+<p></listener></p>
+
+<p>  &lt;display-name>Archetype Created Web Application&lt;/display-name>
+&lt;/web-app></p>
 
 <p>```</p>
 
