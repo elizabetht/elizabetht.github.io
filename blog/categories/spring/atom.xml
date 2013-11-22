@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T13:54:45-06:00</updated>
+  <updated>2013-11-22T14:00:50-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -324,7 +324,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved).</p>
 
-<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page.</p>
+<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page (<a href="http://www.eyecon.ro/bootstrap-datepicker/">http://www.eyecon.ro/bootstrap-datepicker/</a>).</p>
 
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp</a></p>
 
@@ -753,7 +753,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 <p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved).</p>
 
-<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page.</p>
+<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page (<a href="http://www.eyecon.ro/bootstrap-datepicker/">http://www.eyecon.ro/bootstrap-datepicker/</a>).</p>
 
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/tree/master/src/main/webapp</a></p>
 
