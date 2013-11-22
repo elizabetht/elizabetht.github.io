@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T13:48:12-06:00</updated>
+  <updated>2013-11-22T13:54:45-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -173,7 +173,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p></beans>
 ```</p>
 
-<p>After enabling the required namespaces, include the following (in between the <code>&lt;beans&gt;</code> and <code>&lt;/beans&gt;</code> tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
+<p>After enabling the required namespaces, include the following (in between the &lt;beans&gt; and &lt;/beans&gt; tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
 
 <p>```
 &lt;mvc:annotation-driven /></p>
@@ -243,7 +243,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <p><beans>
 ```</p>
 
-<p>After enabling the required namespaces, include the following (in between the <code>&lt;beans&gt;</code> and <code>&lt;/beans&gt;</code> tags) to indicate that the application is annotation driven and base package for the jpa repositories scan.</p>
+<p>After enabling the required namespaces, include the following (in between the &lt;beans&gt; and &lt;/beans&gt; tags) to indicate that the application is annotation driven and base package for the jpa repositories scan.</p>
 
 <p>```
 &lt;context:annotation-config /></p>
@@ -281,7 +281,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <p>```</p>
 
-<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <code>&lt;include connection url&gt;</code> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <code>&lt;include username&gt;</code> and <code>&lt;include password&gt;</code> with the actual username and password values.</p>
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace &lt;include connection url&gt; with the actual connection url for connecting to the MYSQL DB. Likewise, replace &lt;include username&gt; and &lt;include password&gt; with the actual username and password values.</p>
 
 <p>```
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
@@ -332,8 +332,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <p>Create packages each for the Spring Controller, Model and Service classes under the src/main/java folder.</p>
 
-<p>A sample snapshot of the project after the package creation is as shown below:
-<img src="/images/spring-hibernate-package.png" title="Spring Hibernate Package Layout" alt="Spring Hibernate Package Layout" /></p>
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/spring-hibernate-package.png" title="Spring Hibernate Package Layout" alt="Spring Hibernate Package Layout" /></p>
 
 <h2>9. Create classes for Model Tier</h2>
 
@@ -652,7 +653,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p></beans>
 ```</p>
 
-<p>After enabling the required namespaces, include the following (in between the <beans> and </beans> tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
+<p>After enabling the required namespaces, include the following (in between the &lt;beans&gt; and &lt;/beans&gt; tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
 
 <p>```
 &lt;mvc:annotation-driven /></p>
@@ -672,7 +673,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p></bean>
 ```</p>
 
-<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <code>&lt;include connection url&gt;</code> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <code>&lt;include username&gt;</code> and <code>&lt;include password&gt;</code> with the actual username and password values.</p>
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace &lt;include connection url&gt; with the actual connection url for connecting to the MYSQL DB. Likewise, replace &lt;include username&gt; and &lt;include password&gt; with the actual username and password values.</p>
 
 <p>```
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
@@ -760,8 +761,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 <p>Create packages each for the Spring Controller, Model and Service classes under the src/main/java folder. Also create a package for the MyBatis Mapper class under the same src/main/java folder.</p>
 
-<p>A sample snapshot of the project after the package creation is as shown below:
-<img src="/images/mybatis-package.png" title="MyBatis Package Layout" alt="MyBatis Package Layout" /></p>
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/mybatis-package.png" title="MyBatis Package Layout" alt="MyBatis Package Layout" /></p>
 
 <h2>7. Create classes for Model Tier</h2>
 
