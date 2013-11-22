@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T13:36:08-06:00</updated>
+  <updated>2013-11-22T13:39:03-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -48,8 +48,9 @@
 
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
-<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml
-<img src="http://elizabetht.github.io/images/springlayout.png" title="Spring Hibernate Project Layout" alt="Hibernate Spring Maven Project Layout" /></p>
+<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
+
+<p><img src="http://elizabetht.github.io/images/springlayout.png" title="Spring Hibernate Project Layout" alt="Hibernate Spring Maven Project Layout" /></p>
 
 <h2>2. Update pom.xml</h2>
 
@@ -771,8 +772,9 @@ This is necessary as the DB Schema name of studentEnrollment is specified in the
 
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
-<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml
-<img src="http://elizabetht.github.io/images/mybatislayout.png" title="MyBatis Project Layout" alt="MyBatis Maven Project Layout" /></p>
+<p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
+
+<p><img src="http://elizabetht.github.io/images/mybatislayout.png" title="MyBatis Project Layout" alt="MyBatis Maven Project Layout" /></p>
 
 <h2>2. Update pom.xml</h2>
 
