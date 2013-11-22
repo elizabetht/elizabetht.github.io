@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T22:32:38-06:00</updated>
+  <updated>2013-11-22T12:15:54-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -155,7 +155,7 @@ xsi:schemaLocation=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://jav
 
 <p>If you using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.0</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.1</a></p>
 ]]></content>
   </entry>
   
@@ -566,7 +566,7 @@ CREATE TABLE `student` (
 
 <p>The Java web application can be deployed locally by right clicking on the project and choosing the &ldquo;Run As->Run on Server&rdquo; option.</p>
 
-<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /usr/local/tomcat/webapps folder and restarting the tomcat server.</p>
+<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /var/lib/tomcat7 folder and restarting the tomcat server.</p>
 
 <p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/</a></p>
 
