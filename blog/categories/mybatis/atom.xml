@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MyBatis, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/mybatis/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T14:51:58-06:00</updated>
+  <updated>2013-11-22T16:41:38-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -28,12 +28,14 @@
 
 <h2>2. Update pom.xml</h2>
 
-<p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml
-&ndash; mybatis (for MyBatis support)&nbsp;
-&ndash; mybatis-spring (for MyBatis-Spring integration support)&nbsp;
-&ndash; jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)&nbsp;
-&ndash; spring-test (may be optional, needed if Spring-test support is needed)&nbsp;
-&ndash; mysql-connector-java (for MYSQL support)&nbsp;</p>
+<p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
+
+<pre><code>- mybatis (for MyBatis support) 
+- mybatis-spring (for MyBatis-Spring integration support) 
+- jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support) 
+- spring-test (may be optional, needed if Spring-test support is needed) 
+- mysql-connector-java (for MYSQL support) 
+</code></pre>
 
 <p>```
 <dependency></p>
@@ -84,9 +86,11 @@
 
 <h2>3. Modify web.xml</h2>
 
-<p>Modify the contents of the web.xml to include the following:
-&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.&nbsp;
-&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.&nbsp;</p>
+<p>Modify the contents of the web.xml to include the following:</p>
+
+<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout. 
+- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.
+</code></pre>
 
 <p>```
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
@@ -263,9 +267,11 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p>A Mapper in MyBatis framework is similar to the Repository tier in a Spring environment. Crude SQL queries takes its place here.
 Create an interface class named StudentMapper.java inside the package com.meygam.mapper to support the database operations.</p>
 
-<p>There are two interface methods needed for the application&rsquo;s purpose.
-&ndash; To Insert the Student Signup details into the Database
-&ndash; To Verify the Student Login details from the Database</p>
+<p>There are two interface methods needed for the application&rsquo;s purpose.</p>
+
+<pre><code>- To Insert the Student Signup details into the Database
+- To Verify the Student Login details from the Database
+</code></pre>
 
 <p>```
 public interface StudentMapper {</p>

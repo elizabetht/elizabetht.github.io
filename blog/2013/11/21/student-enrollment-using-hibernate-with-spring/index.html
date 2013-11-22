@@ -117,16 +117,14 @@
 
 <p>To make the above Maven Java Web Application project support the Hibernate ORM in Spring framework, add the following dependencies to the existing pom.xml</p>
 
-<ul>
-<li>jstl, spring-webmvc and servlet-api (for Spring support)</li>
-<li>mysql-connector-java (for MYSQL support)</li>
-<li>spring-jdbc (for data access with JDBC Spring)</li>
-<li>spring-orm (for ORM data access with Spring)</li>
-<li>spring-data-jpa (for JPA support)</li>
-<li>hibernate-validator and hibernate-entitymanager (for Hibernate Support)</li>
-<li>jta (for transaction support)</li>
-</ul>
-
+<pre><code>- jstl, spring-webmvc and servlet-api (for Spring support)
+- mysql-connector-java (for MYSQL support)
+- spring-jdbc (for data access with JDBC Spring)
+- spring-orm (for ORM data access with Spring)
+- spring-data-jpa (for JPA support)
+- hibernate-validator and hibernate-entitymanager (for Hibernate Support)
+- jta (for transaction support)
+</code></pre>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -246,10 +244,12 @@
 
 <h2>3. Modify web.xml</h2>
 
-<p>Modify the contents of the web.xml to include the following:
-&ndash; A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.&nbsp;
-&ndash; A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.&nbsp;
-&ndash; A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.&nbsp;</p>
+<p>Modify the contents of the web.xml to include the following:</p>
+
+<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.&amp;nbsp;
+- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.&amp;nbsp;
+- A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.&amp;nbsp;
+</code></pre>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
