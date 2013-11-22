@@ -117,12 +117,14 @@
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
 
-<pre><code>- mybatis (for MyBatis support) 
-- mybatis-spring (for MyBatis-Spring integration support) 
-- jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support) 
-- spring-test (may be optional, needed if Spring-test support is needed) 
-- mysql-connector-java (for MYSQL support) 
-</code></pre>
+<ul>
+<li>mybatis (for MyBatis support)</li>
+<li>mybatis-spring (for MyBatis-Spring integration support)</li>
+<li>jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)</li>
+<li>spring-test (may be optional, needed if Spring-test support is needed)</li>
+<li>mysql-connector-java (for MYSQL support)</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -212,9 +214,11 @@
 
 <p>Modify the contents of the web.xml to include the following:</p>
 
-<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout. 
-- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.
-</code></pre>
+<ul>
+<li>A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.</li>
+<li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -422,9 +426,11 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 
 <p>There are two interface methods needed for the application&rsquo;s purpose.</p>
 
-<pre><code>- To Insert the Student Signup details into the Database
-- To Verify the Student Login details from the Database
-</code></pre>
+<ul>
+<li>To Insert the Student Signup details into the Database</li>
+<li>To Verify the Student Login details from the Database</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

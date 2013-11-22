@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MyBatis, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/mybatis/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T16:41:38-06:00</updated>
+  <updated>2013-11-22T17:05:41-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -30,12 +30,14 @@
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
 
-<pre><code>- mybatis (for MyBatis support) 
-- mybatis-spring (for MyBatis-Spring integration support) 
-- jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support) 
-- spring-test (may be optional, needed if Spring-test support is needed) 
-- mysql-connector-java (for MYSQL support) 
-</code></pre>
+<ul>
+<li>mybatis (for MyBatis support)</li>
+<li>mybatis-spring (for MyBatis-Spring integration support)</li>
+<li>jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)</li>
+<li>spring-test (may be optional, needed if Spring-test support is needed)</li>
+<li>mysql-connector-java (for MYSQL support)</li>
+</ul>
+
 
 <p>```
 <dependency></p>
@@ -88,9 +90,11 @@
 
 <p>Modify the contents of the web.xml to include the following:</p>
 
-<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout. 
-- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.
-</code></pre>
+<ul>
+<li>A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.</li>
+<li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
+</ul>
+
 
 <p>```
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
@@ -269,9 +273,11 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 
 <p>There are two interface methods needed for the application&rsquo;s purpose.</p>
 
-<pre><code>- To Insert the Student Signup details into the Database
-- To Verify the Student Login details from the Database
-</code></pre>
+<ul>
+<li>To Insert the Student Signup details into the Database</li>
+<li>To Verify the Student Login details from the Database</li>
+</ul>
+
 
 <p>```
 public interface StudentMapper {</p>

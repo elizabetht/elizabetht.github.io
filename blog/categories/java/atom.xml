@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T16:41:38-06:00</updated>
+  <updated>2013-11-22T17:05:41-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -30,14 +30,16 @@
 
 <p>To make the above Maven Java Web Application project support the Hibernate ORM in Spring framework, add the following dependencies to the existing pom.xml</p>
 
-<pre><code>- jstl, spring-webmvc and servlet-api (for Spring support)
-- mysql-connector-java (for MYSQL support)
-- spring-jdbc (for data access with JDBC Spring)
-- spring-orm (for ORM data access with Spring)
-- spring-data-jpa (for JPA support)
-- hibernate-validator and hibernate-entitymanager (for Hibernate Support)
-- jta (for transaction support)
-</code></pre>
+<ul>
+<li>jstl, spring-webmvc and servlet-api (for Spring support)</li>
+<li>mysql-connector-java (for MYSQL support)</li>
+<li>spring-jdbc (for data access with JDBC Spring)</li>
+<li>spring-orm (for ORM data access with Spring)</li>
+<li>spring-data-jpa (for JPA support)</li>
+<li>hibernate-validator and hibernate-entitymanager (for Hibernate Support)</li>
+<li>jta (for transaction support)</li>
+</ul>
+
 
 <p>```
 <dependency></p>
@@ -106,10 +108,12 @@
 
 <p>Modify the contents of the web.xml to include the following:</p>
 
-<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.&amp;nbsp;
-- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.&amp;nbsp;
-- A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.&amp;nbsp;
-</code></pre>
+<ul>
+<li>A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.</li>
+<li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
+<li>A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.</li>
+</ul>
+
 
 <p>```
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
@@ -348,7 +352,15 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <h2>10. Create class for Repository Tier</h2>
 
-<p>Create an interface class named StudentRepository.java inside the package com.meygam.repository to support the repository tier operations.</p>
+<p>Create an interface class named StudentRepository.java inside the package com.meygam.repository to support the repository tier database operations.</p>
+
+<p>There are two interface methods needed for the application&rsquo;s purpose.</p>
+
+<ul>
+<li>To Insert the Student Signup details into the Database</li>
+<li>To Verify the Student Login details from the Database</li>
+</ul>
+
 
 <p>```
 @Repository(&ldquo;studentRepository&rdquo;)
@@ -547,12 +559,14 @@ CREATE TABLE `student` (
 
 <p>To make the above Maven Java Web Application project support the MyBatis framework, add the following dependencies to the existing pom.xml</p>
 
-<pre><code>- mybatis (for MyBatis support) 
-- mybatis-spring (for MyBatis-Spring integration support) 
-- jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support) 
-- spring-test (may be optional, needed if Spring-test support is needed) 
-- mysql-connector-java (for MYSQL support) 
-</code></pre>
+<ul>
+<li>mybatis (for MyBatis support)</li>
+<li>mybatis-spring (for MyBatis-Spring integration support)</li>
+<li>jstl, spring-webmvc, servlet-api and spring-context-support (for Spring support)</li>
+<li>spring-test (may be optional, needed if Spring-test support is needed)</li>
+<li>mysql-connector-java (for MYSQL support)</li>
+</ul>
+
 
 <p>```
 <dependency></p>
@@ -605,9 +619,11 @@ CREATE TABLE `student` (
 
 <p>Modify the contents of the web.xml to include the following:</p>
 
-<pre><code>- A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout. 
-- A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.
-</code></pre>
+<ul>
+<li>A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.</li>
+<li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
+</ul>
+
 
 <p>```
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
@@ -786,9 +802,11 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 
 <p>There are two interface methods needed for the application&rsquo;s purpose.</p>
 
-<pre><code>- To Insert the Student Signup details into the Database
-- To Verify the Student Login details from the Database
-</code></pre>
+<ul>
+<li>To Insert the Student Signup details into the Database</li>
+<li>To Verify the Student Login details from the Database</li>
+</ul>
+
 
 <p>```
 public interface StudentMapper {</p>
