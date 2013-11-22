@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T14:38:54-06:00</updated>
+  <updated>2013-11-22T14:40:10-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -30,8 +30,6 @@
 
 <p>To make the above Maven Java Web Application project support the Hibernate ORM in Spring framework, add the following dependencies to the existing pom.xml</p>
 
-<hr />
-
 <pre><code>- jstl, spring-webmvc and servlet-api (for Spring support)&amp;nbsp;
 - mysql-connector-java (for MYSQL support)&amp;nbsp;
 - spring-jdbc (for data access with JDBC Spring)&amp;nbsp;
@@ -40,8 +38,6 @@
 - hibernate-validator and hibernate-entitymanager (for Hibernate Support)&amp;nbsp;
 - jta (for transaction support)&amp;nbsp;
 </code></pre>
-
-<hr />
 
 <p>```
 <dependency></p>
