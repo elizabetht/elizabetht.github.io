@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T13:41:56-06:00</updated>
+  <updated>2013-11-22T13:48:12-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -173,7 +173,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p></beans>
 ```</p>
 
-<p>After enabling the required namespaces, include the following (in between the <beans> and </beans> tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
+<p>After enabling the required namespaces, include the following (in between the <code>&lt;beans&gt;</code> and <code>&lt;/beans&gt;</code> tags) to indicate that the application is annotation driven and base package for the context component scan.</p>
 
 <p>```
 &lt;mvc:annotation-driven /></p>
@@ -243,7 +243,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <p><beans>
 ```</p>
 
-<p>After enabling the required namespaces, include the following (in between the <beans> and </beans> tags) to indicate that the application is annotation driven and base package for the jpa repositories scan.</p>
+<p>After enabling the required namespaces, include the following (in between the <code>&lt;beans&gt;</code> and <code>&lt;/beans&gt;</code> tags) to indicate that the application is annotation driven and base package for the jpa repositories scan.</p>
 
 <p>```
 &lt;context:annotation-config /></p>
@@ -281,7 +281,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <p>```</p>
 
-<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <include connection url> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <include username> and <include password> with the actual username and password values.</p>
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <code>&lt;include connection url&gt;</code> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <code>&lt;include username&gt;</code> and <code>&lt;include password&gt;</code> with the actual username and password values.</p>
 
 <p>```
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
@@ -672,7 +672,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p></bean>
 ```</p>
 
-<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace &ldquo;<include connection url>&rdquo; with the actual connection url for connecting to the MYSQL DB. Likewise, replace &ldquo;<include username>&rdquo; and &ldquo;<include password>&rdquo; with the actual username and password values.</p>
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace <code>&lt;include connection url&gt;</code> with the actual connection url for connecting to the MYSQL DB. Likewise, replace <code>&lt;include username&gt;</code> and <code>&lt;include password&gt;</code> with the actual username and password values.</p>
 
 <p>```
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
