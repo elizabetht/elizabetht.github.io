@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T14:16:01-06:00</updated>
+  <updated>2013-11-22T14:17:43-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -32,18 +32,14 @@
 
 <hr />
 
-<ul>
-<li>jstl, spring-webmvc and servlet-api (for Spring support)&nbsp;</li>
-<li>mysql-connector-java (for MYSQL support)&nbsp;</li>
-<li>spring-jdbc (for data access with JDBC Spring)&nbsp;</li>
-<li>spring-orm (for ORM data access with Spring)&nbsp;</li>
-<li>spring-data-jpa (for JPA support)&nbsp;</li>
-<li>hibernate-validator and hibernate-entitymanager (for Hibernate Support)&nbsp;</li>
-<li>jta (for transaction support)&nbsp;</li>
-</ul>
+<p>&mdash; &ndash; jstl, spring-webmvc and servlet-api (for Spring support)&nbsp;
+&mdash; &ndash; mysql-connector-java (for MYSQL support)&nbsp;
+&mdash; &ndash; spring-jdbc (for data access with JDBC Spring)&nbsp;
+&mdash; &ndash; spring-orm (for ORM data access with Spring)&nbsp;
+&mdash; &ndash; spring-data-jpa (for JPA support)&nbsp;
+&mdash; &ndash; hibernate-validator and hibernate-entitymanager (for Hibernate Support)&nbsp;</p>
 
-
-<hr />
+<h2>&mdash; &ndash; jta (for transaction support)&nbsp;</h2>
 
 <p>```
 <dependency></p>
