@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-21T17:54:36-06:00</updated>
+  <updated>2013-11-21T18:16:34-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -287,9 +287,9 @@ public Student getStudentByUserName(String userName);
 
 <h2>9. Create classes for Service Tier</h2>
 
-<p>Create an interface class named StudentService.java inside the package com.meygam.service to support the service tier operations.
-This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.
-```
+<p>Create an interface class named StudentService.java inside the package com.meygam.service to support the service tier operations.</p>
+
+<p>```
 public interface StudentService {</p>
 
 <pre><code>void insertStudent(Student student);
@@ -300,7 +300,7 @@ boolean getStudentByUserName(String userName);
 <p>}
 ```</p>
 
-<p>Create an service tier implementation class named StudentServiceImpl.java inside the package com.meygam.service.</p>
+<p>Create a service tier implementation class (a POJO indeed) named StudentServiceImpl.java inside the package com.meygam.service. This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.</p>
 
 <p>```
 @Service(&ldquo;studentService&rdquo;)
@@ -343,9 +343,92 @@ public boolean getStudentByUserName(String userName) {
 
 <h2>10. Create class for Controller Tier</h2>
 
-<p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login url is called.</p>
 
-<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0</a></p>
+<p>```
+@Controller
+@SessionAttributes(&ldquo;student&rdquo;)
+public class StudentController {</p>
+
+<pre><code>@Autowired
+private StudentService studentService;
+
+@RequestMapping(value="/signup", method=RequestMethod.GET)
+public String signup(Model model) {
+    Student student = new Student();
+    model.addAttribute("student", student);
+    return "signup";
+}
+
+@RequestMapping(value="/signup", method=RequestMethod.POST)
+public String signup(@ModelAttribute("student") Student student, Model model) {
+    if(studentService.getStudentByUserName(student.getUserName())) {
+        model.addAttribute("message", "User Name exists. Try another user name");
+        return "signup";
+    } else {
+        studentService.insertStudent(student);
+        model.addAttribute("message", "Saved student details");
+        return "redirect:login.html";
+    }
+}
+
+@RequestMapping(value="/login", method=RequestMethod.GET)
+public String login(Model model) {
+    StudentLogin studentLogin = new StudentLogin();
+    model.addAttribute("studentLogin", studentLogin);
+    return "login";
+}
+
+@RequestMapping(value="/login", method=RequestMethod.POST)
+public String login(@ModelAttribute("studentLogin") StudentLogin studentLogin, BindingResult result) {
+    boolean found = studentService.getStudentByLogin(studentLogin.getUserName(), studentLogin.getPassword());
+    if (found) {                
+        return "success";
+    } else {                
+        return "failure";
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<h2>11. Create the DB Schema in a MYSQL DB</h2>
+
+<p>Connect to the MySQL DB which is to be used for this application and create a new DB Schema named studentEnrollment using the MySQL Workbench.
+This is necessary as the DB Schema name of studentEnrollment is specified in the dataSource bean in springConfig.xml</p>
+
+<p>Once the studentEnrollment DB Schema is created, create a table named student inside the DB Schema using the CREATE TABLE statement as follows:</p>
+
+<p><code>
+CREATE TABLE `student` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dateOfBirth` datetime NOT NULL,
+  `emailAddress` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `password` varchar(8) NOT NULL,
+  `userName` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+</code></p>
+
+<h2>12. Deploying the Application on Tomcat Server</h2>
+
+<p>Once the above steps are complete and the project is successfully built, the Java web application is ready to deployed on the Tomcat Server 7.</p>
+
+<p>The Java web application can be deployed locally by right clicking on the project and choosing the &ldquo;Run As->Run on Server&rdquo; option.</p>
+
+<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /usr/local/tomcat/webapps folder and restarting the tomcat server.</p>
+
+<p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/</a></p>
+
+<h2>13. Clone or Download code</h2>
+
+<p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
+
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0</a></p>
 ]]></content>
   </entry>
   
