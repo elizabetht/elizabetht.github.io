@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MyBatis, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/mybatis/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T12:15:54-06:00</updated>
+  <updated>2013-11-22T13:36:08-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -120,7 +120,7 @@ xsi:schemaLocation=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://jav
 
 <h2>4. Create the Spring Configuration File</h2>
 
-<p>Create a Spring Bean Configuration file under the folder WEB-INF/config. If a STS(Spring Tool Suite) is the IDE, go ahead and enable the context, mvc and tx namespaces. The springConfig.xml will be as shown below</p>
+<p>Create a Spring Bean Configuration file under the folder WEB-INF/config. If STS(Spring Tool Suite) is the IDE, go ahead and enable the context, mvc and tx namespaces. The springConfig.xml will be as shown below</p>
 
 <p>```
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
@@ -231,11 +231,11 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 
 <p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. A snapshot of the signup page is as follows:</p>
 
-<p><img src="/images/mybatis-signup.png" title="MyBatis Signup Layout" alt="MyBatis Signup Layout" /></p>
+<p><img src="/images/signup.png" title="MyBatis Signup Layout" alt="MyBatis Signup Layout" /></p>
 
 <p>Next, create a file login.jsp to include a form with UserName and Password. A snapshot of the login page is as follows:</p>
 
-<p><img src="/images/mybatis-login.png" title="MyBatis Login Layout" alt="MyBatis Login Layout" /></p>
+<p><img src="/images/login.png" title="MyBatis Login Layout" alt="MyBatis Login Layout" /></p>
 
 <p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved).</p>
 
@@ -343,7 +343,7 @@ public boolean getStudentByUserName(String userName) {
 
 <h2>10. Create class for Controller Tier</h2>
 
-<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login url is called.</p>
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called.</p>
 
 <p>```
 @Controller
@@ -380,7 +380,7 @@ public String login(Model model) {
 }
 
 @RequestMapping(value="/login", method=RequestMethod.POST)
-public String login(@ModelAttribute("studentLogin") StudentLogin studentLogin, BindingResult result) {
+public String login(@ModelAttribute("studentLogin") StudentLogin studentLogin) {
     boolean found = studentService.getStudentByLogin(studentLogin.getUserName(), studentLogin.getPassword());
     if (found) {                
         return "success";
@@ -420,7 +420,7 @@ CREATE TABLE `student` (
 
 <p>The Java web application can be deployed locally by right clicking on the project and choosing the &ldquo;Run As->Run on Server&rdquo; option.</p>
 
-<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /var/lib/tomcat7 folder and restarting the tomcat server.</p>
+<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /var/lib/tomcat7 folder (or appropriate tomcat directory) and restarting the tomcat server.</p>
 
 <p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithMyBatis/</a></p>
 
@@ -428,7 +428,7 @@ CREATE TABLE `student` (
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.0</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.1</a></p>
 ]]></content>
   </entry>
   
