@@ -516,7 +516,6 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
-<span class='line-number'>33</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Service("studentService")
 </span><span class='line'>public class StudentServiceImpl implements StudentService {
 </span><span class='line'>
@@ -524,8 +523,7 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 </span><span class='line'>  private StudentMapper studentMapper;
 </span><span class='line'>  
 </span><span class='line'>  @Transactional
-</span><span class='line'>  public void insertStudent(Student student) {
-</span><span class='line'>      StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+</span><span class='line'>  public void insertStudent(Student student) {        
 </span><span class='line'>      studentMapper.insertStudent(student);
 </span><span class='line'>  }
 </span><span class='line'>

@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-23T12:08:13-06:00</updated>
+  <updated>2013-11-23T12:17:22-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -1196,7 +1196,6 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 <span class='line-number'>30</span>
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
-<span class='line-number'>33</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Service("studentService")
 </span><span class='line'>public class StudentServiceImpl implements StudentService {
 </span><span class='line'>
@@ -1204,8 +1203,7 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 </span><span class='line'>  private StudentMapper studentMapper;
 </span><span class='line'>  
 </span><span class='line'>  @Transactional
-</span><span class='line'>  public void insertStudent(Student student) {
-</span><span class='line'>      StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+</span><span class='line'>  public void insertStudent(Student student) {        
 </span><span class='line'>      studentMapper.insertStudent(student);
 </span><span class='line'>  }
 </span><span class='line'>
