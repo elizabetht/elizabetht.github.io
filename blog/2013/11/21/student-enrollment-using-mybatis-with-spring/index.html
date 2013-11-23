@@ -517,13 +517,11 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 <span class='line-number'>31</span>
 <span class='line-number'>32</span>
 <span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Service("studentService")
 </span><span class='line'>public class StudentServiceImpl implements StudentService {
 </span><span class='line'>
 </span><span class='line'>  @Autowired
-</span><span class='line'>  private SqlSession sqlSession;
+</span><span class='line'>  private StudentMapper studentMapper;
 </span><span class='line'>  
 </span><span class='line'>  @Transactional
 </span><span class='line'>  public void insertStudent(Student student) {
@@ -531,8 +529,7 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 </span><span class='line'>      studentMapper.insertStudent(student);
 </span><span class='line'>  }
 </span><span class='line'>
-</span><span class='line'>  public boolean getStudentByLogin(String userName, String password) {
-</span><span class='line'>      StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+</span><span class='line'>  public boolean getStudentByLogin(String userName, String password) {        
 </span><span class='line'>      Student student = studentMapper.getStudentByUserName(userName);
 </span><span class='line'>      
 </span><span class='line'>      if(student != null && student.getPassword().equals(password)) {
@@ -543,7 +540,6 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 </span><span class='line'>  }
 </span><span class='line'>
 </span><span class='line'>  public boolean getStudentByUserName(String userName) {
-</span><span class='line'>      StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
 </span><span class='line'>      Student student = studentMapper.getStudentByUserName(userName);
 </span><span class='line'>      
 </span><span class='line'>      if(student != null) {
@@ -554,6 +550,11 @@ Create an interface class named StudentMapper.java inside the package com.meygam
 </span><span class='line'>  }
 </span><span class='line'>
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote><p>When using MyBatis with Spring, a mapper can be directly injected into the service tier. This is probably the strongest point of the Spring integration of MyBatis. This is the only tool that I am aware that lets to build the application with no imports to it.</p><footer><strong>@EduardoMacarron</strong> <cite><a href='https://twitter.com/EduardoMacarron'>twitter.com/EduardoMacarron/&hellip;</a></cite></footer></blockquote>
 
 
 <h2>10. Create class for Controller Tier</h2>

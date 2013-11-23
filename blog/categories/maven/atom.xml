@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-22T17:13:47-06:00</updated>
+  <updated>2013-11-23T12:08:13-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -850,7 +850,7 @@ boolean getStudentByUserName(String userName);
 public class StudentServiceImpl implements StudentService {</p>
 
 <pre><code>@Autowired
-private SqlSession sqlSession;
+private StudentMapper studentMapper;
 
 @Transactional
 public void insertStudent(Student student) {
@@ -858,8 +858,7 @@ public void insertStudent(Student student) {
     studentMapper.insertStudent(student);
 }
 
-public boolean getStudentByLogin(String userName, String password) {
-    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+public boolean getStudentByLogin(String userName, String password) {        
     Student student = studentMapper.getStudentByUserName(userName);
 
     if(student != null &amp;&amp; student.getPassword().equals(password)) {
@@ -870,7 +869,6 @@ public boolean getStudentByLogin(String userName, String password) {
 }
 
 public boolean getStudentByUserName(String userName) {
-    StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
     Student student = studentMapper.getStudentByUserName(userName);
 
     if(student != null) {
@@ -883,6 +881,8 @@ public boolean getStudentByUserName(String userName) {
 
 <p>}
 ```</p>
+
+<p><blockquote><p>When using MyBatis with Spring, a mapper can be directly injected into the service tier. This is probably the strongest point of the Spring integration of MyBatis. This is the only tool that I am aware that lets to build the application with no imports to it.</p><footer><strong>@EduardoMacarron <a href="https://twitter.com/EduardoMacarron">https://twitter.com/EduardoMacarron</a></strong></footer></blockquote></p>
 
 <h2>10. Create class for Controller Tier</h2>
 
