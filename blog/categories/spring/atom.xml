@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-23T12:17:22-06:00</updated>
+  <updated>2013-11-26T15:00:13-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -538,7 +538,7 @@ CREATE TABLE `student` (
 
 <p>If you using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.1</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.2">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.2</a></p>
 ]]></content>
   </entry>
   
@@ -970,7 +970,7 @@ CREATE TABLE `student` (
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git">https://github.com/elizabetht/StudentEnrollmentWithMyBatis.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.1</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.3">https://github.com/elizabetht/StudentEnrollmentWithMyBatis/releases/tag/1.3</a></p>
 ]]></content>
   </entry>
   

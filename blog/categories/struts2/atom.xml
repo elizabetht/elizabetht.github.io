@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Java, | My Experiments with Java]]></title>
-  <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Struts2, | My Experiments with Java]]></title>
+  <link href="http://elizabetht.github.io/blog/categories/struts2/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
   <updated>2013-11-26T15:00:13-06:00</updated>
   <id>http://elizabetht.github.io/</id>
