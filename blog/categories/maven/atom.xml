@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-26T15:00:13-06:00</updated>
+  <updated>2013-11-26T15:39:24-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -295,7 +295,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
 
 <pre><code>    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
-    &lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
+    &lt;property name="url" value="jdbc:mysql//&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
     &lt;property name="username" value="&lt;include username&gt;" /&gt;
     &lt;property name="password" value="&lt;include password&gt;" /&gt;
 </code></pre>
@@ -703,7 +703,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
 
 <pre><code>&lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
-&lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
+&lt;property name="url" value="jdbc:mysql//&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
 &lt;property name="username" value="&lt;include username&gt;" /&gt;
 &lt;property name="password" value="&lt;include password&gt;" /&gt;
 </code></pre>

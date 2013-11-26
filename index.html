@@ -227,7 +227,7 @@
 
 <p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. A snapshot of the signup page is as follows:</p>
 
-<p><img src="/images/signup.png" title="Struts Signup Layout" alt="Struts Signup Layout" /></p>
+<p><img src="/images/struts-signup.png" title="Struts Signup Layout" alt="Struts Signup Layout" /></p>
 
 <p>Next, create a file login.jsp to include a form with UserName and Password. A snapshot of the login page is as follows:</p>
 
@@ -241,13 +241,328 @@
 </ul>
 
 
-<p>In order to display a success (result) page after the login action is complete, create a login-success.jsp page to indicate the login success (The page name will follow the semantics: &lt;action name&gt;&ndash;&lt;result name&gt;). Similarly, to indicate a login failure (result), create a page login-failure.jsp(These are just pages used to display the contents &ndash; no processing logic involved).</p>
-
-<p>Also create a signup-failure.jsp page to indicate the signup failure, possibly due to an already existing username (signup is the action name here)</p>
+<p>In order to display a success (result) page after the login action is complete, create a login-success.jsp page to indicate the login success (The page name will follow the semantics: &lt;action name&gt;&ndash;&lt;result name&gt;.jsp). Similarly, to indicate a login failure (result), create a page login-failure.jsp (login is the action and failure is the result). Also create a signup-failure.jsp page to indicate the signup failure, possibly due to an already existing username (signup is the action and failure is the result). These are just pages used to display the contents &ndash; no processing logic involved.</p>
 
 <p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets.</p>
 
+<p>The Struts 2 UI component tags are used to create the page elements like the form, textfield, password and hidden fields. The Struts Bootstrap tags are used for the Twitter Bootstrap integration. The Struts jQuery tags are used to include the AJAX functionality of submitting the form outside from the modal window and to use the UI widgets like the datepicker.</p>
+
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/tree/master/WebContent">https://github.com/elizabetht/StudentEnrollmentWithStruts/tree/master/WebContent</a></p>
+
+<h2>5. Create packages</h2>
+
+<p>Create packages each for the Struts Controller, Model and DAO (Data Access Objects, equivalent to the repository tier) classes under the src folder.
+Also create packages for the Struts action classes and for the utilities classes under the src folder.</p>
+
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/struts-package.png" title="Struts Package Layout" alt="Struts Package Layout" /></p>
+
+<h2>6. Create class for Model Tier</h2>
+
+<p>Create a POJO class named Student.java inside the package com.meygam.model to include the details of the Student model entity.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class Student {
+</span><span class='line'>  private String userName;
+</span><span class='line'>  private String firstName;
+</span><span class='line'>  private String lastName;
+</span><span class='line'>  private String password;
+</span><span class='line'>  private String emailAddress;
+</span><span class='line'>  private Date dateOfBirth;
+</span><span class='line'>  
+</span><span class='line'>  public String getUserName() {
+</span><span class='line'>      return userName;
+</span><span class='line'>  }
+</span><span class='line'>  public void setUserName(String userName) {
+</span><span class='line'>      this.userName = userName;
+</span><span class='line'>  }
+</span><span class='line'>  public String getFirstName() {
+</span><span class='line'>      return firstName;
+</span><span class='line'>  }
+</span><span class='line'>  public void setFirstName(String firstName) {
+</span><span class='line'>      this.firstName = firstName;
+</span><span class='line'>  }
+</span><span class='line'>  public String getLastName() {
+</span><span class='line'>      return lastName;
+</span><span class='line'>  }
+</span><span class='line'>  public void setLastName(String lastName) {
+</span><span class='line'>      this.lastName = lastName;
+</span><span class='line'>  }
+</span><span class='line'>  public String getPassword() {
+</span><span class='line'>      return password;
+</span><span class='line'>  }
+</span><span class='line'>  public void setPassword(String password) {
+</span><span class='line'>      this.password = password;
+</span><span class='line'>  }
+</span><span class='line'>  public String getEmailAddress() {
+</span><span class='line'>      return emailAddress;
+</span><span class='line'>  }
+</span><span class='line'>  public void setEmailAddress(String emailAddress) {
+</span><span class='line'>      this.emailAddress = emailAddress;
+</span><span class='line'>  }
+</span><span class='line'>  public Date getDateOfBirth() {
+</span><span class='line'>      return dateOfBirth;
+</span><span class='line'>  }
+</span><span class='line'>  public void setDateOfBirth(Date dateOfBirth) {
+</span><span class='line'>      this.dateOfBirth = dateOfBirth;
+</span><span class='line'>  }   
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>7. Create db.properties file</h2>
+
+<p>Create a file named db.properties under the src folder, where the properties of the MYSQL DB like url, username and password can be specified. Replace &lt;include connection url&gt; with the actual connection url for connecting to the MYSQL DB. Likewise, replace &lt;include username&gt; and &lt;include password&gt; with the actual username and password values.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dbDriver=com.mysql.jdbc.Driver
+</span><span class='line'>connectionUrl=jdbc:mysql://&lt;include connection url&gt;:3306/studentEnrollment
+</span><span class='line'>userName=&lt;include username&gt;
+</span><span class='line'>password=&lt;include password&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>8. Create utility class for DAO tier</h2>
+
+<p>Create a POJO class named DbUtil.java under the package com.meygam.util to include a helper class functionality that would load the db.properties file and get the database connection.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class DbUtil {
+</span><span class='line'>  private static Connection dbConnection = null;
+</span><span class='line'>  
+</span><span class='line'>  public static Connection getConnection() {
+</span><span class='line'>      if (dbConnection != null) {
+</span><span class='line'>          return dbConnection;
+</span><span class='line'>      } else {
+</span><span class='line'>          try {
+</span><span class='line'>          InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
+</span><span class='line'>          Properties properties = new Properties();
+</span><span class='line'>          if (properties != null) {
+</span><span class='line'>              properties.load(inputStream);
+</span><span class='line'>                  
+</span><span class='line'>              String dbDriver = properties.getProperty("dbDriver");
+</span><span class='line'>              String connectionUrl = properties.getProperty("connectionUrl");
+</span><span class='line'>              String userName = properties.getProperty("userName");
+</span><span class='line'>              String password = properties.getProperty("password");
+</span><span class='line'>                  
+</span><span class='line'>              Class.forName(dbDriver).newInstance();              
+</span><span class='line'>              dbConnection = DriverManager.getConnection(connectionUrl, userName, password);              
+</span><span class='line'>          }   
+</span><span class='line'>          } catch (Exception e) {
+</span><span class='line'>              e.printStackTrace();
+</span><span class='line'>          } 
+</span><span class='line'>          return dbConnection;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>9. Create class for DAO tier</h2>
+
+<p>Create a DAO tier POJO class named StudentDao.java under the package com.meygam.dao to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class StudentDao {
+</span><span class='line'>  private Connection dbConnection;
+</span><span class='line'>  
+</span><span class='line'>  public StudentDao() {
+</span><span class='line'>      dbConnection = DbUtil.getConnection();
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>  public void addStudent(Student student) {
+</span><span class='line'>      try {
+</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("insert into student(userName, firstName, lastName, password, emailAddress, dateOfBirth) values (?, ?, ?, ?, ?, ?)");
+</span><span class='line'>          prepStatement.setString(1, student.getUserName());
+</span><span class='line'>          prepStatement.setString(2, student.getFirstName());
+</span><span class='line'>          prepStatement.setString(3, student.getLastName());
+</span><span class='line'>          prepStatement.setString(4, student.getPassword());
+</span><span class='line'>          prepStatement.setString(5, student.getEmailAddress());
+</span><span class='line'>          prepStatement.setDate(6, new Date(student.getDateOfBirth().getTime()));
+</span><span class='line'>          
+</span><span class='line'>          prepStatement.executeUpdate();
+</span><span class='line'>      } catch (SQLException e) {
+</span><span class='line'>          e.printStackTrace();
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>  public boolean checkUserName(String userName) {
+</span><span class='line'>      try {
+</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("select count(*) from student where userName = ?");
+</span><span class='line'>          prepStatement.setString(1, userName);   
+</span><span class='line'>                      
+</span><span class='line'>          ResultSet result = prepStatement.executeQuery();
+</span><span class='line'>          if (result != null) {   
+</span><span class='line'>              while (result.next()) {
+</span><span class='line'>                  if (result.getInt(1) == 1) {
+</span><span class='line'>                      return true;
+</span><span class='line'>                  }               
+</span><span class='line'>              }
+</span><span class='line'>          }
+</span><span class='line'>      } catch (Exception e) {
+</span><span class='line'>          e.printStackTrace();
+</span><span class='line'>      }
+</span><span class='line'>      return false;
+</span><span class='line'>  }
+</span><span class='line'>  
+</span><span class='line'>  public boolean verifyStudent(String userName, String password) {
+</span><span class='line'>      try {
+</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("select password from student where userName = ?");
+</span><span class='line'>          prepStatement.setString(1, userName);           
+</span><span class='line'>          
+</span><span class='line'>          ResultSet result = prepStatement.executeQuery();
+</span><span class='line'>          if (result != null) {
+</span><span class='line'>              while (result.next()) {
+</span><span class='line'>                  if (result.getString(1).equals(password)) {
+</span><span class='line'>                      return true;
+</span><span class='line'>                  }
+</span><span class='line'>              }               
+</span><span class='line'>          }           
+</span><span class='line'>      } catch (Exception e) {
+</span><span class='line'>          e.printStackTrace();
+</span><span class='line'>      }
+</span><span class='line'>      return false;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>10. Create class for Controller Tier</h2>
+
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller.</p>
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts.git">https://github.com/elizabetht/StudentEnrollmentWithStruts.git</a></p>
 
@@ -678,7 +993,7 @@
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
 </span><span class='line'>      &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
-</span><span class='line'>      &lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" /&gt;
+</span><span class='line'>      &lt;property name="url" value="jdbc:mysql//&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" /&gt;
 </span><span class='line'>      &lt;property name="username" value="&lt;include username&gt;" /&gt;
 </span><span class='line'>      &lt;property name="password" value="&lt;include password&gt;" /&gt;
 </span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
@@ -1280,7 +1595,7 @@ This is necessary as the DB Schema name of studentEnrollment is specified in the
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"&gt;
 </span><span class='line'>  &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
-</span><span class='line'>  &lt;property name="url" value="jdbc:&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" /&gt;
+</span><span class='line'>  &lt;property name="url" value="jdbc:mysql//&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" /&gt;
 </span><span class='line'>  &lt;property name="username" value="&lt;include username&gt;" /&gt;
 </span><span class='line'>  &lt;property name="password" value="&lt;include password&gt;" /&gt;
 </span><span class='line'>&lt;/bean&gt;</span></code></pre></td></tr></table></div></figure>
