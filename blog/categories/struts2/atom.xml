@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Struts2, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/struts2/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-11-26T15:39:24-06:00</updated>
+  <updated>2013-11-26T21:37:03-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -116,8 +116,8 @@
 
 <h2>5. Create packages</h2>
 
-<p>Create packages each for the Struts Controller, Model and DAO (Data Access Objects, equivalent to the repository tier) classes under the src folder.
-Also create packages for the Struts action classes and for the utilities classes under the src folder.</p>
+<p>Create packages each for the Struts Actions(equivalent to Controller), Service, Repository and Model classes under the src folder.
+Also create package for the utilities class under the src folder.</p>
 
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
@@ -140,39 +140,50 @@ private Date dateOfBirth;
 public String getUserName() {
     return userName;
 }
+
 public void setUserName(String userName) {
     this.userName = userName;
 }
+
 public String getFirstName() {
     return firstName;
 }
+
 public void setFirstName(String firstName) {
     this.firstName = firstName;
 }
+
 public String getLastName() {
     return lastName;
 }
+
 public void setLastName(String lastName) {
     this.lastName = lastName;
 }
+
 public String getPassword() {
     return password;
 }
+
 public void setPassword(String password) {
     this.password = password;
 }
+
 public String getEmailAddress() {
     return emailAddress;
 }
+
 public void setEmailAddress(String emailAddress) {
     this.emailAddress = emailAddress;
 }
+
 public Date getDateOfBirth() {
     return dateOfBirth;
 }
+
 public void setDateOfBirth(Date dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
-}   
+}
 </code></pre>
 
 <p>}
@@ -189,7 +200,7 @@ userName=&lt;include username&gt;
 password=&lt;include password&gt;
 </code></p>
 
-<h2>8. Create utility class for DAO tier</h2>
+<h2>8. Create utility class </h2>
 
 <p>Create a POJO class named DbUtil.java under the package com.meygam.util to include a helper class functionality that would load the db.properties file and get the database connection.</p>
 
@@ -203,22 +214,25 @@ public static Connection getConnection() {
         return dbConnection;
     } else {
         try {
-        InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
-        Properties properties = new Properties();
-        if (properties != null) {
-            properties.load(inputStream);
+            InputStream inputStream = DbUtil.class.getClassLoader()
+                    .getResourceAsStream("db.properties");
+            Properties properties = new Properties();
+            if (properties != null) {
+                properties.load(inputStream);
 
-            String dbDriver = properties.getProperty("dbDriver");
-            String connectionUrl = properties.getProperty("connectionUrl");
-            String userName = properties.getProperty("userName");
-            String password = properties.getProperty("password");
+                String dbDriver = properties.getProperty("dbDriver");
+                String connectionUrl = properties
+                        .getProperty("connectionUrl");
+                String userName = properties.getProperty("userName");
+                String password = properties.getProperty("password");
 
-            Class.forName(dbDriver).newInstance();              
-            dbConnection = DriverManager.getConnection(connectionUrl, userName, password);              
-        }   
+                Class.forName(dbDriver).newInstance();
+                dbConnection = DriverManager.getConnection(connectionUrl,
+                        userName, password);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
         return dbConnection;
     }
 }
@@ -227,69 +241,84 @@ public static Connection getConnection() {
 <p>}
 ```</p>
 
-<h2>9. Create class for DAO tier</h2>
+<h2>9. Create class for Repository tier</h2>
 
-<p>Create a DAO tier POJO class named StudentDao.java under the package com.meygam.dao to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
+<p>Create a Repository tier POJO class named StudentRepository.java under the package com.meygam.repository to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
 
 <p>```
-public class StudentDao {</p>
+public class StudentRepository {</p>
 
 <pre><code>private Connection dbConnection;
 
-public StudentDao() {
+public StudentRepository() {
     dbConnection = DbUtil.getConnection();
 }
 
-public void addStudent(Student student) {
-    try {
-        PreparedStatement prepStatement = dbConnection.prepareStatement("insert into student(userName, firstName, lastName, password, emailAddress, dateOfBirth) values (?, ?, ?, ?, ?, ?)");
-        prepStatement.setString(1, student.getUserName());
-        prepStatement.setString(2, student.getFirstName());
-        prepStatement.setString(3, student.getLastName());
-        prepStatement.setString(4, student.getPassword());
-        prepStatement.setString(5, student.getEmailAddress());
-        prepStatement.setDate(6, new Date(student.getDateOfBirth().getTime()));
+public void save(String userName, String password, String firstName,
+        String lastName, String dateOfBirth, String emailAddress) {
+    if (dbConnection != null) {
+        try {
+            PreparedStatement prepStatement = dbConnection
+                    .prepareStatement("insert into student(userName, password, firstName, lastName, dateOfBirth, emailAddress) values (?, ?, ?, ?, ?, ?)");
+            prepStatement.setString(1, userName);
+            prepStatement.setString(2, password);
+            prepStatement.setString(3, firstName);
+            prepStatement.setString(4, lastName);               
 
-        prepStatement.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
+            prepStatement.setDate(5, new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy")
+            .parse(dateOfBirth.substring(0, 10)).getTime()));
+
+            prepStatement.setString(6, emailAddress);
+
+            prepStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {                
+            e.printStackTrace();
+        }
     }
 }
 
-public boolean checkUserName(String userName) {
-    try {
-        PreparedStatement prepStatement = dbConnection.prepareStatement("select count(*) from student where userName = ?");
-        prepStatement.setString(1, userName);   
+public boolean findByUserName(String userName) {
+    if (dbConnection != null) {
+        try {
+            PreparedStatement prepStatement = dbConnection
+                    .prepareStatement("select count(*) from student where userName = ?");
+            prepStatement.setString(1, userName);
 
-        ResultSet result = prepStatement.executeQuery();
-        if (result != null) {   
-            while (result.next()) {
-                if (result.getInt(1) == 1) {
-                    return true;
-                }               
+            ResultSet result = prepStatement.executeQuery();
+            if (result != null) {
+                while (result.next()) {
+                    if (result.getInt(1) == 1) {
+                        return true;
+                    }
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
     return false;
 }
 
-public boolean verifyStudent(String userName, String password) {
-    try {
-        PreparedStatement prepStatement = dbConnection.prepareStatement("select password from student where userName = ?");
-        prepStatement.setString(1, userName);           
+public boolean findByLogin(String userName, String password) {
+    if (dbConnection != null) {
+        try {
+            PreparedStatement prepStatement = dbConnection
+                    .prepareStatement("select password from student where userName = ?");
+            prepStatement.setString(1, userName);
 
-        ResultSet result = prepStatement.executeQuery();
-        if (result != null) {
-            while (result.next()) {
-                if (result.getString(1).equals(password)) {
-                    return true;
+            ResultSet result = prepStatement.executeQuery();
+            if (result != null) {
+                while (result.next()) {
+                    if (result.getString(1).equals(password)) {
+                        return true;
+                    }
                 }
-            }               
-        }           
-    } catch (Exception e) {
-        e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     return false;
 }
@@ -298,13 +327,240 @@ public boolean verifyStudent(String userName, String password) {
 <p>}
 ```</p>
 
-<h2>10. Create class for Controller Tier</h2>
+<h2>10. Create class for Service Tier</h2>
 
-<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller.</p>
+<p>Create a Controller tier POJO class named StudentService.java inside the package com.meygam.service. This layer acts as a median between the Controller and Repository tier classes.</p>
+
+<p>```
+public class StudentService {</p>
+
+<pre><code>private StudentRepository studentRepository;
+
+public StudentService() {
+    studentRepository = new StudentRepository();
+}
+
+public String save(String userName, String password,
+        String firstName, String lastName, String dateOfBirth,
+        String emailAddress) {
+    if (studentRepository != null) {
+        if (studentRepository.findByUserName(userName)) {
+            return "SignupFailure-UserNameExists";
+        }
+        studentRepository.save(userName, password, firstName, lastName,
+                dateOfBirth, emailAddress);
+        return "SignupSuccess";
+    } else {
+        return "SignupFailure";
+    }
+}
+
+public String findByLogin(String userName, String password) {
+    String result = "LoginFailure";
+    if (studentRepository != null) {
+        boolean status = studentRepository.findByLogin(userName, password);
+        if (status) {
+            result = "LoginSuccess";
+        }
+    }
+    return result;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>11. Create Action classes for Controller tier</h2>
+
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called. For simplicity sake, two separate action classes are created for each of the operation.</p>
+
+<p>Each of the Action class has to implement the execute() method. Based on the String result returned from the execute() method of the action class, the appropriate view page is rendered.</p>
+
+<p>In most cases, the action class is extended from the general ActionSupport class, which has a lot of easy to use convenient features. So, extend the ActionSupport class in the Action class, unless you have a reason not to!</p>
+
+<p>The following snippet shows the SignupAction class.
+```
+@SuppressWarnings(&ldquo;serial&rdquo;)
+public class SignupAction extends ActionSupport {</p>
+
+<pre><code>private String pageName;
+private String userName;
+private String password;
+private String firstName;
+private String lastName;
+private String dateOfBirth;
+private String emailAddress;
+
+@Action("signup-input")
+public String input() throws Exception {
+    return "signup";
+}
+
+@Override
+@Action(value = "signup", results = { @Result(name = "login-input", location = "login-input", type = "redirect") })
+public String execute() throws Exception {
+    String result = "";
+    StudentService studentService = new StudentService();
+
+    if (pageName != null &amp;&amp; studentService != null) {
+        if (pageName.equals("signup")) {
+            result = studentService.save(userName, password, firstName,
+                    lastName, dateOfBirth, emailAddress);
+            if (result.equals("SignupSuccess")) {
+                return "login-input";
+            } else {
+                return "failure";
+            }
+        }
+    }
+    return SUCCESS;
+}
+
+public String getPageName() {
+    return pageName;
+}
+
+public void setPageName(String pageName) {
+    this.pageName = pageName;
+}
+
+public String getUserName() {
+    return userName;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "UserName is a required field")
+@StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "UserName must be of length between 6 and 12")
+public void setUserName(String userName) {
+    this.userName = userName;
+}
+
+public String getPassword() {
+    return password;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "Password is a required field")
+@StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "Password must be of length between 6 and 12")
+public void setPassword(String password) {
+    this.password = password;
+}
+
+public String getFirstName() {
+    return firstName;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "FirstName is a required field")
+public void setFirstName(String firstName) {
+    this.firstName = firstName;
+}
+
+public String getLastName() {
+    return lastName;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "LastName is a required field")
+public void setLastName(String lastName) {
+    this.lastName = lastName;
+}
+
+public String getEmailAddress() {
+    return emailAddress;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "EmailAddress is a required field")
+@EmailValidator(type = ValidatorType.FIELD, message = "Email Address must be valid")
+public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
+}
+
+public String getDateOfBirth() {
+    return dateOfBirth;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "DateOfBirth is a required field")
+public void setDateOfBirth(String dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Similar to the SignupAction class, the LoginAction class also implements the execute() method as shown below</p>
+
+<p>```
+@SuppressWarnings(&ldquo;serial&rdquo;)
+public class LoginAction extends ActionSupport {</p>
+
+<pre><code>private String pageName;
+private String userName;
+private String password;
+
+@Action("login-input")
+public String input() throws Exception {
+    return "login";
+}
+
+@Action("login")
+public String execute() throws Exception {
+    String result = "";
+    StudentService studentService = new StudentService();
+
+    if (pageName != null &amp;&amp; studentService != null) {
+        if (pageName.equals("login")) {
+            result = studentService.findByLogin(userName, password);
+            if (result.equals("LoginFailure")) {
+                return "failure";
+            } else {
+                return "success";
+            }
+        }
+    }
+    return SUCCESS;
+}
+
+public String getPageName() {
+    return pageName;
+}
+
+public void setPageName(String pageName) {
+    this.pageName = pageName;
+}
+
+public String getUserName() {
+    return userName;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "UserName is a required field")
+@StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "UserName must be of length between 6 and 12")
+public void setUserName(String userName) {
+    this.userName = userName;
+}
+
+public String getPassword() {
+    return password;
+}
+
+@RequiredStringValidator(type = ValidatorType.FIELD, message = "Password is a required field")
+@StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "Password must be of length between 6 and 12")
+public void setPassword(String password) {
+    this.password = password;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The @Action annotation is used to specify the incoming requested URL and results to be rendered. For results other than SUCCESS (or the equivalent success string), the resulting view will be rendered based on the value of the result. For instance, in SignupAction class, if &ldquo;failure&rdquo; string is returned from the execute() method, the result will be appended to the @Action value (which is &ldquo;signup&rdquo;, in this case) and the signup-failure.jsp page will be rendered. Similarly, in LoginAction class, if &ldquo;failure&rdquo; string is returned from the execute() method, the login-failure.jsp page will be rendered.</p>
+
+<p>If SUCCESS (or the equivalent success string) is returned from the execute() method, the actual value of action will be the resulting view, unless there are no results specified using the @Result annotation. For instance, in LoginAction class, there are no @Result annotations used and hence, login-success.jsp will be rendered when execute() method returns a SUCCESS string.</p>
+
+<p>But if there are results specified with @Result annotation as in SignupAction class, the name and location given by the results array will determine the view rendered &ndash; in this case, login-input action will be rendered (which is an action specified by the LoginAction class).</p>
+
+<h2>13. Clone or Download code</h2>
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts.git">https://github.com/elizabetht/StudentEnrollmentWithStruts.git</a></p>
 
-<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.1</a></p>
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.2">https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.2</a></p>
 ]]></content>
   </entry>
   

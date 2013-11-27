@@ -251,8 +251,8 @@
 
 <h2>5. Create packages</h2>
 
-<p>Create packages each for the Struts Controller, Model and DAO (Data Access Objects, equivalent to the repository tier) classes under the src folder.
-Also create packages for the Struts action classes and for the utilities classes under the src folder.</p>
+<p>Create packages each for the Struts Actions(equivalent to Controller), Service, Repository and Model classes under the src folder.
+Also create package for the utilities class under the src folder.</p>
 
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
@@ -307,6 +307,17 @@ Also create packages for the Struts action classes and for the utilities classes
 <span class='line-number'>43</span>
 <span class='line-number'>44</span>
 <span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>public class Student {
 </span><span class='line'>  private String userName;
 </span><span class='line'>  private String firstName;
@@ -314,43 +325,54 @@ Also create packages for the Struts action classes and for the utilities classes
 </span><span class='line'>  private String password;
 </span><span class='line'>  private String emailAddress;
 </span><span class='line'>  private Date dateOfBirth;
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  public String getUserName() {
 </span><span class='line'>      return userName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setUserName(String userName) {
 </span><span class='line'>      this.userName = userName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public String getFirstName() {
 </span><span class='line'>      return firstName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setFirstName(String firstName) {
 </span><span class='line'>      this.firstName = firstName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public String getLastName() {
 </span><span class='line'>      return lastName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setLastName(String lastName) {
 </span><span class='line'>      this.lastName = lastName;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public String getPassword() {
 </span><span class='line'>      return password;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setPassword(String password) {
 </span><span class='line'>      this.password = password;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public String getEmailAddress() {
 </span><span class='line'>      return emailAddress;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setEmailAddress(String emailAddress) {
 </span><span class='line'>      this.emailAddress = emailAddress;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public Date getDateOfBirth() {
 </span><span class='line'>      return dateOfBirth;
 </span><span class='line'>  }
+</span><span class='line'>
 </span><span class='line'>  public void setDateOfBirth(Date dateOfBirth) {
 </span><span class='line'>      this.dateOfBirth = dateOfBirth;
-</span><span class='line'>  }   
+</span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
@@ -368,7 +390,7 @@ Also create packages for the Struts action classes and for the utilities classes
 </span><span class='line'>password=&lt;include password&gt;</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>8. Create utility class for DAO tier</h2>
+<h2>8. Create utility class </h2>
 
 <p>Create a POJO class named DbUtil.java under the package com.meygam.util to include a helper class functionality that would load the db.properties file and get the database connection.</p>
 
@@ -400,39 +422,45 @@ Also create packages for the Struts action classes and for the utilities classes
 <span class='line-number'>26</span>
 <span class='line-number'>27</span>
 <span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>public class DbUtil {
 </span><span class='line'>  private static Connection dbConnection = null;
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  public static Connection getConnection() {
 </span><span class='line'>      if (dbConnection != null) {
 </span><span class='line'>          return dbConnection;
 </span><span class='line'>      } else {
 </span><span class='line'>          try {
-</span><span class='line'>          InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("db.properties");
-</span><span class='line'>          Properties properties = new Properties();
-</span><span class='line'>          if (properties != null) {
-</span><span class='line'>              properties.load(inputStream);
-</span><span class='line'>                  
-</span><span class='line'>              String dbDriver = properties.getProperty("dbDriver");
-</span><span class='line'>              String connectionUrl = properties.getProperty("connectionUrl");
-</span><span class='line'>              String userName = properties.getProperty("userName");
-</span><span class='line'>              String password = properties.getProperty("password");
-</span><span class='line'>                  
-</span><span class='line'>              Class.forName(dbDriver).newInstance();              
-</span><span class='line'>              dbConnection = DriverManager.getConnection(connectionUrl, userName, password);              
-</span><span class='line'>          }   
+</span><span class='line'>              InputStream inputStream = DbUtil.class.getClassLoader()
+</span><span class='line'>                      .getResourceAsStream("db.properties");
+</span><span class='line'>              Properties properties = new Properties();
+</span><span class='line'>              if (properties != null) {
+</span><span class='line'>                  properties.load(inputStream);
+</span><span class='line'>
+</span><span class='line'>                  String dbDriver = properties.getProperty("dbDriver");
+</span><span class='line'>                  String connectionUrl = properties
+</span><span class='line'>                          .getProperty("connectionUrl");
+</span><span class='line'>                  String userName = properties.getProperty("userName");
+</span><span class='line'>                  String password = properties.getProperty("password");
+</span><span class='line'>
+</span><span class='line'>                  Class.forName(dbDriver).newInstance();
+</span><span class='line'>                  dbConnection = DriverManager.getConnection(connectionUrl,
+</span><span class='line'>                          userName, password);
+</span><span class='line'>              }
 </span><span class='line'>          } catch (Exception e) {
 </span><span class='line'>              e.printStackTrace();
-</span><span class='line'>          } 
+</span><span class='line'>          }
 </span><span class='line'>          return dbConnection;
 </span><span class='line'>      }
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>9. Create class for DAO tier</h2>
+<h2>9. Create class for Repository tier</h2>
 
-<p>Create a DAO tier POJO class named StudentDao.java under the package com.meygam.dao to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
+<p>Create a Repository tier POJO class named StudentRepository.java under the package com.meygam.repository to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -496,63 +524,93 @@ Also create packages for the Struts action classes and for the utilities classes
 <span class='line-number'>60</span>
 <span class='line-number'>61</span>
 <span class='line-number'>62</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>public class StudentDao {
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class StudentRepository {
 </span><span class='line'>  private Connection dbConnection;
-</span><span class='line'>  
-</span><span class='line'>  public StudentDao() {
+</span><span class='line'>
+</span><span class='line'>  public StudentRepository() {
 </span><span class='line'>      dbConnection = DbUtil.getConnection();
 </span><span class='line'>  }
-</span><span class='line'>  
-</span><span class='line'>  public void addStudent(Student student) {
-</span><span class='line'>      try {
-</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("insert into student(userName, firstName, lastName, password, emailAddress, dateOfBirth) values (?, ?, ?, ?, ?, ?)");
-</span><span class='line'>          prepStatement.setString(1, student.getUserName());
-</span><span class='line'>          prepStatement.setString(2, student.getFirstName());
-</span><span class='line'>          prepStatement.setString(3, student.getLastName());
-</span><span class='line'>          prepStatement.setString(4, student.getPassword());
-</span><span class='line'>          prepStatement.setString(5, student.getEmailAddress());
-</span><span class='line'>          prepStatement.setDate(6, new Date(student.getDateOfBirth().getTime()));
-</span><span class='line'>          
-</span><span class='line'>          prepStatement.executeUpdate();
-</span><span class='line'>      } catch (SQLException e) {
-</span><span class='line'>          e.printStackTrace();
+</span><span class='line'>
+</span><span class='line'>  public void save(String userName, String password, String firstName,
+</span><span class='line'>          String lastName, String dateOfBirth, String emailAddress) {
+</span><span class='line'>      if (dbConnection != null) {
+</span><span class='line'>          try {
+</span><span class='line'>              PreparedStatement prepStatement = dbConnection
+</span><span class='line'>                      .prepareStatement("insert into student(userName, password, firstName, lastName, dateOfBirth, emailAddress) values (?, ?, ?, ?, ?, ?)");
+</span><span class='line'>              prepStatement.setString(1, userName);
+</span><span class='line'>              prepStatement.setString(2, password);
+</span><span class='line'>              prepStatement.setString(3, firstName);
+</span><span class='line'>              prepStatement.setString(4, lastName);               
+</span><span class='line'>              
+</span><span class='line'>              prepStatement.setDate(5, new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy")
+</span><span class='line'>              .parse(dateOfBirth.substring(0, 10)).getTime()));
+</span><span class='line'>
+</span><span class='line'>              prepStatement.setString(6, emailAddress);
+</span><span class='line'>
+</span><span class='line'>              prepStatement.executeUpdate();
+</span><span class='line'>          } catch (SQLException e) {
+</span><span class='line'>              e.printStackTrace();
+</span><span class='line'>          } catch (ParseException e) {                
+</span><span class='line'>              e.printStackTrace();
+</span><span class='line'>          }
 </span><span class='line'>      }
 </span><span class='line'>  }
-</span><span class='line'>  
-</span><span class='line'>  public boolean checkUserName(String userName) {
-</span><span class='line'>      try {
-</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("select count(*) from student where userName = ?");
-</span><span class='line'>          prepStatement.setString(1, userName);   
-</span><span class='line'>                      
-</span><span class='line'>          ResultSet result = prepStatement.executeQuery();
-</span><span class='line'>          if (result != null) {   
-</span><span class='line'>              while (result.next()) {
-</span><span class='line'>                  if (result.getInt(1) == 1) {
-</span><span class='line'>                      return true;
-</span><span class='line'>                  }               
+</span><span class='line'>
+</span><span class='line'>  public boolean findByUserName(String userName) {
+</span><span class='line'>      if (dbConnection != null) {
+</span><span class='line'>          try {
+</span><span class='line'>              PreparedStatement prepStatement = dbConnection
+</span><span class='line'>                      .prepareStatement("select count(*) from student where userName = ?");
+</span><span class='line'>              prepStatement.setString(1, userName);
+</span><span class='line'>
+</span><span class='line'>              ResultSet result = prepStatement.executeQuery();
+</span><span class='line'>              if (result != null) {
+</span><span class='line'>                  while (result.next()) {
+</span><span class='line'>                      if (result.getInt(1) == 1) {
+</span><span class='line'>                          return true;
+</span><span class='line'>                      }
+</span><span class='line'>                  }
 </span><span class='line'>              }
+</span><span class='line'>          } catch (Exception e) {
+</span><span class='line'>              e.printStackTrace();
 </span><span class='line'>          }
-</span><span class='line'>      } catch (Exception e) {
-</span><span class='line'>          e.printStackTrace();
 </span><span class='line'>      }
 </span><span class='line'>      return false;
 </span><span class='line'>  }
-</span><span class='line'>  
-</span><span class='line'>  public boolean verifyStudent(String userName, String password) {
-</span><span class='line'>      try {
-</span><span class='line'>          PreparedStatement prepStatement = dbConnection.prepareStatement("select password from student where userName = ?");
-</span><span class='line'>          prepStatement.setString(1, userName);           
-</span><span class='line'>          
-</span><span class='line'>          ResultSet result = prepStatement.executeQuery();
-</span><span class='line'>          if (result != null) {
-</span><span class='line'>              while (result.next()) {
-</span><span class='line'>                  if (result.getString(1).equals(password)) {
-</span><span class='line'>                      return true;
+</span><span class='line'>
+</span><span class='line'>  public boolean findByLogin(String userName, String password) {
+</span><span class='line'>      if (dbConnection != null) {
+</span><span class='line'>          try {
+</span><span class='line'>              PreparedStatement prepStatement = dbConnection
+</span><span class='line'>                      .prepareStatement("select password from student where userName = ?");
+</span><span class='line'>              prepStatement.setString(1, userName);
+</span><span class='line'>
+</span><span class='line'>              ResultSet result = prepStatement.executeQuery();
+</span><span class='line'>              if (result != null) {
+</span><span class='line'>                  while (result.next()) {
+</span><span class='line'>                      if (result.getString(1).equals(password)) {
+</span><span class='line'>                          return true;
+</span><span class='line'>                      }
 </span><span class='line'>                  }
-</span><span class='line'>              }               
-</span><span class='line'>          }           
-</span><span class='line'>      } catch (Exception e) {
-</span><span class='line'>          e.printStackTrace();
+</span><span class='line'>              }
+</span><span class='line'>          } catch (Exception e) {
+</span><span class='line'>              e.printStackTrace();
+</span><span class='line'>          }
 </span><span class='line'>      }
 </span><span class='line'>      return false;
 </span><span class='line'>  }
@@ -560,13 +618,427 @@ Also create packages for the Struts action classes and for the utilities classes
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>10. Create class for Controller Tier</h2>
+<h2>10. Create class for Service Tier</h2>
 
-<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller.</p>
+<p>Create a Controller tier POJO class named StudentService.java inside the package com.meygam.service. This layer acts as a median between the Controller and Repository tier classes.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public class StudentService {
+</span><span class='line'>
+</span><span class='line'>  private StudentRepository studentRepository;
+</span><span class='line'>
+</span><span class='line'>  public StudentService() {
+</span><span class='line'>      studentRepository = new StudentRepository();
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String save(String userName, String password,
+</span><span class='line'>          String firstName, String lastName, String dateOfBirth,
+</span><span class='line'>          String emailAddress) {
+</span><span class='line'>      if (studentRepository != null) {
+</span><span class='line'>          if (studentRepository.findByUserName(userName)) {
+</span><span class='line'>              return "SignupFailure-UserNameExists";
+</span><span class='line'>          }
+</span><span class='line'>          studentRepository.save(userName, password, firstName, lastName,
+</span><span class='line'>                  dateOfBirth, emailAddress);
+</span><span class='line'>          return "SignupSuccess";
+</span><span class='line'>      } else {
+</span><span class='line'>          return "SignupFailure";
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String findByLogin(String userName, String password) {
+</span><span class='line'>      String result = "LoginFailure";
+</span><span class='line'>      if (studentRepository != null) {
+</span><span class='line'>          boolean status = studentRepository.findByLogin(userName, password);
+</span><span class='line'>          if (status) {
+</span><span class='line'>              result = "LoginSuccess";
+</span><span class='line'>          }
+</span><span class='line'>      }
+</span><span class='line'>      return result;
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>11. Create Action classes for Controller tier</h2>
+
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called. For simplicity sake, two separate action classes are created for each of the operation.</p>
+
+<p>Each of the Action class has to implement the execute() method. Based on the String result returned from the execute() method of the action class, the appropriate view page is rendered.</p>
+
+<p>In most cases, the action class is extended from the general ActionSupport class, which has a lot of easy to use convenient features. So, extend the ActionSupport class in the Action class, unless you have a reason not to!</p>
+
+<p>The following snippet shows the SignupAction class.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@SuppressWarnings("serial")
+</span><span class='line'>public class SignupAction extends ActionSupport {
+</span><span class='line'>
+</span><span class='line'>  private String pageName;
+</span><span class='line'>  private String userName;
+</span><span class='line'>  private String password;
+</span><span class='line'>  private String firstName;
+</span><span class='line'>  private String lastName;
+</span><span class='line'>  private String dateOfBirth;
+</span><span class='line'>  private String emailAddress;
+</span><span class='line'>
+</span><span class='line'>  @Action("signup-input")
+</span><span class='line'>  public String input() throws Exception {
+</span><span class='line'>      return "signup";
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  @Action(value = "signup", results = { @Result(name = "login-input", location = "login-input", type = "redirect") })
+</span><span class='line'>  public String execute() throws Exception {
+</span><span class='line'>      String result = "";
+</span><span class='line'>      StudentService studentService = new StudentService();
+</span><span class='line'>
+</span><span class='line'>      if (pageName != null && studentService != null) {
+</span><span class='line'>          if (pageName.equals("signup")) {
+</span><span class='line'>              result = studentService.save(userName, password, firstName,
+</span><span class='line'>                      lastName, dateOfBirth, emailAddress);
+</span><span class='line'>              if (result.equals("SignupSuccess")) {
+</span><span class='line'>                  return "login-input";
+</span><span class='line'>              } else {
+</span><span class='line'>                  return "failure";
+</span><span class='line'>              }
+</span><span class='line'>          }
+</span><span class='line'>      }
+</span><span class='line'>      return SUCCESS;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getPageName() {
+</span><span class='line'>      return pageName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public void setPageName(String pageName) {
+</span><span class='line'>      this.pageName = pageName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getUserName() {
+</span><span class='line'>      return userName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "UserName is a required field")
+</span><span class='line'>  @StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "UserName must be of length between 6 and 12")
+</span><span class='line'>  public void setUserName(String userName) {
+</span><span class='line'>      this.userName = userName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getPassword() {
+</span><span class='line'>      return password;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "Password is a required field")
+</span><span class='line'>  @StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "Password must be of length between 6 and 12")
+</span><span class='line'>  public void setPassword(String password) {
+</span><span class='line'>      this.password = password;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getFirstName() {
+</span><span class='line'>      return firstName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "FirstName is a required field")
+</span><span class='line'>  public void setFirstName(String firstName) {
+</span><span class='line'>      this.firstName = firstName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getLastName() {
+</span><span class='line'>      return lastName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "LastName is a required field")
+</span><span class='line'>  public void setLastName(String lastName) {
+</span><span class='line'>      this.lastName = lastName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getEmailAddress() {
+</span><span class='line'>      return emailAddress;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "EmailAddress is a required field")
+</span><span class='line'>  @EmailValidator(type = ValidatorType.FIELD, message = "Email Address must be valid")
+</span><span class='line'>  public void setEmailAddress(String emailAddress) {
+</span><span class='line'>      this.emailAddress = emailAddress;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getDateOfBirth() {
+</span><span class='line'>      return dateOfBirth;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "DateOfBirth is a required field")
+</span><span class='line'>  public void setDateOfBirth(String dateOfBirth) {
+</span><span class='line'>      this.dateOfBirth = dateOfBirth;
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similar to the SignupAction class, the LoginAction class also implements the execute() method as shown below</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@SuppressWarnings("serial")
+</span><span class='line'>public class LoginAction extends ActionSupport {
+</span><span class='line'>
+</span><span class='line'>  private String pageName;
+</span><span class='line'>  private String userName;
+</span><span class='line'>  private String password;
+</span><span class='line'>
+</span><span class='line'>  @Action("login-input")
+</span><span class='line'>  public String input() throws Exception {
+</span><span class='line'>      return "login";
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Action("login")
+</span><span class='line'>  public String execute() throws Exception {
+</span><span class='line'>      String result = "";
+</span><span class='line'>      StudentService studentService = new StudentService();
+</span><span class='line'>
+</span><span class='line'>      if (pageName != null && studentService != null) {
+</span><span class='line'>          if (pageName.equals("login")) {
+</span><span class='line'>              result = studentService.findByLogin(userName, password);
+</span><span class='line'>              if (result.equals("LoginFailure")) {
+</span><span class='line'>                  return "failure";
+</span><span class='line'>              } else {
+</span><span class='line'>                  return "success";
+</span><span class='line'>              }
+</span><span class='line'>          }
+</span><span class='line'>      }
+</span><span class='line'>      return SUCCESS;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getPageName() {
+</span><span class='line'>      return pageName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public void setPageName(String pageName) {
+</span><span class='line'>      this.pageName = pageName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getUserName() {
+</span><span class='line'>      return userName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "UserName is a required field")
+</span><span class='line'>  @StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "UserName must be of length between 6 and 12")
+</span><span class='line'>  public void setUserName(String userName) {
+</span><span class='line'>      this.userName = userName;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  public String getPassword() {
+</span><span class='line'>      return password;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @RequiredStringValidator(type = ValidatorType.FIELD, message = "Password is a required field")
+</span><span class='line'>  @StringLengthFieldValidator(type = ValidatorType.FIELD, maxLength = "12", minLength = "6", message = "Password must be of length between 6 and 12")
+</span><span class='line'>  public void setPassword(String password) {
+</span><span class='line'>      this.password = password;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The @Action annotation is used to specify the incoming requested URL and results to be rendered. For results other than SUCCESS (or the equivalent success string), the resulting view will be rendered based on the value of the result. For instance, in SignupAction class, if &ldquo;failure&rdquo; string is returned from the execute() method, the result will be appended to the @Action value (which is &ldquo;signup&rdquo;, in this case) and the signup-failure.jsp page will be rendered. Similarly, in LoginAction class, if &ldquo;failure&rdquo; string is returned from the execute() method, the login-failure.jsp page will be rendered.</p>
+
+<p>If SUCCESS (or the equivalent success string) is returned from the execute() method, the actual value of action will be the resulting view, unless there are no results specified using the @Result annotation. For instance, in LoginAction class, there are no @Result annotations used and hence, login-success.jsp will be rendered when execute() method returns a SUCCESS string.</p>
+
+<p>But if there are results specified with @Result annotation as in SignupAction class, the name and location given by the results array will determine the view rendered &ndash; in this case, login-input action will be rendered (which is an action specified by the LoginAction class).</p>
+
+<h2>13. Clone or Download code</h2>
 
 <p>If you are using git, you can clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts.git">https://github.com/elizabetht/StudentEnrollmentWithStruts.git</a></p>
 
-<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.1</a></p>
+<p>In case you are not using git, you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.2">https://github.com/elizabetht/StudentEnrollmentWithStruts/releases/tag/1.2</a></p>
 </div>
   
   
