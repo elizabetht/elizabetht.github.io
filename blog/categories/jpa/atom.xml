@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JPA | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jpa/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-03T10:40:17-06:00</updated>
+  <updated>2013-12-10T09:16:20-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -186,7 +186,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 <p>```
 &lt;mvc:annotation-driven /></p>
 
-<p>&lt;context:component-scan base-package=&ldquo;com.meygam&rdquo; />
+<p>&lt;context:component-scan base-package=&ldquo;com.github.elizabetht&rdquo; />
 ```</p>
 
 <p>Include the bean InternalResourceViewResolver of Spring to locate the jsp files</p>
@@ -256,7 +256,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <p>```
 &lt;context:annotation-config /></p>
 
-<p>&lt;jpa:repositories base-package=&ldquo;com.meygam.repository&rdquo; />
+<p>&lt;jpa:repositories base-package=&ldquo;com.github.elizabetht.repository&rdquo; />
 ```</p>
 
 <p>Next, include the bean PersistenceAnnotationBeanPostProcessor. This is necessary to process the Persistence Unit, Persistence Context annotations and for injecting JPA related resources.</p>
@@ -346,13 +346,13 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <h2>9. Create classes for Model Tier</h2>
 
-<p>Create a POJO class named Student.java inside the package com.meygam.model to include the details of the Student model entity during signup. Create another POJO class named StudentLogin.java inside the same package com.meygam.model to include the Student Login details.</p>
+<p>Create a POJO class named Student.java inside the package com.github.elizabetht.model to include the details of the Student model entity during signup. Create another POJO class named StudentLogin.java inside the same package com.github.elizabetht.model to include the Student Login details.</p>
 
-<p>A reference link to the files for the Model classes can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/meygam/model</a></p>
+<p>A reference link to the files for the Model classes can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model</a></p>
 
 <h2>10. Create class for Repository Tier</h2>
 
-<p>Create an interface class named StudentRepository.java inside the package com.meygam.repository to support the repository tier database operations.</p>
+<p>Create an interface class named StudentRepository.java inside the package com.github.elizabetht.repository to support the repository tier database operations.</p>
 
 <p>There are two interface methods needed for the application&rsquo;s purpose.</p>
 
@@ -377,7 +377,7 @@ Student findByUserName(@Param("userName") String userName);
 
 <h2>11. Create classes for Service Tier</h2>
 
-<p>Create an interface class named StudentService.java inside the package com.meygam.service to support the service tier operations.</p>
+<p>Create an interface class named StudentService.java inside the package com.github.elizabetht.service to support the service tier operations.</p>
 
 <p>```
 public interface StudentService {</p>
@@ -390,7 +390,7 @@ boolean findByUserName(String userName);
 <p>}
 ```</p>
 
-<p>Create a service tier implementation class (a POJO indeed) named StudentServiceImpl.java inside the package com.meygam.service. This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.</p>
+<p>Create a service tier implementation class (a POJO indeed) named StudentServiceImpl.java inside the package com.github.elizabetht.service. This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.</p>
 
 <p>```
 @Service(&ldquo;studentService&rdquo;)
@@ -430,7 +430,7 @@ public boolean findByUserName(String userName) {
 
 <h2>10. Create class for Controller Tier</h2>
 
-<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called.</p>
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.github.elizabetht.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called.</p>
 
 <p>```
 @Controller
@@ -489,7 +489,7 @@ public String login(@Valid @ModelAttribute("studentLogin") StudentLogin studentL
 
 <h2>11. Create messages.properties file</h2>
 
-<p>As seen above, the @Valid annotation is used to validate the input parameters of the form reaching the method and the result of the validation is stored in BindingResult object. In order to validate specific fields, (refer the classes created for the Model tier &ndash; <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/meygam/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/meygam/model</a>), use annotations like @NotEmpty, @Size, @Email and @NotNull from the various validations available from the Hibernate Validator.</p>
+<p>As seen above, the @Valid annotation is used to validate the input parameters of the form reaching the method and the result of the validation is stored in BindingResult object. In order to validate specific fields, (refer the classes created for the Model tier &ndash; <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model</a>), use annotations like @NotEmpty, @Size, @Email and @NotNull from the various validations available from the Hibernate Validator.</p>
 
 <p>The Custom messages that should be displayed when any of the above mentioned validators fail is specified in the messages.properties file. Create a file named messages.properties under src/main/resources folder and include the following</p>
 
@@ -538,7 +538,7 @@ CREATE TABLE `student` (
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.3">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.3</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6</a></p>
 ]]></content>
   </entry>
   

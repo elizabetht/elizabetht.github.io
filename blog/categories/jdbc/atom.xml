@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JDBC | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-03T10:40:17-06:00</updated>
+  <updated>2013-12-10T09:16:20-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -54,7 +54,7 @@
 <p>  <servlet></p>
 
 <pre><code>&lt;servlet-name&gt;studentJDBCServlet&lt;/servlet-name&gt;
-&lt;servlet-class&gt;com.meygam.controller.StudentController&lt;/servlet-class&gt;
+&lt;servlet-class&gt;com.github.elizabetht.controller.StudentController&lt;/servlet-class&gt;
 </code></pre>
 
 <p>  </servlet></p>
@@ -121,7 +121,7 @@ Also create package for the utilities class under the src folder.</p>
 
 <h2>6. Create class for Model Tier</h2>
 
-<p>Create a POJO class named Student.java inside the package com.meygam.model to include the details of the Student model entity.</p>
+<p>Create a POJO class named Student.java inside the package com.github.elizabetht.model to include the details of the Student model entity.</p>
 
 <p>```
 public class Student {</p>
@@ -198,7 +198,7 @@ password=&lt;include password&gt;
 
 <h2>8. Create utility class </h2>
 
-<p>Create a POJO class named DbUtil.java under the package com.meygam.util to include a helper class functionality that would load the db.properties file and get the database connection.</p>
+<p>Create a POJO class named DbUtil.java under the package com.github.elizabetht.util to include a helper class functionality that would load the db.properties file and get the database connection.</p>
 
 <p>```
 public class DbUtil {</p>
@@ -239,7 +239,7 @@ public static Connection getConnection() {
 
 <h2>9. Create class for Repository tier</h2>
 
-<p>Create a Repository tier POJO class named StudentRepository.java under the package com.meygam.repository to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
+<p>Create a Repository tier POJO class named StudentRepository.java under the package com.github.elizabetht.repository to support the database operations of saving the student details, verifying the student login details and checking if the username exists when a save is attempted.</p>
 
 <p>```
 public class StudentRepository {</p>
@@ -313,7 +313,7 @@ public boolean findByLogin(String userName, String password) {
 
 <h2>10. Create class for Controller Tier</h2>
 
-<p>Create a Controller tier POJO class named StudentController.java inside the package com.meygam.controller. This is where the servicing logic of the application goes &ndash; whether a signup or login action is called.</p>
+<p>Create a Controller tier POJO class named StudentController.java inside the package com.github.elizabetht.controller. This is where the servicing logic of the application goes &ndash; whether a signup or login action is called.</p>
 
 <p>```
 @SuppressWarnings(&ldquo;serial&rdquo;)
@@ -426,7 +426,7 @@ CREATE TABLE `student` (
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithJDBC.git">https://github.com/elizabetht/StudentEnrollmentWithJDBC.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.1</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.2">https://github.com/elizabetht/StudentEnrollmentWithJDBC/releases/tag/1.2</a></p>
 ]]></content>
   </entry>
   
