@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-13T11:24:21-06:00</updated>
+  <updated>2013-12-13T11:41:51-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -362,6 +362,118 @@ xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springf
 ```</p>
 
 <p>Thus ends the long configuration in applicationContext.xml</p>
+
+<h2>6. Create JSP Files for Student Signup/Login</h2>
+
+<p>Create a folder named &ldquo;jsp&rdquo; under WEB-INF (This is where the jsp files will be created as indicated in the web.xml for the JSP TemplateBasePath).</p>
+
+<p>Create a file signup.jsp to include a form to get the input details like UserName, Password, FirstName, LastName, DateOfBirth and EmailAddress of the student. A snapshot of the signup page is as follows:</p>
+
+<p><img src="/images/signup.png" title="Jersey REST Spring Hibernate Signup Layout" alt="Jersey REST Spring Hibernate Signup Layout" /></p>
+
+<p>Next, create a file login.jsp to include a form with UserName and Password. A snapshot of the login page is as follows:</p>
+
+<p><img src="/images/login.png" title="Jersey REST Spring Hibernate Login Layout" alt="Jersey REST Spring Hibernate Login Layout" /></p>
+
+<p>Also create success.jsp to indicate the login success and failure.jsp to indicate login failure (These are just pages used to display the contents &ndash; no processing logic involved).</p>
+
+<p>This application uses twitter bootstrap <a href="http://getbootstrap.com/">http://getbootstrap.com/</a> and <a href="http://bootswatch.com/united/">http://bootswatch.com/united/</a> as style sheets. It also uses a datepicker stylesheet as well to pop up a calendar for the DateOfBirth field in the Student Signup page (<a href="http://www.eyecon.ro/bootstrap-datepicker/">http://www.eyecon.ro/bootstrap-datepicker/</a>).</p>
+
+<p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithREST/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithREST/tree/master/src/main/webapp</a></p>
+
+<h2>7. Create packages for Resource, Service, Repository and Model tier classes</h2>
+
+<p>Create packages each for the Jersey Resource, Service, Repository and Model classes under the src/main/java folder.</p>
+
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/jersey-package.png" title="Jersey REST Spring Package Layout" alt="Jersey REST Spring Package Layout" /></p>
+
+<h2>8. Create classes for Model Tier</h2>
+
+<p>Create a POJO class named Student.java inside the package com.github.elizabetht.model to include the details of the Student model entity during signup. Create another POJO class named StudentLogin.java inside the same package com.github.elizabetht.model to include the Student Login details.</p>
+
+<p>Annotate the classes with @Component to be picked by the Context-Component Scan of the Jersey-Spring framework. Also annotate the classes with @XmlRootElement to indicate the XML Element.</p>
+
+<p>A reference link to the files for the Model classes can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithREST/tree/master/src/main/java/com/github/elizabetht/model">https://github.com/elizabetht/StudentEnrollmentWithREST/tree/master/src/main/java/com/github/elizabetht/model</a></p>
+
+<h2>9. Create class for Repository Tier</h2>
+
+<p>Create an interface class named StudentRepository.java inside the package com.github.elizabetht.repository to support the repository tier database operations.</p>
+
+<p>There are two interface methods needed for the application&rsquo;s purpose.</p>
+
+<ul>
+<li>To Insert the Student Signup details into the Database</li>
+<li>To Verify the Student Login details from the Database</li>
+</ul>
+
+
+<p>```
+@Repository(&ldquo;studentRepository&rdquo;)
+public interface StudentRepository extends JpaRepository&lt;Student, Long> {</p>
+
+<pre><code>@Query("select s from Student s where s.userName = :userName")
+Student findByUserName(@Param("userName") String userName);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The save() method is supported by the Hibernate implementation and hence no separate SQL statements are required for the data insert.</p>
+
+<h2>10. Create classes for Service Tier</h2>
+
+<p>Create an interface class named StudentService.java inside the package com.github.elizabetht.service to support the service tier operations.</p>
+
+<p>```
+public interface StudentService {</p>
+
+<pre><code>Student save(Student student);
+boolean findByLogin(String userName, String password);
+boolean findByUserName(String userName);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Create a service tier implementation class (a POJO indeed) named StudentServiceImpl.java inside the package com.github.elizabetht.service. This is where the application logic goes &ndash; either to save the student details into the database or to verify the student (already saved) details from the database.</p>
+
+<p>```
+@Service(&ldquo;studentService&rdquo;)
+public class StudentServiceImpl implements StudentService {</p>
+
+<pre><code>@Autowired
+private StudentRepository studentRepository;
+
+@Transactional
+public Student save(Student student) {
+    return studentRepository.save(student);
+}
+
+public boolean findByLogin(String userName, String password) {  
+    Student stud = studentRepository.findByUserName(userName);
+
+    if(stud != null &amp;&amp; stud.getPassword().equals(password)) {
+        return true;
+    } 
+
+    return false;       
+}
+
+public boolean findByUserName(String userName) {
+    Student stud = studentRepository.findByUserName(userName);
+
+    if(stud != null) {
+        return true;
+    }
+
+    return false;
+}
+</code></pre>
+
+<p>}
+```</p>
 ]]></content>
   </entry>
   
@@ -688,9 +800,9 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp</a></p>
 
-<h2>8. Create packages for Controller, Model and Service tier classes</h2>
+<h2>8. Create packages for Controller, Model, Repository and Service tier classes</h2>
 
-<p>Create packages each for the Spring Controller, Model and Service classes under the src/main/java folder.</p>
+<p>Create packages each for the Spring Controller, Model, Repository and Service classes under the src/main/java folder.</p>
 
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
@@ -780,7 +892,7 @@ public boolean findByUserName(String userName) {
 <p>}
 ```</p>
 
-<h2>10. Create class for Controller Tier</h2>
+<h2>12. Create class for Controller Tier</h2>
 
 <p>Create a Controller tier POJO class named StudentController.java inside the package com.github.elizabetht.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called.</p>
 
@@ -839,7 +951,7 @@ public String login(@Valid @ModelAttribute("studentLogin") StudentLogin studentL
 <p>}
 ```</p>
 
-<h2>11. Create messages.properties file</h2>
+<h2>13. Create messages.properties file</h2>
 
 <p>As seen above, the @Valid annotation is used to validate the input parameters of the form reaching the method and the result of the validation is stored in BindingResult object. In order to validate specific fields, (refer the classes created for the Model tier &ndash; <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model</a>), use annotations like @NotEmpty, @Size, @Email and @NotNull from the various validations available from the Hibernate Validator.</p>
 
@@ -856,7 +968,7 @@ Past=Date of Birth must be in the past</p>
 typeMismatch=Invalid format
 ```</p>
 
-<h2>12. Create the DB Schema in a MYSQL DB</h2>
+<h2>14. Create the DB Schema in a MYSQL DB</h2>
 
 <p>Connect to the MySQL DB which is to be used for this application and create a new DB Schema named studentEnrollment using the MySQL Workbench.
 This is necessary as the DB Schema name of studentEnrollment is specified in the dataSource bean in jpaContext.xml</p>
@@ -876,7 +988,7 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 </code></p>
 
-<h2>13. Deploying the Application on Tomcat Server</h2>
+<h2>15. Deploying the Application on Tomcat Server</h2>
 
 <p>Once the above steps are complete and the project is successfully built, the Java web application is ready to deployed on the Tomcat Server 7.</p>
 
@@ -886,7 +998,7 @@ CREATE TABLE `student` (
 
 <p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/</a></p>
 
-<h2>14. Clone or Download code</h2>
+<h2>16. Clone or Download code</h2>
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
 

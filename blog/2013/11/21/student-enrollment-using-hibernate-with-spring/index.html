@@ -536,9 +536,9 @@
 
 <p>A reference link to the files under webapp folder of this application can be found at <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/webapp</a></p>
 
-<h2>8. Create packages for Controller, Model and Service tier classes</h2>
+<h2>8. Create packages for Controller, Model, Repository and Service tier classes</h2>
 
-<p>Create packages each for the Spring Controller, Model and Service classes under the src/main/java folder.</p>
+<p>Create packages each for the Spring Controller, Model, Repository and Service classes under the src/main/java folder.</p>
 
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
@@ -664,7 +664,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>10. Create class for Controller Tier</h2>
+<h2>12. Create class for Controller Tier</h2>
 
 <p>Create a Controller tier POJO class named StudentController.java inside the package com.github.elizabetht.controller. This is where the routing logic of the application goes &ndash; whether a signup or login action is called.</p>
 
@@ -770,7 +770,7 @@
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>11. Create messages.properties file</h2>
+<h2>13. Create messages.properties file</h2>
 
 <p>As seen above, the @Valid annotation is used to validate the input parameters of the form reaching the method and the result of the validation is stored in BindingResult object. In order to validate specific fields, (refer the classes created for the Model tier &ndash; <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model">https://github.com/elizabetht/StudentEnrollmentWithSpring/tree/master/src/main/java/com/github/elizabetht/model</a>), use annotations like @NotEmpty, @Size, @Email and @NotNull from the various validations available from the Hibernate Validator.</p>
 
@@ -794,7 +794,7 @@
 </span><span class='line'>typeMismatch=Invalid format</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>12. Create the DB Schema in a MYSQL DB</h2>
+<h2>14. Create the DB Schema in a MYSQL DB</h2>
 
 <p>Connect to the MySQL DB which is to be used for this application and create a new DB Schema named studentEnrollment using the MySQL Workbench.
 This is necessary as the DB Schema name of studentEnrollment is specified in the dataSource bean in jpaContext.xml</p>
@@ -823,7 +823,7 @@ This is necessary as the DB Schema name of studentEnrollment is specified in the
 </span><span class='line'>) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>13. Deploying the Application on Tomcat Server</h2>
+<h2>15. Deploying the Application on Tomcat Server</h2>
 
 <p>Once the above steps are complete and the project is successfully built, the Java web application is ready to deployed on the Tomcat Server 7.</p>
 
@@ -833,7 +833,7 @@ This is necessary as the DB Schema name of studentEnrollment is specified in the
 
 <p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/</a></p>
 
-<h2>14. Clone or Download code</h2>
+<h2>16. Clone or Download code</h2>
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring.git">https://github.com/elizabetht/StudentEnrollmentWithSpring.git</a></p>
 
