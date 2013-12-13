@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-13T11:41:51-06:00</updated>
+  <updated>2013-12-13T11:55:01-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -474,6 +474,129 @@ public boolean findByUserName(String userName) {
 
 <p>}
 ```</p>
+
+<h2>11. Create class for Resource Tier</h2>
+
+<p>Create a Resource tier POJO class named StudentResource.java inside the package com.github.elizabetht.resource. This is where a REST API is implemented for each of the operation performed from the front end.</p>
+
+<p>```
+@Component
+@Path(&ldquo;studentResource&rdquo;)
+@XmlRootElement
+public class StudentResource {</p>
+
+<pre><code>@Autowired
+private StudentService studentService;
+
+@GET    
+@Produces(MediaType.TEXT_PLAIN)
+public String start() {
+    if(studentService != null) {
+        return "StudentService: Not Null";
+    } else {
+        return "StudentService: Null";
+    }
+}
+
+@GET
+@Path("signup")
+@Produces(MediaType.TEXT_HTML)
+public Viewable signup() {          
+    return new Viewable("/signup");
+}
+
+@POST
+@Path("signup")
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces(MediaType.TEXT_HTML)
+public Viewable signup(@FormParam("userName") String userName,
+        @FormParam("password") String password,
+        @FormParam("firstName") String firstName,
+        @FormParam("lastName") String lastName,
+        @FormParam("dateOfBirth") String dateOfBirth,
+        @FormParam("emailAddress") String emailAddress) throws ParseException {
+
+    Student student = new Student();
+    student.setUserName(userName);
+    student.setPassword(password);
+    student.setFirstName(firstName);
+    student.setLastName(lastName);
+    student.setDateOfBirth(new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy")
+        .parse(dateOfBirth.substring(0, 10)).getTime()));
+    student.setEmailAddress(emailAddress);
+
+    if(studentService.findByUserName(userName)) {
+        Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+        map.put("message", "User Name exists. Try another user name");
+        map.put("student", student);
+        return new Viewable("/signup", map);
+
+    } else {
+        studentService.save(student);
+        return new Viewable("/login");
+    }
+}
+
+@GET
+@Path("login")
+@Produces(MediaType.TEXT_HTML)
+public Viewable login() {           
+    return new Viewable("/login");
+}
+
+@POST
+@Path("login")
+@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+@Produces(MediaType.TEXT_HTML)
+public Viewable login(@FormParam("userName") String userName,
+        @FormParam("password") String password) {
+    boolean found = studentService.findByLogin(userName, password);
+    if (found) {                
+        return new Viewable("/success");
+    } else {                
+        return new Viewable("/failure");
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>12. Create the DB Schema in a MYSQL DB</h2>
+
+<p>Connect to the MySQL DB which is to be used for this application and create a new DB Schema named studentEnrollment using the MySQL Workbench.
+This is necessary as the DB Schema name of studentEnrollment is specified in the dataSource bean in applicationContext.xml</p>
+
+<p>Once the studentEnrollment DB Schema is created, create a table named student inside the DB Schema using the CREATE TABLE statement as follows:</p>
+
+<p><code>
+CREATE TABLE `student` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dateOfBirth` datetime NOT NULL,
+  `emailAddress` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `password` varchar(8) NOT NULL,
+  `userName` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+</code></p>
+
+<h2>13. Deploying the Application on Tomcat Server</h2>
+
+<p>Once the above steps are complete and the project is successfully built, the Java web application is ready to deployed on the Tomcat Server 7.</p>
+
+<p>The Java web application can be deployed locally by right clicking on the project and choosing the &ldquo;Run As->Run on Server&rdquo; option.</p>
+
+<p>The same can be deployed remotely on any native server that supports Tomcat by copying the WAR file (Right click on the project and choose Export as WAR File option) to /var/lib/tomcat7 folder (or appropriate tomcat directory) and restarting the tomcat server.</p>
+
+<p>This application is available for a demo here: <a href="http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/">http://ec2-23-20-137-135.compute-1.amazonaws.com:8080/StudentEnrollmentWithSpring/</a></p>
+
+<h2>14. Clone or Download code</h2>
+
+<p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithREST.git">https://github.com/elizabetht/StudentEnrollmentWithREST.git</a></p>
+
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6</a></p>
 ]]></content>
   </entry>
   
