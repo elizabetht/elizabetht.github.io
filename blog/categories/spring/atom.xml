@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-13T10:57:13-06:00</updated>
+  <updated>2013-12-13T11:24:21-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -18,7 +18,7 @@
     <link href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/"/>
     <updated>2013-12-13T10:45:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring</id>
-    <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+    <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
 
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
@@ -31,6 +31,337 @@ mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -Darch
 <p>Import the project into the IDE using File->Import->Existing Maven Projects, select Root Directory where the Project is created (ideally the name of the Project or ArtifactId) and click on Finish. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
 
 <p><img src="/images/jersey-layout.png" title="Jersey REST Spring Maven Project Layout" alt="Jersey REST Spring Maven Project Layout" /></p>
+
+<h2>2. Update pom.xml</h2>
+
+<p>To make the above Maven Java Web Application project support the Hibernate ORM and Jersey Container in Spring framework, add the following dependencies to the existing pom.xml</p>
+
+<ul>
+<li>jstl and servlet-api (for Javax Servlet Support)</li>
+<li>jersey-container-servlet, jersey-media-moxy, jersey-spring3, jersey-server and jersey-mvc-jsp (for Jersey Support)</li>
+<li>spring-core, spring-context, spring-web and spring-webmvc(for Spring Support)</li>
+<li>junit (for JUnit Support)</li>
+<li>commons-lang3 (for standard Java library support)</li>
+<li>mysql-connector-java (for MYSQL support)</li>
+<li>spring-jdbc (for data access with JDBC Spring)</li>
+<li>spring-orm (for ORM data access with Spring)</li>
+<li>spring-data-jpa (for JPA support)</li>
+<li>hibernate-validator and hibernate-entitymanager (for Hibernate Support)</li>
+<li>jta (for transaction support)</li>
+</ul>
+
+
+<p>```</p>
+
+<pre><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;2.5&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish.jersey.containers&lt;/groupId&gt;
+        &lt;!-- &lt;artifactId&gt;jersey-container-servlet-core&lt;/artifactId&gt; --&gt;
+        &lt;!-- use the above artifactId if you need servlet 2.x compatibility --&gt;
+        &lt;artifactId&gt;jersey-container-servlet&lt;/artifactId&gt;
+        &lt;version&gt;${jersey.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;!-- uncomment this to get JSON support --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish.jersey.media&lt;/groupId&gt;
+        &lt;artifactId&gt;jersey-media-moxy&lt;/artifactId&gt;
+        &lt;version&gt;${jersey.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish.jersey.ext&lt;/groupId&gt;
+        &lt;artifactId&gt;jersey-spring3&lt;/artifactId&gt;
+        &lt;version&gt;${jersey.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish.jersey.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jersey-server&lt;/artifactId&gt;
+        &lt;version&gt;${jersey.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.glassfish.jersey.ext&lt;/groupId&gt;
+        &lt;artifactId&gt;jersey-mvc-jsp&lt;/artifactId&gt;
+        &lt;version&gt;${jersey.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.11&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;
+        &lt;version&gt;3.1&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;5.1.21&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+        &lt;artifactId&gt;hibernate-validator&lt;/artifactId&gt;
+        &lt;version&gt;4.2.0.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+        &lt;artifactId&gt;hibernate-entitymanager&lt;/artifactId&gt;
+        &lt;version&gt;4.1.9.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.transaction&lt;/groupId&gt;
+        &lt;artifactId&gt;jta&lt;/artifactId&gt;
+        &lt;version&gt;1.1&lt;/version&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-data-jpa&lt;/artifactId&gt;
+        &lt;version&gt;1.3.0.RELEASE&lt;/version&gt;
+        &lt;exclusions&gt;
+            &lt;exclusion&gt;
+                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+            &lt;/exclusion&gt;
+        &lt;/exclusions&gt;
+    &lt;/dependency&gt;
+
+&lt;/dependencies&gt;
+&lt;properties&gt;
+    &lt;jersey.version&gt;2.4.1&lt;/jersey.version&gt;
+    &lt;spring.version&gt;3.2.4.RELEASE&lt;/spring.version&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+&lt;/properties&gt;
+</code></pre>
+
+<p>```</p>
+
+<h2>3. Modify web.xml</h2>
+
+<p>Modify the contents of the web.xml to include the following:</p>
+
+<ul>
+<li>A Welcome file.</li>
+<li>The Context Config Location.</li>
+<li>A ContextLoaderLister and RequestContextListener to integrate spring with the web application.</li>
+<li>A Spring Jersey Web Servlet. Specify the location of the provider packages, enable the JSON POJO Mapping Feature, provide the path where the JSP files for the project are stored to the JSP TemplateBasePath and enable the JSP MVC Feature. In this sample, a configuration file named applicationConfig.xml is created under src/main/resources folder  and the JSP files are placed under WEB-INF/jsp folder in the project layout.</li>
+<li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
+</ul>
+
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?></p>
+
+<!-- This web.xml file is not required when using Servlet 3.0 container,
+     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+
+
+<p>&lt;web-app version=&ldquo;2.5&rdquo; xmlns=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a>&rdquo; xmlns:xsi=&ldquo;<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>&rdquo; xsi:schemaLocation=&ldquo;<a href="http://java.sun.com/xml/ns/javaee">http://java.sun.com/xml/ns/javaee</a> <a href="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd</a>&rdquo;></p>
+
+<pre><code>&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index.jsp&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.request.RequestContextListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+
+&lt;servlet&gt;
+    &lt;servlet-name&gt;Spring Jersey Web Servlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.glassfish.jersey.servlet.ServletContainer&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;jersey.config.server.provider.packages&lt;/param-name&gt;
+        &lt;param-value&gt;com.github.elizabetht&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;com.sun.jersey.api.json.POJOMappingFeature&lt;/param-name&gt;
+        &lt;param-value&gt;true&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;jersey.config.server.mvc.templateBasePath.jsp&lt;/param-name&gt;
+        &lt;param-value&gt;/WEB-INF/jsp&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;jersey.config.server.provider.classnames&lt;/param-name&gt;
+        &lt;param-value&gt;org.glassfish.jersey.server.mvc.jsp.JspMvcFeature&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;Spring Jersey Web Servlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/webapi/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+
+<p>&lt;/web-app>
+```</p>
+
+<h2>4. Create persistence.xml</h2>
+
+<p>Create a file named persistence.xml under the folder src/main/resources/META-INF folder in the project to define the persistence unit required by JPA. Add the following to the persistence.xml to define a persistence unit named punit.</p>
+
+<p>```
+&lt;persistence xmlns=&ldquo;<a href="http://java.sun.com/xml/ns/persistence">http://java.sun.com/xml/ns/persistence</a>&rdquo;</p>
+
+<pre><code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="{http://java.sun.com/xml/ns/persistence} {http://java.sun.com/xml/ns/persistence_2_0.xsd}"
+version="2.0"&gt;
+
+&lt;persistence-unit name="punit"&gt;
+&lt;/persistence-unit&gt;
+</code></pre>
+
+<p></persistence>
+```</p>
+
+<h2>5. Create the Spring Configuration File</h2>
+
+<p>As defined in the web.xml, create a file named applicationContext.xml under the folder src/main/resources folder in the project to define JPA and Hibernate related configurations. Note that any file created under src/main/resources folder in a maven project will be automagically added by Maven to the classpath. If STS(Spring Tool Suite) is the IDE, go ahead and enable the context, jpa, mvc and tx namespaces. The applicationContext.xml will be as shown below</p>
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
+
+<pre><code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd"&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>After enabling the required namespaces, include the following (in between the &lt;beans&gt; and &lt;/beans&gt; tags) to indicate that the application is annotation driven, base package for context component scan and base package for the jpa repositories scan.</p>
+
+<p>```</p>
+
+<pre><code>&lt;mvc:annotation-driven /&gt;
+
+&lt;context:annotation-config /&gt;
+&lt;context:component-scan base-package="com.github.elizabetht" /&gt;
+
+&lt;jpa:repositories base-package="com.github.elizabetht.repository" /&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Next, include the bean PersistenceAnnotationBeanPostProcessor. This is necessary to process the Persistence Unit, Persistence Context annotations and for injecting JPA related resources.</p>
+
+<p><code>
+&lt;bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" /&gt;
+</code></p>
+
+<p>Include the bean for EntityManagerFactory which lists the various JPA related properties/resources.</p>
+
+<p>```
+<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"></p>
+
+<pre><code>    &lt;property name="persistenceUnitName" value="punit" /&gt;
+    &lt;property name="dataSource" ref="dataSource" /&gt;
+    &lt;property name="jpaVendorAdapter"&gt;
+        &lt;bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"&gt;
+            &lt;property name="showSql" value="true" /&gt;
+        &lt;/bean&gt;
+    &lt;/property&gt;
+    &lt;property name="jpaPropertyMap"&gt;
+        &lt;map&gt;
+            &lt;entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" /&gt;
+            &lt;entry key="hibernate.hbm2ddl.auto" value="validate" /&gt;
+            &lt;entry key="hibernate.format_sql" value="true" /&gt;
+        &lt;/map&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Include the bean for data source, where the properties of the MYSQL DB like url, username and password can be specified. Replace &lt;include connection url&gt; with the actual connection url for connecting to the MYSQL DB. Likewise, replace &lt;include username&gt; and &lt;include password&gt; with the actual username and password values.</p>
+
+<p>```
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"></p>
+
+<pre><code>    &lt;property name="driverClassName" value="com.mysql.jdbc.Driver" /&gt;
+    &lt;property name="url" value="jdbc:mysql//&lt;include connection url&gt;:3306/studentEnrollment?autoReconnect=true&amp;amp;createDatabaseIfNotExist=true&amp;amp;" /&gt;
+    &lt;property name="username" value="&lt;include username&gt;" /&gt;
+    &lt;property name="password" value="&lt;include password&gt;" /&gt;
+</code></pre>
+
+<p></bean>
+```</p>
+
+<p>Include the bean for transaction manager for scoping/controlling the transactions.</p>
+
+<p>```
+<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"></p>
+
+<pre><code>    &lt;property name="entityManagerFactory" ref="entityManagerFactory" /&gt;
+</code></pre>
+
+<p></bean></p>
+
+<p>&lt;tx:annotation-driven transaction-manager=&ldquo;transactionManager&rdquo; />
+```</p>
+
+<p>Thus ends the long configuration in applicationContext.xml</p>
 ]]></content>
   </entry>
   
@@ -132,7 +463,7 @@ mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -Darch
 <ul>
 <li>A servlet and specify the location of the configuration file for the same. In this sample, a configuration file named springConfig.xml is created under WEB-INF/config folder in the project layout.</li>
 <li>A servlet-mapping to map the servlet created in the above step that should be invoked when the client specifies the url matching the url pattern.</li>
-<li>A ContextLoaderLister to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.</li>
+<li>A ContextLoaderListener to integrate spring with the web application and provide the contextConfigLocation where the context files for JPA.</li>
 </ul>
 
 
