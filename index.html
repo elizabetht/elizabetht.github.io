@@ -9,8 +9,7 @@
   <meta name="author" content="Elizabeth Thomas">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Jersey2 Spring environment. This is a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +108,19 @@
   </header>
 
 
-  <div class="entry-content">
+  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<h2>1. Create Java Web Application Project using Maven Template</h2>
+
+<p>To begin with, from the command line, create a Java Maven project with the template of jersey-quickstart-webapp by providing appropriate values for GroupId, Artifact Id, Version and Package for the project.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeVersion=2.4.1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Import the project into the IDE using File->Import->Existing Maven Projects, select Root Directory where the Project is created (ideally the name of the Project or ArtifactId) and click on Finish. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
+
+<p><img src="/images/jersey-layout.png" title="Jersey REST Spring Maven Project Layout" alt="Jersey REST Spring Maven Project Layout" /></p>
 </div>
   
   
