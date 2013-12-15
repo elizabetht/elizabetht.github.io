@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hibernate, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/hibernate/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-15T11:56:35-06:00</updated>
+  <updated>2013-12-15T14:01:32-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -497,16 +497,6 @@ public class StudentResource {</p>
 <pre><code>@Autowired
 private StudentService studentService;
 
-@GET    
-@Produces(MediaType.TEXT_PLAIN)
-public String start() {
-    if(studentService != null) {
-        return "StudentService: Not Null";
-    } else {
-        return "StudentService: Null";
-    }
-}
-
 @GET
 @Path("signup")
 @Produces(MediaType.TEXT_HTML)
@@ -605,7 +595,7 @@ CREATE TABLE `student` (
 
 <p>If using git, clone a copy of this project here: <a href="https://github.com/elizabetht/StudentEnrollmentWithREST.git">https://github.com/elizabetht/StudentEnrollmentWithREST.git</a></p>
 
-<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6">https://github.com/elizabetht/StudentEnrollmentWithSpring/releases/tag/1.6</a></p>
+<p>In case of not using git, download the project as ZIP or tar.gz file here: <a href="https://github.com/elizabetht/StudentEnrollmentWithREST/releases/tag/1.1">https://github.com/elizabetht/StudentEnrollmentWithREST/releases/tag/1.1</a></p>
 ]]></content>
   </entry>
   
