@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-15T14:36:12-06:00</updated>
+  <updated>2013-12-16T15:51:53-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -779,75 +779,95 @@
 <span class='line-number'>68</span>
 <span class='line-number'>69</span>
 <span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Component
 </span><span class='line'>@Path("studentResource")
 </span><span class='line'>@XmlRootElement
 </span><span class='line'>public class StudentResource {
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  @Autowired
 </span><span class='line'>  private StudentService studentService;
-</span><span class='line'>      
+</span><span class='line'>
 </span><span class='line'>  @GET
 </span><span class='line'>  @Path("signup")
 </span><span class='line'>  @Produces(MediaType.TEXT_HTML)
-</span><span class='line'>  public Viewable signup() {          
-</span><span class='line'>      return new Viewable("/signup");
+</span><span class='line'>  public Response signup() {
+</span><span class='line'>      return Response.ok(new Viewable("/signup")).build();
 </span><span class='line'>  }
-</span><span class='line'>      
+</span><span class='line'>
 </span><span class='line'>  @POST
 </span><span class='line'>  @Path("signup")
 </span><span class='line'>  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 </span><span class='line'>  @Produces(MediaType.TEXT_HTML)
-</span><span class='line'>  public Viewable signup(@FormParam("userName") String userName,
+</span><span class='line'>  public Response signup(@FormParam("userName") String userName,
 </span><span class='line'>          @FormParam("password") String password,
 </span><span class='line'>          @FormParam("firstName") String firstName,
 </span><span class='line'>          @FormParam("lastName") String lastName,
 </span><span class='line'>          @FormParam("dateOfBirth") String dateOfBirth,
-</span><span class='line'>          @FormParam("emailAddress") String emailAddress) throws ParseException {
-</span><span class='line'>      
+</span><span class='line'>          @FormParam("emailAddress") String emailAddress)
+</span><span class='line'>          throws ParseException {
+</span><span class='line'>
+</span><span class='line'>      if (userName == null || password == null || firstName == null
+</span><span class='line'>              || lastName == null || dateOfBirth == null
+</span><span class='line'>              || emailAddress == null) {
+</span><span class='line'>          return Response.status(Status.BAD_REQUEST).build();
+</span><span class='line'>      }
+</span><span class='line'>
 </span><span class='line'>      Student student = new Student();
 </span><span class='line'>      student.setUserName(userName);
 </span><span class='line'>      student.setPassword(password);
 </span><span class='line'>      student.setFirstName(firstName);
 </span><span class='line'>      student.setLastName(lastName);
-</span><span class='line'>      student.setDateOfBirth(new java.sql.Date(new SimpleDateFormat("MM/dd/yyyy")
-</span><span class='line'>          .parse(dateOfBirth.substring(0, 10)).getTime()));
+</span><span class='line'>      student.setDateOfBirth(new java.sql.Date(new SimpleDateFormat(
+</span><span class='line'>              "MM/dd/yyyy").parse(dateOfBirth.substring(0, 10)).getTime()));
 </span><span class='line'>      student.setEmailAddress(emailAddress);
-</span><span class='line'>      
-</span><span class='line'>      if(studentService.findByUserName(userName)) {
+</span><span class='line'>
+</span><span class='line'>      if (studentService.findByUserName(userName)) {
 </span><span class='line'>          Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
 </span><span class='line'>          map.put("message", "User Name exists. Try another user name");
 </span><span class='line'>          map.put("student", student);
-</span><span class='line'>          return new Viewable("/signup", map);
-</span><span class='line'>          
+</span><span class='line'>          return Response.ok().entity(new Viewable("/signup", map)).build();
+</span><span class='line'>
 </span><span class='line'>      } else {
 </span><span class='line'>          studentService.save(student);
-</span><span class='line'>          return new Viewable("/login");
+</span><span class='line'>          return Response.ok().entity(new Viewable("/login")).build();
 </span><span class='line'>      }
 </span><span class='line'>  }
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  @GET
 </span><span class='line'>  @Path("login")
 </span><span class='line'>  @Produces(MediaType.TEXT_HTML)
-</span><span class='line'>  public Viewable login() {           
-</span><span class='line'>      return new Viewable("/login");
+</span><span class='line'>  public Response login() {
+</span><span class='line'>      return Response.ok(new Viewable("/login")).build();
 </span><span class='line'>  }
-</span><span class='line'>  
+</span><span class='line'>
 </span><span class='line'>  @POST
 </span><span class='line'>  @Path("login")
 </span><span class='line'>  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 </span><span class='line'>  @Produces(MediaType.TEXT_HTML)
-</span><span class='line'>  public Viewable login(@FormParam("userName") String userName,
+</span><span class='line'>  public Response login(@FormParam("userName") String userName,
 </span><span class='line'>          @FormParam("password") String password) {
+</span><span class='line'>
+</span><span class='line'>      if (userName == null || password == null) {
+</span><span class='line'>          return Response.status(Status.BAD_REQUEST).build();
+</span><span class='line'>      }
+</span><span class='line'>
 </span><span class='line'>      boolean found = studentService.findByLogin(userName, password);
-</span><span class='line'>      if (found) {                
-</span><span class='line'>          return new Viewable("/success");
-</span><span class='line'>      } else {                
-</span><span class='line'>          return new Viewable("/failure");
+</span><span class='line'>      if (found) {
+</span><span class='line'>          return Response.ok().entity(new Viewable("/success")).build();
+</span><span class='line'>      } else {
+</span><span class='line'>          return Response.ok().entity(new Viewable("/failure")).build();
 </span><span class='line'>      }
 </span><span class='line'>  }
-</span><span class='line'>  
-</span><span class='line'>  
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
