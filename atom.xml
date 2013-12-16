@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-16T15:51:53-06:00</updated>
+  <updated>2013-12-16T16:40:40-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -789,6 +789,7 @@
 <span class='line-number'>78</span>
 <span class='line-number'>79</span>
 <span class='line-number'>80</span>
+<span class='line-number'>81</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Component
 </span><span class='line'>@Path("studentResource")
 </span><span class='line'>@XmlRootElement
@@ -819,7 +820,7 @@
 </span><span class='line'>      if (userName == null || password == null || firstName == null
 </span><span class='line'>              || lastName == null || dateOfBirth == null
 </span><span class='line'>              || emailAddress == null) {
-</span><span class='line'>          return Response.status(Status.BAD_REQUEST).build();
+</span><span class='line'>          return Response.status(Status.PRECONDITION_FAILED).build();
 </span><span class='line'>      }
 </span><span class='line'>
 </span><span class='line'>      Student student = new Student();
@@ -835,8 +836,8 @@
 </span><span class='line'>          Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
 </span><span class='line'>          map.put("message", "User Name exists. Try another user name");
 </span><span class='line'>          map.put("student", student);
-</span><span class='line'>          return Response.ok().entity(new Viewable("/signup", map)).build();
-</span><span class='line'>
+</span><span class='line'>          return Response.status(Status.BAD_REQUEST)
+</span><span class='line'>                  .entity(new Viewable("/signup", map)).build();
 </span><span class='line'>      } else {
 </span><span class='line'>          studentService.save(student);
 </span><span class='line'>          return Response.ok().entity(new Viewable("/login")).build();
@@ -858,14 +859,15 @@
 </span><span class='line'>          @FormParam("password") String password) {
 </span><span class='line'>
 </span><span class='line'>      if (userName == null || password == null) {
-</span><span class='line'>          return Response.status(Status.BAD_REQUEST).build();
+</span><span class='line'>          return Response.status(Status.PRECONDITION_FAILED).build();
 </span><span class='line'>      }
 </span><span class='line'>
 </span><span class='line'>      boolean found = studentService.findByLogin(userName, password);
 </span><span class='line'>      if (found) {
 </span><span class='line'>          return Response.ok().entity(new Viewable("/success")).build();
 </span><span class='line'>      } else {
-</span><span class='line'>          return Response.ok().entity(new Viewable("/failure")).build();
+</span><span class='line'>          return Response.status(Status.BAD_REQUEST)
+</span><span class='line'>                  .entity(new Viewable("/failure")).build();
 </span><span class='line'>      }
 </span><span class='line'>  }
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>

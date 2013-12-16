@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jersey, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jersey/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-16T15:51:53-06:00</updated>
+  <updated>2013-12-16T16:40:40-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -510,7 +510,7 @@ public Response signup(@FormParam("userName") String userName,
     if (userName == null || password == null || firstName == null
             || lastName == null || dateOfBirth == null
             || emailAddress == null) {
-        return Response.status(Status.BAD_REQUEST).build();
+        return Response.status(Status.PRECONDITION_FAILED).build();
     }
 
     Student student = new Student();
@@ -526,8 +526,8 @@ public Response signup(@FormParam("userName") String userName,
         Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
         map.put("message", "User Name exists. Try another user name");
         map.put("student", student);
-        return Response.ok().entity(new Viewable("/signup", map)).build();
-
+        return Response.status(Status.BAD_REQUEST)
+                .entity(new Viewable("/signup", map)).build();
     } else {
         studentService.save(student);
         return Response.ok().entity(new Viewable("/login")).build();
@@ -549,14 +549,15 @@ public Response login(@FormParam("userName") String userName,
         @FormParam("password") String password) {
 
     if (userName == null || password == null) {
-        return Response.status(Status.BAD_REQUEST).build();
+        return Response.status(Status.PRECONDITION_FAILED).build();
     }
 
     boolean found = studentService.findByLogin(userName, password);
     if (found) {
         return Response.ok().entity(new Viewable("/success")).build();
     } else {
-        return Response.ok().entity(new Viewable("/failure")).build();
+        return Response.status(Status.BAD_REQUEST)
+                .entity(new Viewable("/failure")).build();
     }
 }
 </code></pre>
