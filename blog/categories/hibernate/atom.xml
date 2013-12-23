@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hibernate, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/hibernate/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-23T12:15:36-06:00</updated>
+  <updated>2013-12-23T12:39:41-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -19,11 +19,126 @@
     <updated>2013-12-23T12:10:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Jersey2 REST Client in a Spring environment and test the same using JUnit and JMock frameworks. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+
+<h2>1. Update pom.xml</h2>
+
+<p>To make the Maven Java Web Application project (<a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>) support the JUnit testing framework, add the following dependency to the existing pom.xml</p>
+
+<p>```
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;org.jmock&lt;/groupId&gt;
+&lt;artifactId&gt;jmock-junit4&lt;/artifactId&gt;
+&lt;version&gt;2.6.0&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+```</p>
+
+<h2>2. Create packages for Client tier classes</h2>
+
+<p>Create package for the Jersey Client classes under the src/main/java folder.</p>
+
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/jersey-client-package.png" title="Jersey REST Client Package Layout" alt="Jersey REST Client Package Layout" /></p>
+
+<h2>3. Create classes for Client tier</h2>
+
+<p>Create an interface class named StudentClientInterface.java inside the package com.github.elizabetht.client to support the client operations.</p>
+
+<p>```
+public interface StudentClientInterface {</p>
+
+<pre><code>public Response getSignup();
+
+public Response postSignup(String userName, String password,
+        String firstName, String lastName, String dateOfBirth,
+        String emailAddress) throws Exception;
+
+public Response getLogin();
+
+public Response postLogin(String userName, String password);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Create a client tier implementation class (a POJO indeed) named StudentClient.java inside the package com.github.elizabetht.client. This is where the client logic goes &ndash; either to access the GET/POST methods in the StudentResource.java class.</p>
+
+<p>```
+public class StudentClient implements StudentClientInterface {</p>
+
+<pre><code>private WebTarget target;
+
+public StudentClient(WebTarget target) {
+    this.target = target;
+}
+
+public Response getSignup() {       
+    Response response = target.path("signup").request().get(Response.class);
+    return response;
+}
+
+public Response postSignup(String userName, String password,
+        String firstName, String lastName, String dateOfBirth,
+        String emailAddress) throws Exception {
+
+    Form form = new Form().param("userName", userName)
+            .param("password", password).param("firstName", firstName)
+            .param("lastName", lastName).param("dateOfBirth", dateOfBirth)
+            .param("emailAddress", emailAddress);
+    Response response = target.path("signup").request()
+            .post(Entity.form(form));
+
+    if (response.getStatus() == Status.INTERNAL_SERVER_ERROR
+            .getStatusCode()) {
+        throw new Exception();
+    }
+
+    if (response.getStatus() != Status.OK.getStatusCode()) {
+        throw new RuntimeException();
+    }
+
+    return response;
+}
+
+public Response getLogin() {
+    Response response = target.path("login").request().get(Response.class);
+
+    return response;
+}
+
+public Response postLogin(String userName, String password) {
+    Form form = new Form().param("userName", userName).param("password",
+            password);
+
+    Response response = target.path("login").request()
+            .post(Entity.form(form));
+
+    if (response.getStatus() != Status.OK.getStatusCode()) {
+        throw new RuntimeException();
+    }
+
+    return response;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>4. Create packages for Client Test tier classes</h2>
+
+<p>Create package for the Client Test classes by right-clicking on the StudentClient.java class and choosing New->JUnit Test Case option. Specify the source folder as StudentEnrollmentWithREST/src/test/java folder (create the src/test/java folder if the folder does not exist) and specify the name for the test class.</p>
+
+<p>A sample snapshot of the project after the package creation is as shown below:</p>
+
+<p><img src="/images/jersey-client-test-package.png" title="Jersey REST Client Test Package Layout" alt="Jersey REST Client Test Package Layout" /></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Building Java Web Application Using Jersey REST With Spring]]></title>
+    <title type="html"><![CDATA[Building Java Web Application Using Jersey2 REST With Spring]]></title>
     <link href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/"/>
     <updated>2013-12-13T10:45:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring</id>
