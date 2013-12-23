@@ -284,6 +284,110 @@
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
 <p><img src="/images/jersey-client-test-package.png" title="Jersey REST Client Test Package Layout" alt="Jersey REST Client Test Package Layout" /></p>
+
+<h2>5. Extract Interfaces for Model and Resource tier classes</h2>
+
+<p>In order to support the use of JMock mocking framework alongside JUnit test cases, extract the interfaces out of the Model(Student.java) and Resource (StudentResource.java) tier classes. This is necessary in order to mock the objects.</p>
+
+<p>Extracting interfaces can be done by right-clicking on the class file and choosing Refactor->Extract Interface option.</p>
+
+<p>The StudentInterface.java (in src/main/java/com.github.elizabetht.model package) after the extraction looks as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public interface StudentInterface {
+</span><span class='line'>
+</span><span class='line'>  public Long getId();
+</span><span class='line'>
+</span><span class='line'>  public void setId(Long id);
+</span><span class='line'>
+</span><span class='line'>  public String getUserName();
+</span><span class='line'>
+</span><span class='line'>  public void setUserName(String userName);
+</span><span class='line'>
+</span><span class='line'>  public String getFirstName();
+</span><span class='line'>
+</span><span class='line'>  public void setFirstName(String firstName);
+</span><span class='line'>
+</span><span class='line'>  public String getLastName();
+</span><span class='line'>
+</span><span class='line'>  public void setLastName(String lastName);
+</span><span class='line'>
+</span><span class='line'>  public String getPassword();
+</span><span class='line'>
+</span><span class='line'>  public void setPassword(String password);
+</span><span class='line'>
+</span><span class='line'>  public String getEmailAddress();
+</span><span class='line'>
+</span><span class='line'>  public void setEmailAddress(String emailAddress);
+</span><span class='line'>
+</span><span class='line'>  public Date getDateOfBirth();
+</span><span class='line'>
+</span><span class='line'>  public void setDateOfBirth(Date dateOfBirth);
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similarly, the StudentResourceInterface.java (in src/main/java/com.github.elizabetht.resource package) looks as below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>public interface StudentResourceInterface {
+</span><span class='line'>
+</span><span class='line'>  public Response signup();
+</span><span class='line'>
+</span><span class='line'>  public Response signup(String userName, String password, String firstName,
+</span><span class='line'>          String lastName, String dateOfBirth, String emailAddress)
+</span><span class='line'>          throws ParseException;
+</span><span class='line'>
+</span><span class='line'>  public Response login();
+</span><span class='line'>
+</span><span class='line'>  public Response login(String userName, String password);
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 

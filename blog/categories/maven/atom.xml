@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Maven, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/maven/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-23T12:39:41-06:00</updated>
+  <updated>2013-12-23T15:28:04-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -134,6 +134,68 @@ public Response postLogin(String userName, String password) {
 <p>A sample snapshot of the project after the package creation is as shown below:</p>
 
 <p><img src="/images/jersey-client-test-package.png" title="Jersey REST Client Test Package Layout" alt="Jersey REST Client Test Package Layout" /></p>
+
+<h2>5. Extract Interfaces for Model and Resource tier classes</h2>
+
+<p>In order to support the use of JMock mocking framework alongside JUnit test cases, extract the interfaces out of the Model(Student.java) and Resource (StudentResource.java) tier classes. This is necessary in order to mock the objects.</p>
+
+<p>Extracting interfaces can be done by right-clicking on the class file and choosing Refactor->Extract Interface option.</p>
+
+<p>The StudentInterface.java (in src/main/java/com.github.elizabetht.model package) after the extraction looks as below.</p>
+
+<p>```
+public interface StudentInterface {</p>
+
+<pre><code>public Long getId();
+
+public void setId(Long id);
+
+public String getUserName();
+
+public void setUserName(String userName);
+
+public String getFirstName();
+
+public void setFirstName(String firstName);
+
+public String getLastName();
+
+public void setLastName(String lastName);
+
+public String getPassword();
+
+public void setPassword(String password);
+
+public String getEmailAddress();
+
+public void setEmailAddress(String emailAddress);
+
+public Date getDateOfBirth();
+
+public void setDateOfBirth(Date dateOfBirth);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Similarly, the StudentResourceInterface.java (in src/main/java/com.github.elizabetht.resource package) looks as below.</p>
+
+<p>```
+public interface StudentResourceInterface {</p>
+
+<pre><code>public Response signup();
+
+public Response signup(String userName, String password, String firstName,
+        String lastName, String dateOfBirth, String emailAddress)
+        throws ParseException;
+
+public Response login();
+
+public Response login(String userName, String password);
+</code></pre>
+
+<p>}
+```</p>
 ]]></content>
   </entry>
   
