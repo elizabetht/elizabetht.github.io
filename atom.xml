@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-16T17:16:18-06:00</updated>
+  <updated>2013-12-23T12:08:33-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -790,6 +790,8 @@
 <span class='line-number'>79</span>
 <span class='line-number'>80</span>
 <span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>@Component
 </span><span class='line'>@Path("studentResource")
 </span><span class='line'>@XmlRootElement
@@ -828,8 +830,10 @@
 </span><span class='line'>      student.setPassword(password);
 </span><span class='line'>      student.setFirstName(firstName);
 </span><span class='line'>      student.setLastName(lastName);
+</span><span class='line'>
 </span><span class='line'>      student.setDateOfBirth(new java.sql.Date(new SimpleDateFormat(
 </span><span class='line'>              "MM/dd/yyyy").parse(dateOfBirth.substring(0, 10)).getTime()));
+</span><span class='line'>
 </span><span class='line'>      student.setEmailAddress(emailAddress);
 </span><span class='line'>
 </span><span class='line'>      if (studentService.findByUserName(userName)) {

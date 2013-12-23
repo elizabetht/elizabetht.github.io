@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hibernate, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/hibernate/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2013-12-16T17:16:18-06:00</updated>
+  <updated>2013-12-23T12:08:33-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -518,8 +518,10 @@ public Response signup(@FormParam("userName") String userName,
     student.setPassword(password);
     student.setFirstName(firstName);
     student.setLastName(lastName);
+
     student.setDateOfBirth(new java.sql.Date(new SimpleDateFormat(
             "MM/dd/yyyy").parse(dateOfBirth.substring(0, 10)).getTime()));
+
     student.setEmailAddress(emailAddress);
 
     if (studentService.findByUserName(userName)) {
