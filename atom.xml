@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-14T16:52:49-06:00</updated>
+  <updated>2014-01-14T17:28:29-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -14,11 +14,19 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Deploying Java Applications Using Jenkins Continuous Integration]]></title>
+    <title type="html"><![CDATA[Deploying Java Web Applications Using Jenkins Continuous Integration]]></title>
     <link href="http://elizabetht.github.io/blog/2014/01/13/jenkins-continuous-integration/"/>
     <updated>2014-01-13T16:50:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2014/01/13/jenkins-continuous-integration</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+
+<h2>1. Install Jenkins as a Windows Service</h2>
+
+<p>Navigate to jenkins-ci.org website using an Internet browser and download the Windows native package (the link is underlined for easy identification) as shown from the right side pane of the Download Jenkins tab.</p>
+
+<p><img src="http://elizabetht.github.io/images/jenkins-installation.png" title="Jenkins Installation Package" alt="Jenkins Installation package" /></p>
+
+<p>Once the download is complete, uncompress the zip file and click on the jenkins-1.xxx.msi file. Proceed through the configuration steps to install the Jenkins as Windows service.</p>
 ]]></content>
   </entry>
   

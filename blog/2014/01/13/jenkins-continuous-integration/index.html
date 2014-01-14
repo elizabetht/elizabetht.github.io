@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Deploying Java Applications Using Jenkins Continuous Integration - My Experiments with Java</title>
+  <title>Deploying Java Web Applications Using Jenkins Continuous Integration - My Experiments with Java</title>
   <meta name="author" content="Elizabeth Thomas">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Deploying Java Applications Using Jenkins Continuous Integration</h1>
+      <h1 class="entry-title">Deploying Java Web Applications Using Jenkins Continuous Integration</h1>
     
     
       <p class="meta">
@@ -106,7 +105,15 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+
+<h2>1. Install Jenkins as a Windows Service</h2>
+
+<p>Navigate to jenkins-ci.org website using an Internet browser and download the Windows native package (the link is underlined for easy identification) as shown from the right side pane of the Download Jenkins tab.</p>
+
+<p><img src="/images/jenkins-installation.png" title="Jenkins Installation Package" alt="Jenkins Installation package" /></p>
+
+<p>Once the download is complete, uncompress the zip file and click on the jenkins-1.xxx.msi file. Proceed through the configuration steps to install the Jenkins as Windows service.</p>
 </div>
 
 
@@ -134,7 +141,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/continuous/'>Continuous</a>, <a class='category' href='/blog/categories/integration/'>Integration</a>, <a class='category' href='/blog/categories/java/'>Java,</a>, <a class='category' href='/blog/categories/jenkins/'>Jenkins,</a>
+    <a class='category' href='/blog/categories/continuousintegration/'>ContinuousIntegration</a>, <a class='category' href='/blog/categories/java/'>Java,</a>, <a class='category' href='/blog/categories/jenkins/'>Jenkins,</a>
   
 </span>
 
@@ -170,7 +177,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/13/jenkins-continuous-integration/">Deploying Java Applications Using Jenkins Continuous Integration</a>
+        <a href="/blog/2014/01/13/jenkins-continuous-integration/">Deploying Java Web Applications Using Jenkins Continuous Integration</a>
       </li>
     
       <li class="post">
