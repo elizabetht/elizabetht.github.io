@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ContinuousIntegration | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/continuousintegration/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-16T09:49:13-06:00</updated>
+  <updated>2014-01-16T10:22:08-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -111,9 +111,45 @@ I'm still debugging this.
 
 <p><img src="/images/jenkins-artifactory.png" title="Jenkins Artifactory Servers Configuration" alt="Jenkins Artifactory Servers Configuration" /></p>
 
-<p>Next, proceed to the Email Notification section and enter the SMTP Server details as shown below. Click on the Advanced button to add the further details required and Save the changes.</p>
+<p>Next, proceed to the Email Notification section and enter the SMTP Server details as shown below. Click on the Advanced button to add the further details required and Save the changes. Click on &ldquo;Test configuration by sending test e-mail&rdquo;, enter the test e-mail recipient and click on &ldquo;Test configuration&rdquo; to see if the email is successfully sent.</p>
 
 <p><img src="/images/jenkins-email.png" title="Jenkins Email Notification" alt="Jenkins Email Notification" /></p>
+
+<h2>5. Create a New Jenkins Job</h2>
+
+<p>From the Jenkins Dashboard, click on &ldquo;New Job&rdquo; to create a new job. Enter a name for the job and choose &ldquo;Build a maven2/3 project&rdquo; as option and click on OK as shown below.</p>
+
+<p><img src="/images/jenkins-newjob.png" title="Jenkins New Job" alt="Jenkins New Job" /></p>
+
+<p>From the New Job Configuration screen, proceed to the Source Code Management section and specify the Git Repository URL for the project as shown below. Save the changes.</p>
+
+<p><img src="/images/jenkins-sourcecodemgmt.png" title="Jenkins Source Code Management" alt="Jenkins Source Code Management" /></p>
+
+<p>Next, from the Build Triggers section, select the options desired as shown below and Save the changes.</p>
+
+<p><img src="/images/jenkins-buildtriggers.png" title="Jenkins Build Triggers" alt="Jenkins Build Triggers" /></p>
+
+<p>Proceed to the Build section, enter the maven goals for building a snapshot as shown below and Save the changes.</p>
+
+<p><img src="/images/jenkins-build.png" title="Jenkins Build" alt="Jenkins Build" /></p>
+
+<p>Proceed to the Build Settings section. Select the option for Email Notification and enter the values for the email recipients as shown below. Save the changes.</p>
+
+<p><img src="/images/jenkins-emailnotifications.png" title="Jenkins Email Notifications" alt="Jenkins Email Notifications" /></p>
+
+<p>Under the Post-build Actions, click on &ldquo;Add post-build action&rdquo; button and select &ldquo;Deploy war/ear to a container&rdquo;. In the Amazon EC2, a Tomcat Manager (manager as username) instance has to be configured with roles manager-gui and manager-script to allow the remote deployment of the WAR/EAR to the Tomcat Container. The configuration steps can be found in the link <a href="https://help.ubuntu.com/13.04/serverguide/tomcat.html">https://help.ubuntu.com/13.04/serverguide/tomcat.html</a> under the section of &ldquo;Tomcat administration webapps&rdquo;</p>
+
+<p>Once the Tomcat Manager webapp configuration is complete in the Amazon EC2 instance, enter the details necessary for the deployment as shown below. Save the changes.</p>
+
+<p><img src="/images/jenkins-deploy.png" title="Jenkins Deployment" alt="Jenkins Deployment" /></p>
+
+<p>Similarly, from the Post-build Actions, click on &ldquo;Add post-build action&rdquo; button and select &ldquo;Publish Cobertura Coverage Report&rdquo;. Enter the Cobertura XML Report Pattern as shown below and save the changes.</p>
+
+<p><img src="/images/jenkins-cobertura.png" title="Jenkins Cobertura Coverage Report" alt="Jenkins Cobertura Coverage Report" /></p>
+
+<h2>6. Configure settings.xml</h2>
+
+<p>In order to upload the built Maven artifacts to the artifactory server, configure the Jenkins settings.xml found in C:\Program Files (x86)\Jenkins\tools\hudson.tasks.Maven_MavenInstallation\Maven_3.1\conf folder with the same parameters as found in the default settings.xml (usually found under C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\conf for a Windows machine) of the Maven installation on the system.</p>
 ]]></content>
   </entry>
   
