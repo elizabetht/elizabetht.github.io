@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Deploying Java Web Applications Using Jenkins Continuous Integration - My Experiments with Java</title>
+  <title>Deploying Java Web Applications to Snapshot Repository Using Jenkins Continuous Integration - My Experiments with Java</title>
   <meta name="author" content="Elizabeth Thomas">
 
   
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Deploying Java Web Applications Using Jenkins Continuous Integration</h1>
+      <h1 class="entry-title">Deploying Java Web Applications to Snapshot Repository Using Jenkins Continuous Integration</h1>
     
     
       <p class="meta">
@@ -250,6 +250,171 @@
 <h2>6. Configure settings.xml</h2>
 
 <p>In order to upload the built Maven artifacts to the artifactory server, configure the Jenkins settings.xml found in C:\Program Files (x86)\Jenkins\tools\hudson.tasks.Maven_MavenInstallation\Maven_3.1\conf folder with the same parameters as found in the default settings.xml (usually found under C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\conf for a Windows machine) of the Maven installation on the system.</p>
+
+<p>Typically, the server, mirror and profile section needs to be configured in the settings.xml for Jenkins matching with the details of the Artifactory server.</p>
+
+<h2>7. Update pom.xml</h2>
+
+<p>The pom.xml file for the project needs to be configured with the following plugins under the build section for the deployment to snapshot repository and for running the Cobertura Coverage report.</p>
+
+<ul>
+<li>maven-compiler plugin</li>
+<li>maven-deploy-plugin</li>
+<li>cobertura-maven-plugin</li>
+</ul>
+
+
+<p>Also add parent, scm and developer section to comply with the requirements put forth by the Artifactory server management as shown below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;parent&gt;
+</span><span class='line'>      &lt;groupId&gt;org.sonatype.oss&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;oss-parent&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;7&lt;/version&gt;
+</span><span class='line'>  &lt;/parent&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;scm&gt;
+</span><span class='line'>      &lt;connection&gt;scm:git:git@github.com:elizabetht/StudentEnrollmentWithREST.git&lt;/connection&gt;
+</span><span class='line'>      &lt;developerConnection&gt;scm:git:git@github.com:elizabetht/StudentEnrollmentWithREST.git&lt;/developerConnection&gt;
+</span><span class='line'>      &lt;url&gt;git@github.com:elizabetht/StudentEnrollmentWithREST.git&lt;/url&gt;
+</span><span class='line'>      &lt;tag&gt;StudentEnrollmentWithREST-1.3&lt;/tag&gt;
+</span><span class='line'>  &lt;/scm&gt;
+</span><span class='line'>  &lt;developers&gt;
+</span><span class='line'>      &lt;developer&gt;
+</span><span class='line'>          &lt;id&gt;elizabetht&lt;/id&gt;
+</span><span class='line'>          &lt;name&gt;Elizabeth Thomas&lt;/name&gt;
+</span><span class='line'>          &lt;email&gt;email2eliza@gmail.com&lt;/email&gt;
+</span><span class='line'>      &lt;/developer&gt;
+</span><span class='line'>  &lt;/developers&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;build&gt;
+</span><span class='line'>      &lt;finalName&gt;StudentEnrollmentWithREST&lt;/finalName&gt;
+</span><span class='line'>      &lt;plugins&gt;
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;2.5.1&lt;/version&gt;
+</span><span class='line'>              &lt;inherited&gt;true&lt;/inherited&gt;
+</span><span class='line'>              &lt;configuration&gt;
+</span><span class='line'>                  &lt;source&gt;1.6&lt;/source&gt;
+</span><span class='line'>                  &lt;target&gt;1.6&lt;/target&gt;
+</span><span class='line'>              &lt;/configuration&gt;
+</span><span class='line'>          &lt;/plugin&gt;
+</span><span class='line'>
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;maven-deploy-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;2.8.1&lt;/version&gt;
+</span><span class='line'>              &lt;executions&gt;
+</span><span class='line'>                  &lt;execution&gt;
+</span><span class='line'>                      &lt;id&gt;default-deploy&lt;/id&gt;
+</span><span class='line'>                      &lt;phase&gt;deploy&lt;/phase&gt;
+</span><span class='line'>                      &lt;goals&gt;
+</span><span class='line'>                          &lt;goal&gt;deploy&lt;/goal&gt;
+</span><span class='line'>                      &lt;/goals&gt;
+</span><span class='line'>                  &lt;/execution&gt;
+</span><span class='line'>              &lt;/executions&gt;
+</span><span class='line'>          &lt;/plugin&gt;                 
+</span><span class='line'>
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;cobertura-maven-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;2.6&lt;/version&gt;
+</span><span class='line'>              &lt;configuration&gt;
+</span><span class='line'>                  &lt;formats&gt;
+</span><span class='line'>                      &lt;format&gt;html&lt;/format&gt;
+</span><span class='line'>                      &lt;format&gt;xml&lt;/format&gt;
+</span><span class='line'>                  &lt;/formats&gt;
+</span><span class='line'>              &lt;/configuration&gt;
+</span><span class='line'>              &lt;executions&gt;
+</span><span class='line'>                  &lt;execution&gt;
+</span><span class='line'>                      &lt;phase&gt;package&lt;/phase&gt;
+</span><span class='line'>                      &lt;goals&gt;
+</span><span class='line'>                          &lt;goal&gt;cobertura&lt;/goal&gt;
+</span><span class='line'>                      &lt;/goals&gt;
+</span><span class='line'>                  &lt;/execution&gt;
+</span><span class='line'>              &lt;/executions&gt;
+</span><span class='line'>          &lt;/plugin&gt;
+</span><span class='line'>      &lt;/plugins&gt;
+</span><span class='line'>  &lt;/build&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>8. Build Now</h2>
+
+<p>Once the above configuration steps are complete, click on &ldquo;Build Now&rdquo; under the Jenkins &ndash;> Upload REST Snapshot Artifacts (or the respective Job name) to build the project based on the configuration.</p>
+
+<p>The console output has the detailed logs of what steps were initiated by the configuration and the outcome of the entire build.</p>
+
+<p>Thus the entire process of building the project along with unit tests whenever a SCM change is triggered or under another condition, running code coverage reports, uploading the artifacts built to the snapshot artifactory repository, deploying the WAR to the remote server container and triggering emails to the recipients can be automated with a click of a button through Jenkins.</p>
 </div>
 
 
@@ -313,7 +478,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/13/jenkins-continuous-integration/">Deploying Java Web Applications Using Jenkins Continuous Integration</a>
+        <a href="/blog/2014/01/13/jenkins-continuous-integration/">Deploying Java Web Applications to Snapshot Repository Using Jenkins Continuous Integration</a>
       </li>
     
       <li class="post">
