@@ -173,9 +173,9 @@
 
 <p><img src="/images/jenkins-dashboard.png" title="Jenkins Dashboard" alt="Jenkins Dashboard" /></p>
 
-<h2>3. Install the Plugins</h2>
+<h2>3. Install Plugins</h2>
 
-<p>On the Jenkins Dashboard, navigate to Manage Plugins &ndash;> Manage Plugins as shown in the snapshot below.</p>
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Manage Plugins as shown in the snapshot below.</p>
 
 <p><img src="/images/jenkins-manageplugins.png" title="Jenkins Manage Plugins" alt="Jenkins Manage Plugins" /></p>
 
@@ -188,6 +188,32 @@
 <li>Jenkins Artifactory Plugin (for deploying the built Maven artifacts to the Snapshot repository)</li>
 </ul>
 
+
+<h2>4. Configure System</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Configure System as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-configuresystem.png" title="Jenkins Configure System" alt="Jenkins Configure System" /></p>
+
+<p>Navigate to the JDK section and click on &ldquo;Add JDK&rdquo; to add the JDK installation as shown in the snapshot below. Specify a JDK Name, choose the JDK Version to install and follow the on-screen instructions to save the Oracle Login credentials. Save the changes.</p>
+
+<p><img src="/images/jenkins-java.png" title="Jenkins Java Installation" alt="Jenkins Java Installation" /></p>
+
+<p>Next, proceed to the Maven section and click on &ldquo;Add Maven&rdquo; to add the Maven installation as shown in the snapshot below. Specify Maven Name, choose the Maven Version to install and Save the changes.</p>
+
+<p><img src="/images/jenkins-maven.png" title="Jenkins Maven Installation" alt="Jenkins Maven Installation" /></p>
+
+<p>Proceed to the Git plugin section and enter the values for Github Username and Email Address as credentials as shown below. Save the changes.</p>
+
+<p><img src="/images/jenkins-git.png" title="Jenkins Gitplugin Credentials" alt="Jenkins Gitplugin Credentials" /></p>
+
+<p>Proceed to the Artifactory section and click on &ldquo;Add&rdquo; to add the information about the artifactory servers. Specify the URL for the snapshot repository and provide the deployer credentials created from the Artifactory server website as shown below. Click on &ldquo;Test Connection&rdquo; to test if the connection parameters are good to save and Save the changes.</p>
+
+<p><img src="/images/jenkins-artifactory.png" title="Jenkins Artifactory Servers Configuration" alt="Jenkins Artifactory Servers Configuration" /></p>
+
+<p>Next, proceed to the Email Notification section and enter the SMTP Server details as shown below. Click on the Advanced button to add the further details required and Save the changes.</p>
+
+<p><img src="/images/jenkins-email.png" title="Jenkins Email Notification" alt="Jenkins Email Notification" /></p>
 </div>
 
 
