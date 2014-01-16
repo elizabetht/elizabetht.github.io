@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jenkins, | My Experiments with Java]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jenkins/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-16T11:19:30-06:00</updated>
+  <updated>2014-01-16T11:20:41-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -248,7 +248,7 @@ I'm still debugging this.
 
 <p>The console output has the detailed logs of what steps were initiated by the configuration and the outcome of the entire build.</p>
 
-<p>The timestamp of the WAR deployed to Amazon EC2 instance can be checked to see if the deployment happened. In the same way, the snapshot repository can be checked to see if the upload of the artifacts has happened.</p>
+<p>The timestamp of the WAR deployed to Amazon EC2 instance can be checked to see if the deployment is successful. In the same way, the snapshot repository can be checked to see if the upload of the artifacts is successful.</p>
 
 <p>Thus the entire process of building the project along with unit tests whenever a SCM change is triggered or under another condition, running code coverage reports, uploading the artifacts built to the snapshot artifactory repository, deploying the WAR to the remote server container and triggering emails to the recipients can be automated with a click of a button through Jenkins.</p>
 ]]></content>
