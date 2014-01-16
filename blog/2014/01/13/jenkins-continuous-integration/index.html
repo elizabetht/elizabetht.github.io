@@ -105,7 +105,7 @@
   </header>
 
 
-<div class="entry-content"><p>This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+<div class="entry-content"><p>This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration &ndash; to build the project, run the unit tests, upload the built artifacts to a Sonatype Snapshot repository, run the Cobertura Code Coverage reports and deploy the application to the Amazon EC2. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
 
 <h2>1. Install Jenkins as a Windows Service</h2>
 
@@ -173,7 +173,21 @@
 
 <p><img src="/images/jenkins-dashboard.png" title="Jenkins Dashboard" alt="Jenkins Dashboard" /></p>
 
-<h2>3. </h2>
+<h2>3. Install the Plugins</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Plugins &ndash;> Manage Plugins as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-manageplugins.png" title="Jenkins Manage Plugins" alt="Jenkins Manage Plugins" /></p>
+
+<p>Install the following plugins and restart Jenkins for the changes to take effect.</p>
+
+<ul>
+<li>GitHub Plugin (for integrating Github with Jenkins)</li>
+<li>Jenkins Cobertura Plugin (for Cobertura support)</li>
+<li>Deploy to Container Plugin (for deploying the WAR to the Tomcat Container on EC2 instance)</li>
+<li>Jenkins Artifactory Plugin (for deploying the built Maven artifacts to the Snapshot repository)</li>
+</ul>
+
 </div>
 
 
