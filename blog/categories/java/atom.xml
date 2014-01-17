@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Java | My Experiments with Java]]></title>
+  <title><![CDATA[Category: Java | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-16T11:20:41-06:00</updated>
+  <updated>2014-01-16T19:17:00-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
