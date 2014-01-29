@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JDBC | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-28T18:08:42-06:00</updated>
+  <updated>2014-01-28T18:13:06-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-11-21T09:41:55-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-jdbc</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with JDBC. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<!-- more -->
+
 
 <h2>1. Create Java Web Application Project</h2>
 

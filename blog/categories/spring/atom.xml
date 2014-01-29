@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring, | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-28T18:08:42-06:00</updated>
+  <updated>2014-01-28T18:13:06-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-12-23T12:10:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Jersey2 REST Client in a Spring environment and test the same using JUnit and JMock frameworks. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+
+<!-- more -->
+
 
 <h2>1. Update pom.xml</h2>
 
@@ -958,6 +961,9 @@ public void findByBadUserNameTest() {
     <id>http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
 
+<!-- more -->
+
+
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
 <p>To begin with, from the command line, create a Java Maven project with the template of jersey-quickstart-webapp by providing appropriate values for GroupId, Artifact Id, Version and Package for the project.</p>
@@ -1550,6 +1556,9 @@ CREATE TABLE `student` (
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
 
+<!-- more -->
+
+
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
 <p>To begin with, in the IDE, create a Java Maven project with the template of maven-archetype-webapp (Filter the catalog based on the string &ldquo;webapp&rdquo;) by providing appropriate values for GroupId and Artifact Id for the project. The sample web application directory structure is shown below with a standard deployment descriptor web.xml and Maven pom.xml</p>
@@ -2078,6 +2087,9 @@ CREATE TABLE `student` (
     <updated>2013-11-21T09:41:09-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with MyBatis framework in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<!-- more -->
+
 
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 

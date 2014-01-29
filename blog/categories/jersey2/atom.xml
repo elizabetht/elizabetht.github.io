@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jersey2, | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/jersey2/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-01-28T18:08:42-06:00</updated>
+  <updated>2014-01-28T18:13:06-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-12-23T12:10:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Jersey2 REST Client in a Spring environment and test the same using JUnit and JMock frameworks. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+
+<!-- more -->
+
 
 <h2>1. Update pom.xml</h2>
 
@@ -957,6 +960,9 @@ public void findByBadUserNameTest() {
     <updated>2013-12-13T10:45:30-06:00</updated>
     <id>http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring</id>
     <content type="html"><![CDATA[<p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
+
+<!-- more -->
+
 
 <h2>1. Create Java Web Application Project using Maven Template</h2>
 
