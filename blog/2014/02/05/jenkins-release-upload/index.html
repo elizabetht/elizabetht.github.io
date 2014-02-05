@@ -154,6 +154,28 @@
 <p>Proceed to the Maven Release Plug-in section. Enable Nexus-Pro support, enter the Nexus URL, Nexus User Credentials and Save the changes.</p>
 
 <p><img src="/images/jenkins-nexus-pro.png" title="Jenkins Nexus-Pro" alt="Jenkins Nexus-Pro" /></p>
+
+<h2>5. Create a New Jenkins Job</h2>
+
+<p>From the Jenkins Dashboard, click on &ldquo;New Job&rdquo; to create a new job. Enter a name for the job and choose &ldquo;Build a maven2/3 project&rdquo; as option and click on OK as shown below.</p>
+
+<p><img src="/images/jenkins-newjob.png" title="Jenkins New Job" alt="Jenkins New Job" /></p>
+
+<p>From the New Job Configuration screen, proceed to the Source Code Management section and specify the Git Repository URL for the project as shown below. From the additional behaviors section, click on &ldquo;Add&rdquo; and select Check out to specific local branch. Enter the branch name as master and Save the changes.</p>
+
+<p><img src="/images/jenkins-sourcecodemgmt-release.png" title="Jenkins Source Code Management for Release" alt="Jenkins Source Code Management for Release" /></p>
+
+<p>Proceed to the Build Environment section, enable Maven Release Build option and enter the release goals.</p>
+
+<p><img src="/images/jenkins-maven-release.png" title="Jenkins Maven Release Build" alt="Jenkins Maven Release Build" /></p>
+
+<p>Proceed to the Build section, enter the maven goals for building a snapshot as shown below and Save the changes.</p>
+
+<p><img src="/images/jenkins-build.png" title="Jenkins Build" alt="Jenkins Build" /></p>
+
+<p>Proceed to the Build Settings section. Select the option for Email Notification and enter the values for the email recipients as shown below. Save the changes.</p>
+
+<p><img src="/images/jenkins-emailnotifications.png" title="Jenkins Email Notifications" alt="Jenkins Email Notifications" /></p>
 </div>
 
 
