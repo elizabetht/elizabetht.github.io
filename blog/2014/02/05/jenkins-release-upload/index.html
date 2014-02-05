@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Automating the Release of Java Artifacts Using Jenkins Continuous Integration - My Experiments with Technology</title>
+  <title>Automating the Release of Java Artifacts Using Jenkins on Windows - My Experiments with Technology</title>
   <meta name="author" content="Elizabeth Thomas">
 
   
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Automating the Release of Java Artifacts Using Jenkins Continuous Integration</h1>
+      <h1 class="entry-title">Automating the Release of Java Artifacts Using Jenkins on Windows</h1>
     
     
       <p class="meta">
@@ -111,6 +111,26 @@
 
 <!-- more -->
 
+
+<h2>1. Generate SSH Keys for Github (without passphrase)</h2>
+
+<p>Jenkins does not support passphrases for SSH Keys and so generate the SSH Key for Gihub account without passphrase. Follow the directions given under <a href="https://help.github.com/articles/generating-ssh-keys">Generating SSH Keys</a>, generate a SSH Key without passphrase and upload to Github account.</p>
+
+<h2>2. Force Jenkins to run as user with SSH Key</h2>
+
+<p>On Windows, Jenkins uses the SSH Key of the user it is running as, which is located under C:\Users&lt;username>.ssh. Hence, Jenkins must be run as the user with &lsquo;username&rsquo;.</p>
+
+<p>Type &lsquo;services.msc&rsquo; in a command prompt to open up Services Management. Right click on the Jenkins service and select Properties.</p>
+
+<p><img src="/images/jenkins-services-properties.png" title="Jenkins Services Management" alt="Jenkins Services Management" /></p>
+
+<p>From the Jenkins Properties windows, navigate to Log on tab. Choose Log on as &lsquo;This account&rsquo;, enter the details of the account (use the Browse option to choose/check the name of the account) and click Ok. The account credentials will generally match the log in account for the Windows as shown in the snapshot below</p>
+
+<p><img src="/images/jenkins-logon.png" title="Jenkins Logon" alt="Jenkins Logon" /></p>
+
+<p>Once the changes are saved, restart the Jenkins service from the Services Management by Right clicking on Jenkins service and choose Restart as shown below</p>
+
+<p><img src="/images/jenkins-service-restart.png" title="Jenkins Restart" alt="Jenkins Restart" /></p>
 </div>
 
 
@@ -160,7 +180,7 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/01/13/jenkins-snapshot-upload/" title="Previous Post: Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins Continuous Integration">&laquo; Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins Continuous Integration</a>
+        <a class="basic-alignment left" href="/blog/2014/01/13/jenkins-snapshot-upload/" title="Previous Post: Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins on Windows">&laquo; Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins on Windows</a>
       
       
     </p>
@@ -182,11 +202,11 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/02/05/jenkins-release-upload/">Automating the Release of Java Artifacts Using Jenkins Continuous Integration</a>
+        <a href="/blog/2014/02/05/jenkins-release-upload/">Automating the Release of Java Artifacts Using Jenkins on Windows</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts Using Jenkins Continuous Integration</a>
+        <a href="/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts Using Jenkins on Windows</a>
       </li>
     
       <li class="post">
