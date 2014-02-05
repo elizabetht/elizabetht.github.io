@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Continuous Integration | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/continuous-integration/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-02-05T09:07:11-06:00</updated>
+  <updated>2014-02-05T09:27:22-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -42,6 +42,29 @@
 <p>Once the changes are saved, restart the Jenkins service from the Services Management by Right clicking on Jenkins service and choose Restart as shown below</p>
 
 <p><img src="/images/jenkins-services-restart.png" title="Jenkins Restart" alt="Jenkins Restart" /></p>
+
+<h2>3. Install Plugins</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Manage Plugins as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-manageplugins.png" title="Jenkins Manage Plugins" alt="Jenkins Manage Plugins" /></p>
+
+<p>Install the following plugins and restart Jenkins for the changes to take effect.</p>
+
+<ul>
+<li>Jenkins Release Plugin (for Maven release)</li>
+</ul>
+
+
+<h2>4. Configure System</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Configure System as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-configuresystem.png" title="Jenkins Configure System" alt="Jenkins Configure System" /></p>
+
+<p>Proceed to the Maven Release Plug-in section. Enable Nexus-Pro support, enter the Nexus URL, Nexus User Credentials and Save the changes.</p>
+
+<p><img src="/images/jenkins-nexus-pro.png" title="Jenkins Nexus-Pro" alt="Jenkins Nexus-Pro" /></p>
 ]]></content>
   </entry>
   
@@ -133,6 +156,10 @@ I'm still debugging this.
 <p>Navigate to the JDK section and click on &ldquo;Add JDK&rdquo; to add the JDK installation as shown in the snapshot below. Specify a JDK Name, choose the JDK Version to install and follow the on-screen instructions to save the Oracle Login credentials. Save the changes.</p>
 
 <p><img src="/images/jenkins-java.png" title="Jenkins Java Installation" alt="Jenkins Java Installation" /></p>
+
+<p>Next, proceed to the Git section and click on &ldquo;Add Git&rdquo; to add the Git installation as shown in the snapshot below. Specify Git Name, specify the path to Git executable and Save the changes.</p>
+
+<p><img src="/images/jenkins-gitinstall.png" title="Jenkins Git Installation" alt="Jenkins Git Installation" /></p>
 
 <p>Next, proceed to the Maven section and click on &ldquo;Add Maven&rdquo; to add the Maven installation as shown in the snapshot below. Specify Maven Name, choose the Maven Version to install and Save the changes.</p>
 
