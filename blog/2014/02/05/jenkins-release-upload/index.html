@@ -176,6 +176,260 @@
 <p>Proceed to the Build Settings section. Select the option for Email Notification and enter the values for the email recipients as shown below. Save the changes.</p>
 
 <p><img src="/images/jenkins-emailnotifications.png" title="Jenkins Email Notifications" alt="Jenkins Email Notifications" /></p>
+
+<h2>6. Configure settings.xml</h2>
+
+<p>In order to upload the built Maven artifacts to the artifactory server, configure the Jenkins settings.xml found in C:\Program Files (x86)\Jenkins\tools\hudson.tasks.Maven_MavenInstallation\Maven_3.1\conf folder with the same parameters as found in the default settings.xml (usually found under C:\Program Files\Apache Software Foundation\apache-maven-3.1.0\conf for a Windows machine) of the Maven installation on the system.</p>
+
+<p>Typically, the server section for staging repository needs to be configured with httpHeaders in the settings.xml for the Maven Release.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;servers&gt;
+</span><span class='line'>    &lt;server&gt;
+</span><span class='line'>      &lt;id&gt;sonatype-nexus-staging&lt;/id&gt;
+</span><span class='line'>      &lt;username&gt;username&lt;/username&gt;
+</span><span class='line'>      &lt;password&gt;password&lt;/password&gt;
+</span><span class='line'>    &lt;configuration&gt;
+</span><span class='line'>      &lt;httpHeaders&gt;
+</span><span class='line'>        &lt;property&gt;
+</span><span class='line'>          &lt;name&gt;User-Agent&lt;/name&gt;
+</span><span class='line'>          &lt;value&gt;Maven m2Release (java:${java.vm.version} ${env.BUILD_TAG }&lt;/value&gt;
+</span><span class='line'>        &lt;/property&gt;
+</span><span class='line'>      &lt;/httpHeaders&gt;
+</span><span class='line'>      &lt;/configuration&gt;
+</span><span class='line'>    &lt;/server&gt;
+</span><span class='line'>&lt;/servers&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, a profile section needs to be configured for the PGP Signature, the details of how to Generate PGP Signatures with Maven can be found from the section Generate a Key Pair at <a href="https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven">How to Generate PGP Signatures With Maven</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;profiles&gt;
+</span><span class='line'>    &lt;profile&gt;
+</span><span class='line'>      &lt;id&gt;gpg-release&lt;/id&gt;
+</span><span class='line'>      &lt;properties&gt;
+</span><span class='line'>          &lt;gpg.passphrase&gt;passphrase&lt;/gpg.passphrase&gt;
+</span><span class='line'>          &lt;gpg.useagent&gt;true&lt;/gpg.useagent&gt;
+</span><span class='line'>          &lt;gpg.defaultKeyring&gt;false&lt;/gpg.defaultKeyring&gt;
+</span><span class='line'>          &lt;gpg.homedir&gt;C:/Users/Sara/AppData/Roaming/gnupg&lt;/gpg.homedir&gt;
+</span><span class='line'>          &lt;gpg.publicKeyring&gt;C:/Users/Sara/AppData/Roaming/gnupg/pubring.gpg&lt;/gpg.publicKeyring&gt;
+</span><span class='line'>          &lt;gpg.secretKeyring&gt;C:/Users/Sara/AppData/Roaming/gnupg/secring.gpg&lt;/gpg.secretKeyring&gt;
+</span><span class='line'>      &lt;/properties&gt; 
+</span><span class='line'>    &lt;/profile&gt;
+</span><span class='line'>&lt;/profiles&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>6. Update pom.xml</h2>
+
+<p>The pom.xml file for the project needs to be configured with the following plugins under the build section.</p>
+
+<ul>
+<li>maven-enforcer-plugin</li>
+<li>maven-release-plugin</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;build&gt;
+</span><span class='line'>    &lt;plugins&gt;
+</span><span class='line'>      &lt;plugin&gt;
+</span><span class='line'>          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>          &lt;artifactId&gt;maven-enforcer-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;version&gt;1.2&lt;/version&gt;
+</span><span class='line'>          &lt;executions&gt;
+</span><span class='line'>              &lt;execution&gt;
+</span><span class='line'>                  &lt;id&gt;enforce-maven&lt;/id&gt;
+</span><span class='line'>                  &lt;goals&gt;
+</span><span class='line'>                      &lt;goal&gt;enforce&lt;/goal&gt;
+</span><span class='line'>                  &lt;/goals&gt;
+</span><span class='line'>                  &lt;configuration&gt;
+</span><span class='line'>                      &lt;rules&gt;
+</span><span class='line'>                          &lt;requireMavenVersion&gt;
+</span><span class='line'>                              &lt;version&gt;(,2.1.0),(2.1.0,2.2.0),(2.2.0,)&lt;/version&gt;
+</span><span class='line'>                              &lt;message&gt;Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures
+</span><span class='line'>                                  and checksums respectively.&lt;/message&gt;
+</span><span class='line'>                          &lt;/requireMavenVersion&gt;
+</span><span class='line'>                      &lt;/rules&gt;
+</span><span class='line'>                  &lt;/configuration&gt;
+</span><span class='line'>              &lt;/execution&gt;
+</span><span class='line'>          &lt;/executions&gt;
+</span><span class='line'>      &lt;/plugin&gt;
+</span><span class='line'>  &lt;/plugins&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;pluginManagement&gt;
+</span><span class='line'>      &lt;plugins&gt;
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;maven-release-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;2.4.2&lt;/version&gt;
+</span><span class='line'>              &lt;configuration&gt;
+</span><span class='line'>                  &lt;tagBase&gt;https://github.com/elizabetht/StudentEnrollmentWithREST/tags&lt;/tagBase&gt;
+</span><span class='line'>                  &lt;mavenExecutorId&gt;forked-path&lt;/mavenExecutorId&gt;
+</span><span class='line'>                  &lt;useReleaseProfile&gt;false&lt;/useReleaseProfile&gt;
+</span><span class='line'>                  &lt;arguments&gt;-Psonatype-oss-release&lt;/arguments&gt;
+</span><span class='line'>              &lt;/configuration&gt;
+</span><span class='line'>          &lt;/plugin&gt;
+</span><span class='line'>      &lt;/plugins&gt;
+</span><span class='line'>  &lt;/pluginManagement&gt;
+</span><span class='line'>&lt;/build&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Update the pom.xml with a profile section for the maven-gpg-plugin</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;profiles&gt;
+</span><span class='line'>  &lt;profile&gt;
+</span><span class='line'>      &lt;id&gt;sign&lt;/id&gt;
+</span><span class='line'>      &lt;build&gt;
+</span><span class='line'>          &lt;plugins&gt;
+</span><span class='line'>              &lt;plugin&gt;
+</span><span class='line'>                  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>                  &lt;artifactId&gt;maven-gpg-plugin&lt;/artifactId&gt;
+</span><span class='line'>                  &lt;executions&gt;
+</span><span class='line'>                      &lt;execution&gt;
+</span><span class='line'>                          &lt;id&gt;sign-artifacts&lt;/id&gt;
+</span><span class='line'>                          &lt;phase&gt;verify&lt;/phase&gt;
+</span><span class='line'>                          &lt;goals&gt;
+</span><span class='line'>                              &lt;goal&gt;sign&lt;/goal&gt;
+</span><span class='line'>                          &lt;/goals&gt;
+</span><span class='line'>                      &lt;/execution&gt;
+</span><span class='line'>                  &lt;/executions&gt;
+</span><span class='line'>              &lt;/plugin&gt;
+</span><span class='line'>          &lt;/plugins&gt;
+</span><span class='line'>      &lt;/build&gt;
+</span><span class='line'>  &lt;/profile&gt;
+</span><span class='line'>&lt;/profiles&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add a distribution management section to pom.xml to specify the snapshot and staging repository URLs.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;distributionManagement&gt;
+</span><span class='line'>  &lt;repository&gt;
+</span><span class='line'>      &lt;id&gt;sonatype-nexus-staging&lt;/id&gt;
+</span><span class='line'>      &lt;url&gt;https://oss.sonatype.org/service/local/staging/deploy/maven2&lt;/url&gt;
+</span><span class='line'>  &lt;/repository&gt;
+</span><span class='line'>  &lt;snapshotRepository&gt;
+</span><span class='line'>      &lt;id&gt;sonatype-nexus-snapshots&lt;/id&gt;
+</span><span class='line'>      &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots&lt;/url&gt;
+</span><span class='line'>  &lt;/snapshotRepository&gt;
+</span><span class='line'>&lt;/distributionManagement&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>8. Build Now</h2>
+
+<p>Once the above configuration steps are complete, click on &ldquo;Build Now&rdquo; under the Jenkins &ndash;> Upload REST Release Artifacts (or the respective Job name) to build the project based on the configuration.</p>
+
+<p>The console output has the detailed logs of what steps were initiated by the configuration and the outcome of the entire build. Verify that the build succeeds.</p>
+
+<h2>9. Perform Maven Release</h2>
+
+<p>Once the build succeeds and snapshots are uploaded to the snapshot repository, click on &ldquo;Perform Maven Release&rdquo; under Jenkins &ndash;> Upload REST Release Artifacts (or the respective Job name) to start the Maven Release process.</p>
+
+<p>Verify that the Release version and the next Development Version are correct. Enable &lsquo;Specify custom SCM comment prefix&rsquo; to enter a custom SCM Comment. Enable &lsquo;Specify custom SCM tag&rsquo; to enter a custom SCM tag. Click on Schedule Maven Release Build.</p>
+
+<p><img src="/images/jenkins-perform-maven-release.png" title="Jenkins Perform Maven Release" alt="Jenkins Perform Maven Release" /></p>
+
+<p>Once the release process succeeds, the staging repository will be uploaded with the release artifacts.</p>
+
+<p>Thus the entire process of performing the maven release of artifacts to the staging repository and triggering emails to the recipients can be automated with a click of a button through Jenkins. The staging repository can be taken then through the steps of Close (if its still open) and Release to complete the promotion of the artifacts.</p>
 </div>
 
 
