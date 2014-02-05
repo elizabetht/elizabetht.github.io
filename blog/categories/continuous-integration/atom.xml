@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Continuous Integration | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/continuous-integration/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-02-05T09:04:21-06:00</updated>
+  <updated>2014-02-05T09:07:11-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -18,7 +18,7 @@
     <link href="http://elizabetht.github.io/blog/2014/02/05/jenkins-release-upload/"/>
     <updated>2014-02-05T08:21:00-06:00</updated>
     <id>http://elizabetht.github.io/blog/2014/02/05/jenkins-release-upload</id>
-    <content type="html"><![CDATA[<p>This post will show how to automate the release process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration &ndash; upload the release artifacts to release repository. The job configured using this post must be run only after uploading the snapshot artifacts into the snapshot repository as explained in the earlier post [Deploying Java Web Applications using Jenkins Continuous Integration] (<a href="http://elizabetht.github.io/blog/2014/01/13/jenkins-snapshot-upload/">http://elizabetht.github.io/blog/2014/01/13/jenkins-snapshot-upload/</a>). The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
+    <content type="html"><![CDATA[<p>This post will show how to automate the release process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration &ndash; upload the release artifacts to release repository. The job configured using this post must be run only after uploading the snapshot artifacts into the snapshot repository as explained in the earlier post <a href="http://elizabetht.github.io/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins on Windows</a>. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
 
 <!-- more -->
 
@@ -41,7 +41,7 @@
 
 <p>Once the changes are saved, restart the Jenkins service from the Services Management by Right clicking on Jenkins service and choose Restart as shown below</p>
 
-<p><img src="/images/jenkins-service-restart.png" title="Jenkins Restart" alt="Jenkins Restart" /></p>
+<p><img src="/images/jenkins-services-restart.png" title="Jenkins Restart" alt="Jenkins Restart" /></p>
 ]]></content>
   </entry>
   
