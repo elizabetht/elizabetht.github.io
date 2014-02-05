@@ -4,7 +4,7 @@
   <title><![CDATA[My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-02-05T09:41:07-06:00</updated>
+  <updated>2014-02-05T09:42:47-06:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -78,7 +78,7 @@
 
 <p>Proceed to the Build Environment section, enable Maven Release Build option and enter the release goals.</p>
 
-<p><img src="http://elizabetht.github.io/images/jenkins-maven-release.png" title="Jenkins Maven Release Build" alt="Jenkins Maven Release Build" /></p>
+<p><img src="http://elizabetht.github.io/images/jenkins-maven-releasebuild.png" title="Jenkins Maven Release Build" alt="Jenkins Maven Release Build" /></p>
 
 <p>Proceed to the Build section, enter the maven goals for building a snapshot as shown below and Save the changes.</p>
 
