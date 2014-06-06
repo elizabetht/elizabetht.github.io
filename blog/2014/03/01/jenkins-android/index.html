@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Automating the Continuous Integration of Android Projects Using Jenkins on Windows - My Experiments with Technology</title>
+  <title>Automating the Continuous Integration of Android Projects With Gradle Using Jenkins on Windows - My Experiments with Technology</title>
   <meta name="author" content="Elizabeth Thomas">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="This post will show how to automate the deployment process of a Android Application using Jenkins Continuous Integration &ndash; to build the project &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">Automating the Continuous Integration of Android Projects Using Jenkins on Windows</h1>
+      <h1 class="entry-title">Automating the Continuous Integration of Android Projects With Gradle Using Jenkins on Windows</h1>
     
     
       <p class="meta">
@@ -108,7 +107,105 @@
   </header>
 
 
-<div class="entry-content">
+<div class="entry-content"><p>This post will show how to automate the deployment process of a Android Application using Jenkins Continuous Integration &ndash; to build the project, run the unit tests (if any), archive the built artifacts and run the Android lint reports.</p>
+
+<!-- more -->
+
+
+<h2>1. Install Jenkins as a Windows Service</h2>
+
+<p>Navigate to jenkins-ci.org website using an Internet browser and download the Windows native package (the link is underlined for easy identification) as shown from the right side pane of the Download Jenkins tab.</p>
+
+<p><img src="/images/jenkins-installation.png" title="Jenkins Installation Package" alt="Jenkins Installation package" /></p>
+
+<p>Once the download is complete, uncompress the zip file and click on the jenkins-1.xxx.msi file. Proceed through the configuration steps to install the Jenkins as a Windows service.</p>
+
+<h2>2. Modify Default Jenkins Port</h2>
+
+<p>By default Jenkins runs on the port 8080. In order to avoid conflict with other applications, the default port can be modified by editing the jenkins.xml found under C:\Program Files (x86)\Jenkins location. As shown below, modify the httpPort to 8082.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;service&gt;
+</span><span class='line'>  &lt;id&gt;jenkins&lt;/id&gt;
+</span><span class='line'>  &lt;name&gt;Jenkins&lt;/name&gt;
+</span><span class='line'>  &lt;description&gt;This service runs Jenkins continuous integration system.&lt;/description&gt;
+</span><span class='line'>  &lt;env name="JENKINS_HOME" value="%BASE%"/&gt;
+</span><span class='line'>  &lt;!--
+</span><span class='line'>    if you'd like to run Jenkins with a specific version of Java, specify a full path to java.exe.
+</span><span class='line'>    The following value assumes that you have java in your PATH.
+</span><span class='line'>  --&gt;
+</span><span class='line'>  &lt;executable&gt;%BASE%\jre\bin\java&lt;/executable&gt;
+</span><span class='line'>  &lt;arguments&gt;-Xrs -Xmx256m -Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle -jar "%BASE%\jenkins.war" --httpPort=8082&lt;/arguments&gt;
+</span><span class='line'>  &lt;!--
+</span><span class='line'>    interactive flag causes the empty black Java window to be displayed.
+</span><span class='line'>    I'm still debugging this.
+</span><span class='line'>  &lt;interactive /&gt;
+</span><span class='line'>  --&gt;
+</span><span class='line'>  &lt;logmode&gt;rotate&lt;/logmode&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;onfailure action="restart" /&gt;
+</span><span class='line'>&lt;/service&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once the modification is saved in jenkins.xml file, restart the Jenkins service from the Windows Task Manager->Services and right clicking on the Jenkins service and choose Stop Service to stop the service as shown below.</p>
+
+<p><img src="/images/jenkins-stop.png" title="Jenkins Stop Service" alt="Jenkins Stop Service" /></p>
+
+<p>Once the status of the service changes to stopped, restart the service by right clicking on the Jenkins service and choose Start Service to start the service again.</p>
+
+<p><img src="/images/jenkins-restart.png" title="Jenkins Restart Service" alt="Jenkins Restart Service" /></p>
+
+<p>Navigate to localhost:8082 to verify if the Jenkins restart was successful as shown below &ndash; Jenkins Dashboard will be displayed. Note that it takes a while before the Jenkins service becomes available.</p>
+
+<p><img src="/images/jenkins-dashboard.png" title="Jenkins Dashboard" alt="Jenkins Dashboard" /></p>
+
+<h2>3. Install Plugins</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Manage Plugins as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-manageplugins.png" title="Jenkins Manage Plugins" alt="Jenkins Manage Plugins" /></p>
+
+<p>Install the following plugins and restart Jenkins for the changes to take effect.</p>
+
+<ul>
+<li>Git Plugin (for integrating Git with Jenkins)</li>
+<li>Gradle Plugin (for integrating Gradle with Jenkins)</li>
+<li>Android Lint Plugin (for integration Lint with Jenkins)</li>
+</ul>
+
+
+<h2>4. Configure System</h2>
+
+<p>On the Jenkins Dashboard, navigate to Manage Jenkins &ndash;> Configure System as shown in the snapshot below.</p>
+
+<p><img src="/images/jenkins-configuresystem.png" title="Jenkins Configure System" alt="Jenkins Configure System" /></p>
+
+<p>Navigate to the JDK section and click on &ldquo;Add JDK&rdquo; to add the JDK installation as shown in the snapshot below. Specify a JDK Name, choose the JDK Version to install and follow the on-screen instructions to save the Oracle Login credentials. Save the changes.</p>
+
+<p><img src="/images/jenkins-java.png" title="Jenkins Java Installation" alt="Jenkins Java Installation" /></p>
+
+<p>Next, proceed to the Git section and click on &ldquo;Add Git&rdquo; to add the Git installation as shown in the snapshot below. Specify Git Name, specify the path to Git executable and Save the changes.</p>
+
+<p><img src="/images/jenkins-gitinstall.png" title="Jenkins Git Installation" alt="Jenkins Git Installation" /></p>
 </div>
 
 
@@ -180,7 +277,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/03/01/jenkins-android/">Automating the Continuous Integration of Android Projects Using Jenkins on Windows</a>
+        <a href="/blog/2014/03/01/jenkins-android/">Automating the Continuous Integration of Android Projects With Gradle Using Jenkins on Windows</a>
       </li>
     
       <li class="post">
