@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Continuous Integration | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/continuous-integration/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-06-06T17:11:14-05:00</updated>
+  <updated>2014-06-06T17:16:40-05:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -99,7 +99,7 @@ I'm still debugging this.
 
 <p>Navigate to the Global Properties section and click on Add to add an Environment Variable ANDROID_HOME as shown in the snapshot below. Enter the name as ANDROID_HOME and enter the path of the location where the Android SDK is stored on windows.</p>
 
-<p><img src="/images/androidhome" title="Jenkins Android Home Configuration" alt="Jenkins Android Home Configuration" /></p>
+<p><img src="/images/androidhome.png" title="Jenkins Android Home Configuration" alt="Jenkins Android Home Configuration" /></p>
 
 <p>Navigate to the JDK section and click on &ldquo;Add JDK&rdquo; to add the JDK installation as shown in the snapshot below. Specify a JDK Name, choose the JDK Version to install and follow the on-screen instructions to save the Oracle Login credentials. Save the changes.</p>
 
