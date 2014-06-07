@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Continuous Integration | My Experiments with Technology]]></title>
   <link href="http://elizabetht.github.io/blog/categories/continuous-integration/atom.xml" rel="self"/>
   <link href="http://elizabetht.github.io/"/>
-  <updated>2014-06-07T18:06:45-05:00</updated>
+  <updated>2014-06-07T18:24:23-05:00</updated>
   <id>http://elizabetht.github.io/</id>
   <author>
     <name><![CDATA[Elizabeth Thomas]]></name>
@@ -151,7 +151,9 @@ I'm still debugging this.
 
 <p>Once the above configuration steps are complete, click on &ldquo;Build Now&rdquo; under the Jenkins &ndash;> Build Android Application (or the respective Job name) to build the project based on the configuration.</p>
 
-<p>The console output has the detailed logs of what steps were initiated by the configuration and the outcome of the entire build.</p>
+<p>The console output has the detailed logs of what steps were initiated by the configuration and the outcome of the entire build. Clicking on any successful build outcome shows the artifacts that were archived as part of the build, the change that started the build and the lint results as shown below.</p>
+
+<p><img src="/images/android-build-outcome.png" title="Android Build Outcome" alt="Android Build Outcome" /></p>
 
 <p>Thus the entire process of building the project an Android application project whenever a SCM change is triggered or under another condition, running lint reports, archiving the artifacts built, publishing lint reports and triggering emails to the recipients can be automated with a click of a button through Jenkins.</p>
 ]]></content>
