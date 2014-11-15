@@ -1,0 +1,28 @@
+---
+layout: page
+title: "About Me"
+date: 2014-01-28 17:54
+comments: true
+sharing: true
+footer: true
+---
+My name is Elizabeth Thomas. I'm a Software Engineer.
+
+A little something about me ...
+-------------------------------
+Born in Kerala and brought up in TamilNadu, I have the cultural mix of both the states of India running through my blood and my brains. A school topper all throughout, I graduated from one of the prestigious Engineering Institution in TamilNadu, India in the city of Coimbatore. I landed up in the deemed Software Industry eight years ago and still continuing with the course of meal. A passionate Android/Java/Cloud/CI/C++ software consultant, an avid learner, a technology enthusiast and a beginner runner - these statements fairly sums me up!
+
+This blog is ...
+----------------
+  - ...often my documentation of something that I tried through trial and error
+  - ...sometimes a reference material 
+  - ...and mostly a learner's manual for newbies
+
+Contact me 
+-----------
+  - @email2eliza on twitter
+  - email 2 eliza at gmail dot com
+
+
+
+
