@@ -1,682 +1,188 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>My Experiments with Technology</title>
-  <meta name="author" content="Elizabeth Thomas">
-
-  
-  <meta name="description" content="This post will show how to automate the deployment process of a Android Application using Jenkins Continuous Integration &ndash; to build the project &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://elizabetht.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Experiments with Technology" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-45852485-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Experiments with Technology</a></h1>
-  
-    <h2>Before I forget, I better get it written and get it published!</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:elizabetht.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About Me</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/01/jenkins-android/">Automating the Continuous Integration of Android Projects With Gradle Using Jenkins on Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-01T08:21:00-06:00" pubdate data-updated="true">Mar 1<span>st</span>, 2014</time>
-        
-           | <a href="/blog/2014/03/01/jenkins-android/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2014/03/01/jenkins-android/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to automate the deployment process of a Android Application using Jenkins Continuous Integration &ndash; to build the project, run the unit tests (if any), archive the built artifacts and run the Android lint reports.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/01/jenkins-android/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/05/jenkins-release-upload/">Automating the Release of Java Artifacts Using Jenkins on Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-05T08:21:00-06:00" pubdate data-updated="true">Feb 5<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/05/jenkins-release-upload/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2014/02/05/jenkins-release-upload/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to automate the release process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration &ndash; upload the release artifacts to release repository. The job configured using this post must be run only after uploading the snapshot artifacts into the snapshot repository as explained in the earlier post <a href="http://elizabetht.github.io/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts using Jenkins on Windows</a>. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/05/jenkins-release-upload/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts Using Jenkins on Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-13T16:50:30-06:00" pubdate data-updated="true">Jan 13<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/01/13/jenkins-snapshot-upload/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2014/01/13/jenkins-snapshot-upload/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to automate the deployment process of a Java Web Application (Student Enrollment Application developed using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment) using Jenkins Continuous Integration &ndash; to build the project, run the unit tests, upload the built artifacts to a Sonatype Snapshot repository, run the Cobertura Code Coverage reports and deploy the application to the Amazon EC2. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/13/jenkins-snapshot-upload/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock/">Building Jersey2 REST Client Using Spring With JUnit and JMock</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-23T12:10:30-06:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2013</time>
-        
-           | <a href="/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Jersey2 REST Client in a Spring environment and test the same using JUnit and JMock frameworks. The details of the actual application are explained in the earlier post given by the link <a href="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey REST With Spring</a>.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey2 REST With Spring</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-13T10:45:30-06:00" pubdate data-updated="true">Dec 13<span>th</span>, 2013</time>
-        
-           | <a href="/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a REST based Jersey2 Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/21/student-enrollment-using-jdbc/">Building Java Web Application Using JDBC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-21T09:41:55-06:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
-        
-           | <a href="/blog/2013/11/21/student-enrollment-using-jdbc/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with JDBC. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/21/student-enrollment-using-jdbc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/21/student-enrollment-using-struts-2/">Building Java Web Application Using Struts 2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-21T09:41:45-06:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
-        
-           | <a href="/blog/2013/11/21/student-enrollment-using-struts-2/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-struts-2/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with Struts 2 framework. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/21/student-enrollment-using-struts-2/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/">Building Java Web Application Using Hibernate With Spring</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-21T09:41:30-06:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
-        
-           | <a href="/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with Hibernate ORM in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/">Building Java Web Application Using MyBatis With Spring</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-21T09:41:09-06:00" pubdate data-updated="true">Nov 21<span>st</span>, 2013</time>
-        
-           | <a href="/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/#disqus_thread"
-             data-disqus-identifier="http://elizabetht.github.io/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to create a Student Enrollment Application using MYSQL DB with MyBatis framework in a Spring environment. This is a simple application that aims to collect the input details from the user during signup, save the details in the MYSQL DB and authenticate the same during login.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/03/01/jenkins-android/">Automating the Continuous Integration of Android Projects With Gradle Using Jenkins on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/05/jenkins-release-upload/">Automating the Release of Java Artifacts Using Jenkins on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/13/jenkins-snapshot-upload/">Automating the Deployment and Upload of Snapshot Java Artifacts Using Jenkins on Windows</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/23/jersey2-rest-client-with-junit-and-jmock/">Building Jersey2 REST Client Using Spring With JUnit and JMock</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/13/student-enrollment-using-jersey-rest-with-spring/">Building Java Web Application Using Jersey2 REST With Spring</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/student-enrollment-using-jdbc/">Building Java Web Application Using JDBC</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/student-enrollment-using-struts-2/">Building Java Web Application Using Struts 2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/student-enrollment-using-hibernate-with-spring/">Building Java Web Application Using Hibernate With Spring</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/21/student-enrollment-using-mybatis-with-spring/">Building Java Web Application Using MyBatis With Spring</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/elizabetht">@elizabetht</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'elizabetht',
-            count: 5,
-            skip_forks: false,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+ElizabethThomasPlus?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-<section>
-  <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/continuous-integration/'>Continuous Integration (3)</a></li><li><a href='/blog/categories/eclemma/'>EclEmma (1)</a></li><li><a href='/blog/categories/hibernate/'>Hibernate (3)</a></li><li><a href='/blog/categories/jdbc/'>JDBC (1)</a></li><li><a href='/blog/categories/jersey2/'>Jersey2 (2)</a></li><li><a href='/blog/categories/junit-slash-jmock/'>JUnit/JMock (1)</a></li><li><a href='/blog/categories/maven/'>Maven (4)</a></li><li><a href='/blog/categories/mybatis/'>MyBatis (1)</a></li><li><a href='/blog/categories/rest/'>REST (1)</a></li><li><a href='/blog/categories/spring/'>Spring (4)</a></li><li><a href='/blog/categories/struts2/'>Struts2 (1)</a></li></ul>
-</section>
-<section>
-<!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
-	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elizabeth Thomas — Inference Engineer</title>
+<meta name="description" content="Elizabeth Thomas: inference engineer, vLLM and NVIDIA Dynamo contributor, ex-Principal SRE. Benchmarking and building open-source LLM serving.">
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --border:#30363d;
+    --text:#e6edf3; --muted:#9aa7b4; --accent:#76b900; --accent2:#58a6ff;
+    --chip:#21262d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;}
+  a{color:var(--accent2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
+
+  header{padding:56px 0 8px;text-align:center}
+  header img{width:132px;height:132px;border-radius:50%;border:3px solid var(--border)}
+  header h1{font-size:2.3rem;margin-top:18px;letter-spacing:-.5px}
+  header .role{color:var(--accent);font-size:1.12rem;font-weight:600;margin-top:6px}
+  header .loc{color:var(--muted);margin-top:4px;font-size:.95rem}
+  .links{margin-top:18px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .links a{background:var(--chip);border:1px solid var(--border);color:var(--text);
+    padding:7px 16px;border-radius:999px;font-size:.9rem;font-weight:500}
+  .links a:hover{border-color:var(--accent2);text-decoration:none}
+
+  .about{max-width:760px;margin:30px auto 0;text-align:center;color:#c9d4e0;font-size:1.03rem}
+  .about strong{color:var(--text)}
+
+  .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px 0 6px}
+  .stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:14px 22px;text-align:center;min-width:150px}
+  .stat .n{font-size:1.45rem;font-weight:700;color:var(--text)}
+  .stat .l{color:var(--muted);font-size:.82rem;margin-top:2px}
+
+  h2{font-size:1.35rem;margin:46px 0 18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  h2 .sub{color:var(--muted);font-size:.88rem;font-weight:400;margin-left:8px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px}
+  .card:hover{border-color:#3d4754;background:var(--panel2)}
+  .card h3{font-size:1.05rem;margin-bottom:6px}
+  .card h3 a{color:var(--text)}
+  .card h3 a:hover{color:var(--accent2);text-decoration:none}
+  .card p{color:var(--muted);font-size:.93rem}
+  .tag{display:inline-block;background:rgba(118,185,0,.13);color:#a4d65e;border:1px solid rgba(118,185,0,.35);
+    font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;margin-bottom:10px;letter-spacing:.4px;text-transform:uppercase}
+  .tag.blue{background:rgba(88,166,255,.12);color:#79b8ff;border-color:rgba(88,166,255,.35)}
+
+  ul.highlights{list-style:none}
+  ul.highlights li{background:var(--panel);border:1px solid var(--border);border-radius:12px;
+    padding:16px 20px;margin-bottom:12px;color:#c9d4e0;font-size:.98rem}
+  ul.highlights li strong{color:var(--text)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--chip);border:1px solid var(--border);border-radius:999px;
+    padding:5px 14px;font-size:.86rem;color:#c9d4e0}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--border);
+    text-align:center;color:var(--muted);font-size:.9rem}
+  @media (max-width:560px){ header h1{font-size:1.8rem} }
 </style>
-<div id="mc_embed_signup">
-<form action="http://github.us3.list-manage1.com/subscribe/post?u=b264ccce5e1eeb4d1d482783b&amp;id=6c42c2322e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-	<h2>Subscribe to my mailing list</h2>
-<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-<div class="mc-field-group">
-	<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-</label>
-	<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-</div>
-<div class="mc-field-group">
-	<label for="mce-FNAME">First Name </label>
-	<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-</div>
-<div class="mc-field-group">
-	<label for="mce-LNAME">Last Name </label>
-	<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-</div>
-<div class="mc-field-group input-group">
-    <strong>Email Format </strong>
-    <ul><li><input type="radio" value="html" name="EMAILTYPE" id="mce-EMAILTYPE-0"><label for="mce-EMAILTYPE-0">html</label></li>
-<li><input type="radio" value="text" name="EMAILTYPE" id="mce-EMAILTYPE-1"><label for="mce-EMAILTYPE-1">text</label></li>
-</ul>
-</div>
-	<div id="mce-responses" class="clear">
-		<div class="response" id="mce-error-response" style="display:none"></div>
-		<div class="response" id="mce-success-response" style="display:none"></div>
-	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b264ccce5e1eeb4d1d482783b_6c42c2322e" value=""></div>
-	<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-</form>
-</div>
+</head>
+<body>
+<div class="wrap">
 
-<!--End mc_embed_signup-->
-
-</section>
-
-  
-</aside>
-
+  <header>
+    <img src="https://avatars.githubusercontent.com/u/5291193?v=4" alt="Elizabeth Thomas">
+    <h1>Elizabeth Thomas</h1>
+    <div class="role">Inference Engineer · vLLM &amp; NVIDIA Dynamo contributor</div>
+    <div class="loc">Prosper, Texas · formerly Principal SRE at Target</div>
+    <div class="links">
+      <a href="https://github.com/elizabetht">GitHub</a>
+      <a href="https://www.linkedin.com/in/email2eliza">LinkedIn</a>
+      <a href="https://tokenlabs.run">Token Labs</a>
     </div>
+  </header>
+
+  <p class="about">
+    I spent two decades keeping large production systems alive — most recently as a
+    <strong>Principal Site Reliability Engineer at Target</strong> — and now work on the other side of the
+    same problem: <strong>making LLM inference fast, reliable, and measurable</strong>. I contribute to
+    <strong>vLLM</strong> and NVIDIA's <strong>Dynamo</strong>, run a hands-on benchmarking lab
+    (<strong>Token Labs</strong>), and write up what I learn in public.
+  </p>
+
+  <div class="stats">
+    <div class="stat"><div class="n">1.9k ★</div><div class="l">100 Days of Inference</div></div>
+    <div class="stat"><div class="n">2,277</div><div class="l">benchmark runs archived</div></div>
+    <div class="stat"><div class="n">~65%</div><div class="l">org-wide OTel adoption driven</div></div>
+    <div class="stat"><div class="n">62</div><div class="l">public repositories</div></div>
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Elizabeth Thomas -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
 
-</footer>
-  
+  <h2>Featured work</h2>
+  <div class="grid">
 
-<script type="text/javascript">
-      var disqus_shortname = 'elizabetht';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+    <div class="card">
+      <span class="tag">Writing · ★ 1.9k</span>
+      <h3><a href="https://github.com/elizabetht/100-days-of-inference">100 Days of Inference</a></h3>
+      <p>A hundred days of LLM inference engineering in the open — daily experiments, measurements, and
+      visualizations covering serving stacks, quantization, KV cache behavior, and scheduling.</p>
+    </div>
 
+    <div class="card">
+      <span class="tag blue">Upstream · vLLM</span>
+      <h3><a href="https://github.com/vllm-project/vllm/pull/34270">Merged into vLLM</a></h3>
+      <p>Author of merged upstream fix for MXFP4 inference on the Triton backend with expert parallelism
+      (PR #34270) — the kind of edge that only shows up when low-precision formats meet distributed serving.</p>
+    </div>
 
+    <div class="card">
+      <span class="tag blue">Upstream · Dynamo</span>
+      <h3><a href="https://github.com/ai-dynamo/frontend-crates/pull/349">Dynamo tool-calling parsers</a></h3>
+      <p>Contributor to ai-dynamo's frontend-crates: Kimi grammar sharing and v2 structural tags
+      (PR #349, validated on GB300 hardware at 99.5% on the Kimi Vendor Verifier across vLLM and SGLang),
+      plus ongoing work on tool-call recovery and structural tags for more model families.</p>
+    </div>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    <div class="card">
+      <span class="tag">From scratch</span>
+      <h3><a href="https://github.com/elizabetht/nano-dynamo">nano-dynamo</a></h3>
+      <p>A minimal Dynamo-style inference serving stack written from scratch — in
+      <a href="https://github.com/elizabetht/nano-dynamo">Python</a> and in
+      <a href="https://github.com/elizabetht/nano-dynamo-rs">Rust</a> — to understand disaggregated
+      serving and KV-aware routing by building them.</p>
+    </div>
 
+    <div class="card">
+      <span class="tag">Benchmarking</span>
+      <h3><a href="https://github.com/tokenlabs-run/token-labs">Token Labs &amp; bench-vault</a></h3>
+      <p>A benchmarking practice with a rule: files are the truth, MLflow is the index. Every run lands
+      as a manifest + raw results (2,277 runs archived), with a metric-schema field so a harness that
+      redefines TTFT can't silently corrupt old comparisons.</p>
+    </div>
 
+    <div class="card">
+      <span class="tag">Writing</span>
+      <h3><a href="https://github.com/elizabetht/llm-inference-the-hard-way">LLM Inference — The Hard Way</a></h3>
+      <p>Long-form notes on how inference serving actually works under the hood — plus
+      <a href="https://github.com/elizabetht/prometheus-grafana-vllm">Prometheus/Grafana observability
+      for vLLM</a>, because a serving stack you can't see is a serving stack you can't run.</p>
+    </div>
 
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
+  </div>
 
+  <h2>Before inference <span class="sub">— Principal SRE, Target</span></h2>
+  <ul class="highlights">
+    <li><strong>Observability at org scale.</strong> Drove rollout of an OpenTelemetry telemetry agent
+    across Target's applications to roughly 65% adoption — by making adoption a near-touchless opt-in
+    for product teams rather than a mandate.</li>
+    <li><strong>An LLM tool developers actually used.</strong> Built and deployed an internal code-review
+    assistant on Target's OpenAI API offering in 2024; it was widely recognized inside the company.
+    The hard part was trust: precision over coverage, because a noisy assistant gets muted in a week.</li>
+    <li><strong>Recovery engineering.</strong> Worked with the SRE Recovery team on investigation and
+    recovery prototypes, including APIs that surface the right runbooks and playbooks during an incident.</li>
+  </ul>
 
+  <h2>Focus areas</h2>
+  <div class="chips">
+    <span class="chip">LLM inference serving</span>
+    <span class="chip">vLLM</span>
+    <span class="chip">NVIDIA Dynamo</span>
+    <span class="chip">KV cache &amp; prefix caching</span>
+    <span class="chip">Quantization (FP8 / MXFP4)</span>
+    <span class="chip">Speculative decoding</span>
+    <span class="chip">Disaggregated prefill / decode</span>
+    <span class="chip">Tool calling &amp; structured outputs</span>
+    <span class="chip">Benchmarking methodology</span>
+    <span class="chip">Kubernetes</span>
+    <span class="chip">Prometheus · Grafana · OpenTelemetry</span>
+    <span class="chip">Python</span>
+    <span class="chip">Rust</span>
+  </div>
 
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+  <footer>
+    Elizabeth Thomas · <a href="https://github.com/elizabetht">github.com/elizabetht</a> ·
+    <a href="https://www.linkedin.com/in/email2eliza">LinkedIn</a> ·
+    <a href="https://tokenlabs.run">tokenlabs.run</a>
+  </footer>
 
-
-
-
-
+</div>
 </body>
 </html>
